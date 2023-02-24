@@ -5,48 +5,48 @@ use Flight_reservation;
 drop table if exists airline;
 create table airline(
 	lno int auto_increment primary key,
-    lname varchar(20)
+    lname varchar(20) not null
 );
 
 drop table if exists airplane;
 CREATE TABLE airplane (
     ano INT AUTO_INCREMENT PRIMARY KEY,
-    aname VARCHAR(20),
-    amax int
+    aname VARCHAR(20) not null,
+    amax int not null
 );
 
 drop table if exists airport;
 CREATE TABLE airport (
     pno INT AUTO_INCREMENT PRIMARY KEY,
-    pname VARCHAR(20),
-    pnation varchar(20)
+    pname VARCHAR(20) not null,
+    pnation varchar(20) not null
 );
 
 drop table if exists tier_table;
 create table tier_table(
 	tier varchar(10) primary key,
-    Mileage int,
-    discount float,
-    arate float
+    Mileage int not null,
+    discount float not null,
+    arate float not null
 );
 
 drop table if exists member;
 create table member (
 	mno int auto_increment primary key,
-    mid varchar(20),
-    mpw varchar(20),
-    mname varchar(20),
-    mphone varchar(20),
-    tier varchar(10),
-    Mileage int,
+    mid varchar(20) not null,
+    mpw varchar(20) not null,
+    mname varchar(20) not null,
+    mphone varchar(20) not null,
+    tier varchar(10) not null,
+    Mileage int not null,
     foreign key(tier) references tier_table(tier)
 );
 
 drop table if exists LP;
 create table LP(
 	lpno int auto_increment primary key,
-	lno int,
-    ano int,
+	lno int not null,
+    ano int not null,
     foreign key(lno) references airline(lno),
     foreign key(ano) references airplane(ano)
 );
@@ -54,13 +54,13 @@ create table LP(
 drop table if exists schedule;
 create table schedule(
 	sno int auto_increment primary key,
-    lpno int,
-    spno int,
-    dpno  int,
-    stime datetime,
-    dtime datetime,
-    price int,
-    rseats int,
+    lpno int not null,
+    spno int not null,
+    dpno  int not null,
+    stime datetime not null,
+    dtime datetime not null,
+    price int not null,
+    rseats int not null,
     foreign key(lpno) references LP(lpno),
     foreign key(spno) references airport(pno),
     foreign key(dpno) references airport(pno)
@@ -69,10 +69,10 @@ create table schedule(
 drop table if exists reservation;
 create table reservation(
 	rno int auto_increment primary key,
-    sno int,
-    mno int,
-    men int,
-    tprice int,
+    sno int not null,
+    mno int not null,
+    men int not null,
+    tprice int not null,
     foreign key(sno) references schedule(sno),
     foreign key(mno) references member(mno)
 );
