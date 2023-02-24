@@ -6,4 +6,5 @@
  *
  */
 module PJT_Airport {
+	requires java.sql;
 }
