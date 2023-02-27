@@ -7,6 +7,9 @@
 비행기표 예매
 
 #### 2. 주제 선정 이유
+JAVA와 Database의 연동을 구현하며
+
+배운것을 복습/응용하기 위함.
 
 
 #### 3. 팀원
@@ -74,6 +77,7 @@
 
 #### 6. 프로젝트 Database 구조도
 
+![image1](https://user-images.githubusercontent.com/120459763/221496198-ace76bbf-2340-4f64-bfc7-225f50720f37.png)
 
 
 
