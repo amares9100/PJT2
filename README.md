@@ -19,7 +19,7 @@
   -  branch : 이정준
   
   
-  -  역활분담 : 
+  -  역할분담 : 
   
   
   
@@ -33,20 +33,20 @@
   -  branch : 정소연
   
   
-  -  역활분담 : 
+  -  역할분담 : 
   
   
   
  3. 김지호
   
   
-  -  Git ID : 
+  -  Git ID : sulfur0525
   
   
   -  branch : 김지호
   
   
-  -  역활분담 : 
+  -  역할분담 : 출발지/도착지 선택, 날짜 선택, 인원입력
   
   
   4. 이경석
@@ -58,7 +58,7 @@
   -  branch : 이경석
   
   
-  -  역활분담 :  예약 출력 및 취소, 비행편 출력, 
+  -  역할분담 :  예약 출력 및 취소, 비행편 출력, 
   
   
   
@@ -73,10 +73,13 @@
 
 
 #### 6. 프로젝트 Database 구조도
-
-
-
+![image](https://user-images.githubusercontent.com/121651359/221497952-2d44b228-1769-441c-89a7-2b1caad3464c.png)
 
 
 
 #### 7. 프로젝트 초기 폴더/파일 구조도
+![image](https://user-images.githubusercontent.com/121651359/221498774-8978f4ed-86ea-4054-ae38-9913fd2ba053.png)
+
+
+#### 8. 컨트롤 구조도
+![image](https://user-images.githubusercontent.com/121651359/221498628-891aab39-7864-4b94-a270-674cc2e9c235.png)
