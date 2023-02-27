@@ -8,7 +8,7 @@ public class Front {
 	private Front() {};
 	public static Front getInstance() {return front;}
 	
-	Scanner scanner = new Scanner(System.in);
+	Scanner scanner = new Scanner(System.in);  
 	
 	/*
 	login
