@@ -78,3 +78,77 @@
 
 
 #### 7. 프로젝트 초기 폴더/파일 구조도
+
+C:.
+|   README.md
+|
+\---PJT_Airport
+    |   .classpath
+    |   .gitignore
+    |   .project
+    |
+    +---.settings
+    |       org.eclipse.core.resources.prefs
+    |       org.eclipse.jdt.core.prefs
+    |
+    +---bin
+    |   |   module-info.class
+    |   |
+    |   \---Flight_reservation
+    |       |   SQL.sql
+    |       |   Start.class
+    |       |
+    |       +---controller
+    |       |       Acontroller.class
+    |       |       Mcontroller.class
+    |       |       Rcontroller.class
+    |       |
+    |       +---model
+    |       |       Adao.class
+    |       |       Airline.class
+    |       |       Airplane.class
+    |       |       Airport.class
+    |       |       Dao.class
+    |       |       LP.class
+    |       |       Mdao.class
+    |       |       Member.class
+    |       |       Rdao.class
+    |       |       Reservation.class
+    |       |       Schedule.class
+    |       |       Tier_table.class
+    |       |
+    |       \---view
+    |               Front.class
+    |
+    \---src
+        |   module-info.java
+        |
+        \---Flight_reservation
+            |   SQL.sql
+            |   Start.java
+            |
+            +---controller
+            |       Acontroller.java
+            |       Mcontroller.java
+            |       Rcontroller.java
+            |
+            +---model
+            |       Adao.java
+            |       Airline.java
+            |       Airplane.java
+            |       Airport.java
+            |       Dao.java
+            |       LP.java
+            |       Mdao.java
+            |       Member.java
+            |       Rdao.java
+            |       Reservation.java
+            |       Schedule.java
+            |       Tier_table.java
+            |
+            \---view
+                    Front.java
+
+
+#### 8. 컨트롤 구조도
+![image](https://user-images.githubusercontent.com/121651359/221498628-891aab39-7864-4b94-a270-674cc2e9c235.png)
