@@ -12,8 +12,14 @@ public class Schedule {
     private int price;
     private int rseats;
     
+    private String Kdpno;
+    private String Kapno;
+    
     public Schedule() {}
 
+    
+    
+    
 	public Schedule(int sno, int lpno, int dpno, int apno, Date dtime, Date atime, int price, int rseats) {
 		super();
 		this.sno = sno;
@@ -97,6 +103,9 @@ public class Schedule {
 	}
 
 	
+	public void Arrival() {
+		
+	}
     
     
 }
