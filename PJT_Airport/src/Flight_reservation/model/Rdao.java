@@ -31,7 +31,13 @@ public class Rdao extends Dao{
 				sList.add(sch);
 			}// while
 			
-			
+			/*
+			 * String sql2 = "select pname from airport where pno=?";
+			 * 
+			 * Rdao.getInstance().ps = conn.prepareStatement(sql2); ps.setInt(1,dpno); rs =
+			 * ps.executeQuery();
+			 */
+				
 			
 			return sList;
 		} catch (SQLException e) {e.printStackTrace();}
