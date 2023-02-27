@@ -3,33 +3,33 @@ package Flight_reservation.model;
 import java.util.Date;
 
 public class Schedule {
-	private int sno;
-	private int lpno;
-	private int spno;
-	private int dpno;
-    private Date stime;
-    private Date dtime;
+	private int sno;//스케줄번호
+	private int lpno;//비행편
+	private int dpno;//출발지
+	private int apno;//도착지
+    private Date dtime;//출발시간
+    private Date atime;//도착시간
     private int price;
     private int rseats;
     
     public Schedule() {}
 
-	public Schedule(int sno, int lpno, int spno, int dpno, Date stime, Date dtime, int price, int rseats) {
+	public Schedule(int sno, int lpno, int dpno, int apno, Date dtime, Date atime, int price, int rseats) {
 		super();
 		this.sno = sno;
 		this.lpno = lpno;
-		this.spno = spno;
 		this.dpno = dpno;
-		this.stime = stime;
+		this.apno = apno;
 		this.dtime = dtime;
+		this.atime = atime;
 		this.price = price;
 		this.rseats = rseats;
 	}
 
 	@Override
 	public String toString() {
-		return "Schedule [sno=" + sno + ", lpno=" + lpno + ", spno=" + spno + ", dpno=" + dpno + ", stime=" + stime
-				+ ", dtime=" + dtime + ", price=" + price + ", rseats=" + rseats + "]";
+		return "Schedule [sno=" + sno + ", lpno=" + lpno + ", dpno=" + dpno + ", apno=" + apno + ", dtime=" + dtime
+				+ ", atime=" + atime + ", price=" + price + ", rseats=" + rseats + "]";
 	}
 
 	public int getSno() {
@@ -48,14 +48,6 @@ public class Schedule {
 		this.lpno = lpno;
 	}
 
-	public int getSpno() {
-		return spno;
-	}
-
-	public void setSpno(int spno) {
-		this.spno = spno;
-	}
-
 	public int getDpno() {
 		return dpno;
 	}
@@ -64,12 +56,12 @@ public class Schedule {
 		this.dpno = dpno;
 	}
 
-	public Date getStime() {
-		return stime;
+	public int getApno() {
+		return apno;
 	}
 
-	public void setStime(Date stime) {
-		this.stime = stime;
+	public void setApno(int apno) {
+		this.apno = apno;
 	}
 
 	public Date getDtime() {
@@ -78,6 +70,14 @@ public class Schedule {
 
 	public void setDtime(Date dtime) {
 		this.dtime = dtime;
+	}
+
+	public Date getAtime() {
+		return atime;
+	}
+
+	public void setAtime(Date atime) {
+		this.atime = atime;
 	}
 
 	public int getPrice() {
@@ -95,7 +95,8 @@ public class Schedule {
 	public void setRseats(int rseats) {
 		this.rseats = rseats;
 	}
-    
+
+	
     
     
 }

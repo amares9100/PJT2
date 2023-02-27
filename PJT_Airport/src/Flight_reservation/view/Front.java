@@ -120,6 +120,13 @@ public class Front {
 	}
 	
 	public void Myreser() {
+		System.out.println("1. 예약취소 2. 뒤로가기");
+		int ch = scanner.nextInt();
+		if(ch==1) {MYcancle();} 
+		else if(ch==2) {return;}
+	}
+	
+	public void MYcancle() {
 		
 	}
 	

@@ -1,11 +1,11 @@
 package Flight_reservation.model;
 
 public class Reservation {
-	private int rno;
-	private int sno;
-	private int mno;
-	private int men;
-	private int tprice;
+	private int rno;//예약 번호
+	private int sno;//스케줄 번호
+	private int mno;//회원번호 
+	private int men;//인원수
+	private int tprice;//총 가격
 	
 	public Reservation() {}
 
