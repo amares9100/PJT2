@@ -73,7 +73,8 @@
 
 
 #### 6. 프로젝트 Database 구조도
-![image](https://user-images.githubusercontent.com/121651359/221497844-e810a950-fc03-4f12-8a58-8ad022aac835.png)
+![image](https://user-images.githubusercontent.com/121651359/221497952-2d44b228-1769-441c-89a7-2b1caad3464c.png)
+
 
 
 #### 7. 프로젝트 초기 폴더/파일 구조도
