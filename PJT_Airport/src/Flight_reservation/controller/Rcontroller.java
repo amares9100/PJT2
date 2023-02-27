@@ -1,13 +1,20 @@
 package Flight_reservation.controller;
 
+import java.util.ArrayList;
+
+import Flight_reservation.model.Rdao;
+import Flight_reservation.model.Schedule;
+
 public class Rcontroller {
 	private static Rcontroller acontroller = new Rcontroller();
 	private Rcontroller() {};
 	public static Rcontroller getInstance() {return acontroller;}
 	
+	Rdao rdao = new Rdao();
+	
 	//출발하는 공항
-	public void Departure() {
-		
+	public ArrayList<Schedule> Departure(int dpno) {
+		return rdao.Departure(dpno);
 	}
 	
 	//도착하는 공항

@@ -1,6 +1,10 @@
 package Flight_reservation.view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import Flight_reservation.controller.Rcontroller;
+import Flight_reservation.model.Schedule;
 
 public class Front {
 	
@@ -79,8 +83,8 @@ public class Front {
 				+ " 7. 뒤로가기\r\n"
 				+ "");
 		int ch = scanner.nextInt();
-		if(ch==1) {Arrival();}
-		else if(ch==2) {Departure();}
+		if(ch==1) {Departure();}
+		else if(ch==2) {Arrival();}
 		else if(ch==3) {dateSelect();}
 		else if(ch==4) {pSelect();}
 		else if(ch==5) {flightSelect();}
@@ -88,13 +92,36 @@ public class Front {
 		else if(ch==7) {return;}
 	}
 	
-	public void Arrival() {
+	public void Departure() {
+		System.out.println("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		System.out.println("1. 출발지를 선택해주세요"); 
+		System.out.println("1.김포공항 2.인청공항 3.제주공항 "
+						 + "4.하네다공항 5.푸동공항 6.창이공항 "
+						 + "7.샤롤드 골공항 8.히드로공항 9.덜레스공항");
+		int dpno = scanner.nextInt(); 
+		ArrayList<Schedule> sList = Rcontroller.getInstance().Departure(dpno);
+		
+		System.out.println("----------------------------------------------------------");
+		System.out.println("번호 \t 공항명 \t 국가명");
+		System.out.println("----------------------------------------------------------");
+		for(Schedule sch : sList) {
+		System.out.println(sch.getLpno()+" \t "+sch);
+	
+			
+		}
 		
 	}
 	
-	public void Departure() {
-		
+	
+	public void Arrival() { 
+		System.out.println("도착지를 선택해주세요"); 
+		System.out.println("1.김포공항 2.인청공항 3.제주공항 "
+						 + "4.하네다공항 5.푸동공항 6.창이공항 "
+						 + "7.샤롤드 골공항 8.히드로공항 9.덜레스공항");
+		int apno = scanner.nextInt();
 	}
+	
+	
 	
 	public void dateSelect() {
 		
