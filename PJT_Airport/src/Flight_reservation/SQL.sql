@@ -37,8 +37,8 @@ create table member (
     mpw varchar(20) not null,
     mname varchar(20) not null,
     mphone varchar(20) not null,
-    tier varchar(10) not null,
-    Mileage int not null,
+    tier varchar(10) default 'bronze',
+    Mileage int default 0,
     foreign key(tier) references tier_table(tier)
 );
 
