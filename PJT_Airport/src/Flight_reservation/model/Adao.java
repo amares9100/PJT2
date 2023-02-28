@@ -12,7 +12,7 @@ public class Adao extends Dao{
 	public ArrayList<Schedule> schedulePrint() {
 		
 		ArrayList<Schedule> slist = new ArrayList<>();
-		String sql = "select s.sno,s.dtime,s.atime,s.price,s.rseats,l.lpname,a.pname,a2.pname from schedule s, LP l, airport a, airport a2 where s.lpno = l.lpno and s.dpno = a.pno and s.apno = a2.pno order by a.pname asc limit 10 ;";
+		String sql = "select s.sno,s.dtime,s.atime,s.price,s.rseats,l.lpname,a.pname,a2.pname from schedule s, LP l, airport a, airport a2 where s.lpno = l.lpno and s.dpno = a.pno and s.apno = a2.pno order by s.sno asc limit 10 ;";
 		try {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -61,6 +61,22 @@ public class Adao extends Dao{
 		return sdlist;
 	}
 	
+	public ArrayList<Airport> Airport() {
+		ArrayList<Airport> ListAP = new ArrayList<>();
+		String sql  = "select * from Airport order by pno asc;";
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Airport apDto = new Airport(rs.getInt(1), rs.getString(2), rs.getString(3));
+				ListAP.add(apDto);				
+			}// while e			
+			return ListAP;
+		}catch(Exception e) { }		
+		return null;
+	}
+
 	public ArrayList<LP> LP() {
 		ArrayList<LP> ListLP = new ArrayList<>();
 		String sql  = "select LP.lpno, LP.lpname, AL.lname, AP.aname, AP.amax from  LP ,airline AL,airplane AP where LP.lno = AL.lno and LP.ano = AP.ano order by lpno asc;";
@@ -73,14 +89,32 @@ public class Adao extends Dao{
 				ListLP.add(lpDto);				
 			}// while e			
 			return ListLP;
-		}catch(Exception e) { }
-		
+		}catch(Exception e) { }		
 		return null;
 	}
 	
 	
 	public boolean scheduleRegister(Schedule scdto) {
-		String sql  = "insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats)";
+		String sql  = 
+				"insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) "
+				+ "values((select lpno from lp where lpname = ?) ,"
+				+ "(select pno from airport where pname = ?), "
+				+ "(select pno from airport where pname = ?), "
+				+ " ?,?,?,?);";
+		try {
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, scdto.getLpname());
+			ps.setString(2, scdto.getDpname());
+			ps.setString(3, scdto.getApname());
+			ps.setString(4, scdto.getDtime());
+			ps.setString(5, scdto.getAtime());
+			ps.setInt   (6, scdto.getPrice());
+			ps.setInt   (7, scdto.getRseats());
+			ps.executeUpdate();
+			return true;
+		}catch (Exception e) {System.out.println(e);}
+
 		return false;
 	}
 	

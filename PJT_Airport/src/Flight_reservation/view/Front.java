@@ -17,30 +17,7 @@ public class Front {
 	public static Front getInstance() {return front;}
 	
 	Scanner scanner = new Scanner(System.in);  
-	
-	/*
-	login
-	signup
-	findid
-	findpw
-	---------
-	reservation   -> 선택화면 출력 (출/도 선택창)
-	Myreser      -> 예약 내역 출력 
-	MYcancle      -> 에약 취소
-	Departure   -> 공항 목록 출력
-	Arrival      -> 공항 목록 출력
-	dateSelect   -> 날짜 입력 받기?
-	pSelect      -> 인원 입력 받기?
-	flightSelect    -> 검색된 비행편 출력
-	compelete   -> 선택한 내역 출력 
-	payment      -> 결제 방법 출력?
-	관리자---------------------------------------------------
-	manager      -> 
-	scheduleRegister   -> 스케쥴 등록
-	scheduleUpdate   -> 스케쥴 수정
-	scheduleDelete   -> 스케쥴 삭제
-	*/
-	
+
 	public void index() {
 		System.out.println("메뉴> 1. 로그인 2. 회원가입 3. 아이디찾기 4. 비번 찾기");
 		int ch = scanner.nextInt();
@@ -184,15 +161,15 @@ public class Front {
 		}
 	}
 
-	public void schedulePrint() {
+	public void schedulePrint() {	
+		// 10개만 출력
+		System.out.println("------------------------------------------------------------------------------------------------");
+		System.out.printf("%-2s %-8s %-8s %-19s %-8s %-19s %-8s %-3s \n",
+				"번호","비행편명","출발지","출발일정","도착지","도착일정","가격","잔여좌석");
+		System.out.println("------------------------------------------------------------------------------------------------");
+		Acontroller.getInstance().schedulePrint();
+		System.out.println("------------------------------------------------------------------------------------------------");
 		while(true) {
-			// 10개만 출력
-			System.out.println("------------------------------------------------------------------------------------------------");
-			System.out.printf("%-2s %-8s %-8s %-19s %-8s %-19s %-8s %-3s \n",
-					"번호","비행편명","출발지","출발일정","도착지","도착일정","가격","잔여좌석");
-			System.out.println("------------------------------------------------------------------------------------------------");
-			Acontroller.getInstance().schedulePrint();
-			System.out.println("------------------------------------------------------------------------------------------------");
 			System.out.println("1.출발지 기준 검색 2. 출발일정 기준 검색  3.뒤로가기");
 			int ch = scanner.nextInt();
 			if(ch==1) {schedulePrint_DP();}
@@ -221,27 +198,47 @@ public class Front {
 		System.out.println("------------------------------------------------------------------------------------------------");
 	}
 
-	public void scheduleRegister() {
-		System.out.println("[경로 지정]");
-		System.out.println("출발지 지정 : [예시:김포공항] "); String dpname = scanner.next();
-		System.out.println("도착지 지정 : [예시:김포공항] "); String apname = scanner.next();
-		System.out.println("[일정 지정]");
-		System.out.println("출발일 지정 : [예시:2023-03-07 06:15:00] "); String ddate = scanner.next();
-		System.out.println("도착일 지정 : [예시:2023-03-07 06:15:00] "); String adate = scanner.next();
-		System.out.println("[비행편 지정]");
-		ArrayList<LP> lplist = Acontroller.getInstance().LP();
-		System.out.println("------------------------------------------------------------------------------------------------");
-		System.out.printf("%-2s %-8s %-12s %-8s %-8s\n",
-							"번호","비행편명","소속 항공사","비행기종","최대수용인원");		
-		System.out.println("------------------------------------------------------------------------------------------------");
-		for(LP lp: lplist) {
-			System.out.printf("%-2d %-10s %-13s %-10s %-5d\n",
-					lp.getLpno(),lp.getLpname(),lp.getLname(),lp.getAname(),lp.getAmax());
+	public void scheduleRegister () {
+		while(true) {
+			ArrayList<Airport> aplist = Acontroller.getInstance().Airport();
+			System.out.println("------------------------------------------------------------------------------------------------");
+			System.out.printf("%-2s %-8s %-12s\n",
+					"번호","공항명","소속 국가");
+			System.out.println("------------------------------------------------------------------------------------------------");
+			for(Airport ap: aplist) {
+				System.out.printf("%-2s %-8s %-12s\n",
+						ap.getPno(),ap.getPname(),ap.getPnation());		
+			}
+			System.out.println("------------------------------------------------------------------------------------------------");
+			System.out.println("[경로 지정]");
+			System.out.println("출발지 지정 : [예시:김포공항] "); String dpname = scanner.next();
+			System.out.println("도착지 지정 : [예시:인천공항] "); String apname = scanner.next();
+			if(Acontroller.getInstance().APcheck(dpname, apname)) {}
+			else {System.out.println("[알림] 동일공항 선택이 불가능합니다.");break; }
+			System.out.println("[일정 지정]");
+			System.out.println("출발일 지정 : [예시:2023-03-07T06:15:00] "); String ddate = scanner.next();
+			System.out.println("도착일 지정 : [예시:2023-03-07T09:15:00] "); String adate = scanner.next();
+			System.out.println();
+			System.out.println("[비행편 지정]");
+			ArrayList<LP> lplist = Acontroller.getInstance().LP();
+			System.out.println("------------------------------------------------------------------------------------------------");
+			System.out.printf("%-2s %-8s %-12s %-8s %-8s\n",
+								"번호","비행편명","소속 항공사","비행기종","최대수용인원");		
+			System.out.println("------------------------------------------------------------------------------------------------");
+			for(LP lp: lplist) {
+				System.out.printf("%-2d %-10s %-13s %-10s %-5d\n",
+						lp.getLpno(),lp.getLpname(),lp.getLname(),lp.getAname(),lp.getAmax());
+			}
+			System.out.println("------------------------------------------------------------------------------------------------");
+			System.out.println("비행편 지정 : [예시:MA123456] ");  String lpname = scanner.next();
+			
+			System.out.println("가격 지정  : [예시:110000] "); 		int   price  = scanner.nextInt();
+			
+			boolean result = Acontroller.getInstance().scheduleRegister(dpname,apname,ddate,adate,lpname,price);
+			
+			if(result) {System.out.println("[알림] 일정 등록 완료 "); break;}
+			else {System.out.println("[알림] 일정 등록 실패 "); break;}
 		}
-		System.out.println("비행편 지정 : [예시:1] ");  String lpname = scanner.next();
-		
-		boolean result = Acontroller.getInstance().scheduleRegister(dpname,apname,ddate,adate,lpname);
-		
 	}
 	
 	public void scheduleUpdate() {
