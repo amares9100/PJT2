@@ -1,9 +1,11 @@
 package Flight_reservation.view;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import Flight_reservation.controller.Rcontroller;
+import Flight_reservation.model.Airport;
 import Flight_reservation.model.Schedule;
 
 public class Front {
@@ -74,22 +76,29 @@ public class Front {
 	}
 	
 	public void reservation() {
-		System.out.println(" 1. 출발지 선택    : 김포공항\r\n"
-				+ " 2. 도착지 선택    : 제주공항\r\n"
-				+ " 3. 비행날짜 선택    : 2023-02-24\r\n"
-				+ " 4. 인원선택    : 2명\r\n"
-				+ " 5. 비행편 검색    : \r\n"
-				+ " 6. 예약하기\r\n"
-				+ " 7. 뒤로가기\r\n"
-				+ "");
-		int ch = scanner.nextInt();
-		if(ch==1) {Departure();}
-		else if(ch==2) {Arrival();}
-		else if(ch==3) {dateSelect();}
-		else if(ch==4) {pSelect();}
-		else if(ch==5) {flightSelect();}
-		else if(ch==6) {selectCompelete();}
-		else if(ch==7) {return;}
+		int dpno = 0;
+		int apno = 0;
+		Date dtime = null;
+		int men = 0;
+		Schedule schedule = null;
+		while (true) {
+			System.out.println("1. 츨발지 선택"+(dpno!=0 ?" : "+Rcontroller.getInstance().airportName(dpno) : ""));
+			System.out.println("2. 도착지 선택"+(apno!=0 ? " : "+Rcontroller.getInstance().airportName(apno) : ""));
+			System.out.println("3. 출발날짜 선택"+(dtime!=null ? dtime : ""));
+			System.out.println("4. 인원 선택"+ (men!=0 ? men : ""));
+			System.out.println("5. 비행편 검색"+(schedule!=null ? dtime : ""));
+			System.out.println("6. 예약하기");
+			System.out.println("7. 뒤로가기");
+			
+			int ch = scanner.nextInt();
+			if(ch==1) {dpno = Departure();}
+			else if(ch==2) {apno = Arrival(dpno);}
+			else if(ch==3) {dateSelect();}
+			else if(ch==4) {pSelect();}
+			else if(ch==5) {flightSelect(dpno,apno,dtime,men);}
+			else if(ch==6) {selectCompelete();}
+			else if(ch==7) {return;}
+		}
 	}
 	
 	public int Departure() {
@@ -136,7 +145,7 @@ public class Front {
 		
 	}
 	
-	public void flightSelect() {
+	public void flightSelect(int dpno,int apno,Date dtime,int men) {
 		
 	}
 	

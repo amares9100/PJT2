@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Flight_reservation.model.Rdao;
 import Flight_reservation.model.Schedule;
+import Flight_reservation.model.Airport;
 
 public class Rcontroller {
 	private static Rcontroller acontroller = new Rcontroller();
