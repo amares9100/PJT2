@@ -1,13 +1,24 @@
 package Flight_reservation.controller;
 
+import Flight_reservation.model.Mdao;
+
 public class Mcontroller {
 	private static Mcontroller mcontroller = new Mcontroller();
 	private Mcontroller() {};
 	public static Mcontroller getInstance() {return mcontroller;}
 	
+	
+	int loginsession = 0;
 	//로그인
-	public void login( String mid , String mpw  ) {
+	public int login( String mid , String mpw  ) {
 		/* -> 로그인 성공 시 사용자 메인이동 // 관리자 아이디 로그인시 관리자 페이지 이동*/
+		int loginsession = Mdao.getInstance().login(mid, mpw);
+		
+		
+		
+		
+		
+		return 0;
 	}
 	
 	//회원가입
