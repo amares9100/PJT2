@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import Flight_reservation.controller.Mcontroller;
 import Flight_reservation.controller.Rcontroller;
 import Flight_reservation.model.Airport;
+import Flight_reservation.model.Reservation;
 import Flight_reservation.model.Schedule;
 
 public class Front {
@@ -156,7 +158,19 @@ public class Front {
 		
 	}
 	
-	public void Myreser() {
+	public void Myreser() { // 이경석
+		ArrayList<Reservation> rlist = Mcontroller.getInstance().Myreser();
+		
+		System.out.println("============ 예약내역 출력 ===========");
+		for(Reservation re : rlist) {
+			System.out.printf("항공사 : %s \n 항공편 : %s -> %s \n "
+							+ "비행일 : %s \n 인원 : %d 명 \n "
+							+ "결제 가격 : %d -> 등급 할인 가격 (미정)\n "
+							+ "예상적립 마일리지 : (미정)",
+							re.getLname() , re.getDeparture(), re.getArrival()
+							,re.getMen(), re.getTprice() );
+		}
+		
 		System.out.println("1. 예약취소 2. 뒤로가기");
 		int ch = scanner.nextInt();
 		if(ch==1) {MYcancle();} 
