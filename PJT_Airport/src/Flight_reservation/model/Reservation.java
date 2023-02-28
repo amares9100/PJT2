@@ -1,6 +1,6 @@
 package Flight_reservation.model;
 
-public class Reservation {
+public class Reservation{
 	private int rno;//예약 번호
 	private int sno;//스케줄 번호
 	private int mno;//회원번호 
