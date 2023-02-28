@@ -76,4 +76,30 @@ public class Rdao extends Dao{
 		}return null;
 	}
 	
+	// 나라선택 유효성 검사
+	public boolean pnationCheck(String pnation) {
+		String sql = "select DISTINCT pnation from airport where pnation='"+pnation+"';";
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {	return true;}
+			else {return false;}
+		} catch (Exception e) {
+			System.out.println("DB오류"+e);
+		}return false;
+	}
+	
+	// 공항선택 유효성 검사
+	public boolean airportCheck(int dpno,String pnation) {
+		String sql = "select * from airport where pnation='"+pnation+"' and pno="+dpno+";";
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {	return true;}
+			else {return false;}
+		} catch (Exception e) {
+			System.out.println("DB오류"+e);
+		}return false;
+	}
+	
 }

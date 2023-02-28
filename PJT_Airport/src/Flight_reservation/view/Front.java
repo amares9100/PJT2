@@ -1,6 +1,7 @@
 package Flight_reservation.view;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -90,7 +91,7 @@ public class Front {
 			
 			try {
 				int ch = scanner.nextInt();
-				if(ch==1) {dpno = Departure();}
+				if(ch==1) {dpno = Departure(apno);}
 				else if(ch==2) {apno = Arrival(dpno);}
 				else if(ch==3) {dtime = dateSelect();}
 				else if(ch==4) {men=pSelect();}
@@ -98,29 +99,42 @@ public class Front {
 				else if(ch==6) {selectCompelete();}
 				else if(ch==7) {return;}
 			} catch (Exception e) {
-				System.out.println(e);
+				scanner = new Scanner(System.in);
 			}
 		}
 	}
 	
-	
-	public int Departure() throws Exception{
+	//출발지 입력
+	public int Departure(int apno) throws Exception{
 		System.out.println("국가선택");
 		String pnationlist = Rcontroller.getInstance().pnation();
 		System.out.println(pnationlist);
 		System.out.println("국가명을 입력해 주세요.");
 		String pnation = scanner.next();
 		
-		System.out.println("공항번호\t공항이름\t나라");
+		
 		ArrayList<Airport> airportList = Rcontroller.getInstance().Departure(pnation);
-		for(Airport a : airportList) {
-			System.out.println(a.getPno() +"\t"+ a.getPname() + "\t" +a.getPnation());
+		if(airportList==null) {
+			System.out.println("잘못 입력하셨습니다.");
+			return 0;
+		}else {
+			System.out.println("공항번호\t공항이름\t나라");
+			for(Airport a : airportList) {
+				System.out.println(a.getPno() +"\t"+ a.getPname() + "\t" +a.getPnation());
+			}
+			System.out.println("공항 번호를 입력하세요.");
+			int dpno = scanner.nextInt();
+			if(apno!=dpno && Rcontroller.getInstance().airportCheck(dpno, pnation)) {
+				return dpno;
+			}else {
+				System.out.println("잘못 입력하셨습니다.");
+				return 0;
+			}
 		}
-		System.out.println("공항 번호를 입력하세요.");
-		int dpno = scanner.nextInt();
-		return dpno;
+		
 	}
 	
+	//도착지 입력
 	public int Arrival(int dpno) throws Exception{
 		System.out.println("국가선택");
 		String pnationlist = Rcontroller.getInstance().pnation();
@@ -128,25 +142,146 @@ public class Front {
 		System.out.println("국가명을 입력해 주세요.");
 		String pnation = scanner.next();
 		
-		System.out.println("공항번호\t공항이름\t나라");
 		ArrayList<Airport> airportList = Rcontroller.getInstance().Arrival(pnation,dpno);
-		for(Airport a : airportList) {
-			System.out.println(a.getPno() +"\t"+ a.getPname() + "\t" +a.getPnation());
+		if(airportList==null) {
+			System.out.println("잘못 입력하셨습니다.");
+			return 0;
+		}else {
+			System.out.println("공항번호\t공항이름\t나라");
+			for(Airport a : airportList) {
+				System.out.println(a.getPno() +"\t"+ a.getPname() + "\t" +a.getPnation());
+			}
+			System.out.println("공항 번호를 입력하세요.");
+			int apno =scanner.nextInt();
+			if(apno!=dpno && Rcontroller.getInstance().airportCheck(apno, pnation)) {
+				return apno;
+			}else {
+				System.out.println("잘못 입력하셨습니다.");
+				return 0;
+			}
 		}
-		System.out.println("공항 번호를 입력하세요.");
-		int apno =scanner.nextInt();
-		return apno;
-	}
-	public String dateSelect() throws Exception{
-		Rcontroller.getInstance().dateSelect();
-		System.out.println("출발 날짜를 입력해 주세요[입력예시 : 2023-03-07] =>");
-		String dtime = scanner.next();
-		return dtime;
 	}
 	
-	public int pSelect() throws Exception{
+	//달력 출력
+	public void calendar() {
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH)+1;
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		int nowmonth = month;
+		int nowyear = year;
+		
+		while (true) {
+			System.out.printf("======================= %d년 %d월 =======================\n",year,month);
+			System.out.println("일\t|월\t|화\t|수\t|목\t|금\t|토\t|");
+			
+			cal.set(year, month-1, 1);
+			int sweek = cal.get(Calendar.DAY_OF_WEEK);
+			
+			int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+			
+			
+			
+			for(int i = 1 ; i<sweek ; i++) {
+				System.out.print("\t|");
+			}
+			if(nowyear>year) {
+				for(int i = 1 ; i <=eday ; i++) {
+					System.out.printf("%2d[x]\t|",i);
+					if(sweek%7 == 0)System.out.println( );sweek++;
+				}
+			}else if(nowyear==year) {
+				if(nowmonth>month) {
+					for(int i = 1 ; i <=eday ; i++) {
+						System.out.printf("%2d[x]\t|",i);
+						if(sweek%7 == 0)System.out.println( );sweek++;
+					}
+				}else if(nowmonth==month) {
+					for(int i = 1 ; i <=eday ; i++) {
+						if(i<day) {
+							System.out.printf("%2d[x]\t|",i);
+						}else if(i==day){
+							System.err.printf("[%2d]\t",i);
+							System.out.print("|");
+						}else {
+							System.out.printf("%2d\t|",i);
+						}
+						
+						if(sweek%7 == 0)System.out.println( );sweek++;
+					}
+				}else if(nowmonth<month) {
+					for(int i = 1 ; i <=eday ; i++) {
+						System.out.printf("%2d\t|",i);
+						if(sweek%7 == 0)System.out.println( );sweek++;
+					}
+				}
+			}else if(nowyear<year) {
+				for(int i = 1 ; i <=eday ; i++) {
+					System.out.printf("%2d\t|",i);
+					if(sweek%7 == 0)System.out.println( );sweek++;
+				}
+			}
+
+			
+			System.out.println("\n=========================================================");
+			System.out.println("1.이전달 2.다음달 3.검색 4.날짜선택"); int ch = scanner.nextInt();
+			if(ch==1) {
+				month--;
+				if(month<1) {
+					month=12;
+					year--;
+				}
+			}else if(ch==2) {
+				month++;
+				if(month>12) {
+					month = 1;
+					year++;
+				}
+			}else if(ch==3) {
+				System.out.println("연도 : "); int inputY = scanner.nextInt();
+				System.out.println("월 : "); int inputM = scanner.nextInt();
+				if( inputY>=1900 && inputY<=9999 && inputM>=1 && inputM<=12) {
+					year = inputY; month = inputM;
+				}else{
+					System.out.println("출력할 수 없는 달력입니다.");
+				}
+			}else if(ch==4) {
+				break;
+			}
+		}
+	}
+	
+	//날짜 입력
+	public String dateSelect() throws Exception{
+		calendar();
+		System.out.println("출발 날짜를 입력해 주세요[입력예시 : 2023-03-07] =>");
+		String dtime = scanner.next();
+		
+		if(Rcontroller.getInstance().dateSelect(dtime)) {
+			return dtime;
+		}else {
+			System.out.println("잘못 입력하셨습니다.");
+			return null;
+		}
+	}
+	
+	//인원수 입력
+	public int pSelect(){
 		System.out.println("탑승 인원을 입력해 주십시오.");
-		int men = scanner.nextInt();
+		int men = 0;
+		try {
+			men = scanner.nextInt();
+		} catch (Exception e) {
+			System.out.println("잘못입력하셨습니다.");
+			scanner = new Scanner(System.in);
+		}
+		if(men<=0) {
+			System.out.println("0이하의 숫자는 입력할 수 없습니다.");
+			return 0;
+		}else if(men>11) {
+			System.out.println("한번에 예약 가능한 수는 10장 입니다. 그 이상을 원하시면 관리자에게 문의주세요.");
+			return 0;
+		}
 		return men;
 	}
 	

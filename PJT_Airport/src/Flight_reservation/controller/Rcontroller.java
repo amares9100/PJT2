@@ -19,7 +19,12 @@ public class Rcontroller {
 	
 	//출발지 출력
 	public ArrayList<Airport> Departure(String pnation) {
-		return Rdao.getInstance().Departure(pnation);
+		//유효성검사
+		if(Rdao.getInstance().pnationCheck(pnation)) {
+			return Rdao.getInstance().Departure(pnation);
+		}else {
+			return null;
+		}
 	}
 	
 	//공항 이름 출력
@@ -29,89 +34,58 @@ public class Rcontroller {
 	
 	//도착지 출력
 	public ArrayList<Airport> Arrival(String pnation, int pno) {
-		return Rdao.getInstance().Arrival(pnation, pno);
+		//유효성검사
+		if(Rdao.getInstance().pnationCheck(pnation)) {
+			return Rdao.getInstance().Arrival(pnation, pno);
+		}else {
+			return null;
+		}
 	}
 	
-	//출발 날짜 선택 (달력출력)
-	public void dateSelect() {
+	//공항 선택 유효성 검사
+	public boolean airportCheck(int pno,String pnation) {
+		return Rdao.getInstance().airportCheck(pno, pnation);
+	}
+	
+	
+	//출발 날짜 선택 유효성검사
+	public boolean dateSelect(String dtime) {
+		
+		String date[] = dtime.split("-");
+		int iyear =  Integer.parseInt(date[0]);
+		int imonth =  Integer.parseInt(date[1]);
+		int iday =  Integer.parseInt(date[2]);
+		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH)+1;
 		int day = cal.get(Calendar.DAY_OF_MONTH);
-		int nowmonth = month;
-		int nowyear = year;
+		cal.set(year, month-1, 1);
+		int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		
-		Scanner scanner = new Scanner(System.in);
-		
-		while (true) {
-			System.out.printf("======================= %d년 %d월 =======================\n",year,month);
-			System.out.println("일\t|월\t|화\t|수\t|목\t|금\t|토\t|");
-			
-			cal.set(year, month-1, 1);
-			int sweek = cal.get(Calendar.DAY_OF_WEEK);
-			
-			int eday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-			
-			
-			
-			for(int i = 1 ; i<sweek ; i++) {
-				System.out.print("\t|");
-			}
-			if(nowmonth>month && nowyear>=year) {
-				for(int i = 1 ; i <=eday ; i++) {
-					System.out.printf("%2d[x]\t|",i);
-					if(sweek%7 == 0)System.out.println( );sweek++;
-				}
-			}
-			else if(nowmonth==month && nowyear==year) {
-				for(int i = 1 ; i <=eday ; i++) {
-					if(i<day) {
-						System.out.printf("%2d[x]\t|",i);
-					}else if(i==day){
-						System.err.printf("[%2d]\t",i);
-						System.out.print("|");
-					}else {
-						System.out.printf("%2d\t|",i);
+		if(iyear>=1900 && iyear<=9999 && imonth>=1 && imonth<=12 && iday>=1 && iday<=eday) {
+			if(year>iyear) {
+				return false;
+			}else if(year==iyear) {
+				if(month>imonth) {
+					return false;
+				}else if(month==imonth) {
+					if(day>iday) {
+						return false;
+					}else if(day<=iday) {
+						return true;
 					}
-					
-					if(sweek%7 == 0)System.out.println( );sweek++;
+				}else if(month<imonth) {
+					return true;
 				}
+			}else if(year<iyear) {
+				return true;
 			}
-			else if(nowmonth<month && nowyear<=year) {
-				for(int i = 1 ; i <=eday ; i++) {
-					System.out.printf("%2d\t|",i);
-					if(sweek%7 == 0)System.out.println( );sweek++;
-				}
-			}
-			
-			
-			System.out.println("\n=========================================================");
-			System.out.println("1.이전달 2.다음달 3.검색 4.날짜선택"); int ch = scanner.nextInt();
-			if(ch==1) {
-				month--;
-				if(month<1) {
-					month=12;
-					year--;
-				}
-			}else if(ch==2) {
-				month++;
-				if(month>12) {
-					month = 1;
-					year++;
-				}
-			}else if(ch==3) {
-				System.out.println("연도 : "); int inputY = scanner.nextInt();
-				System.out.println("월 : "); int inputM = scanner.nextInt();
-				if( inputY>=1900 && inputY<=9999 && inputM>=1 && inputM<=12) {
-					year = inputY; month = inputM;
-				}else{
-					System.out.println("출력할 수 없는 달력입니다.");
-				}
-			}else if(ch==4) {
-				break;
-			}
-		}
+		}else {return false;}
+		return false;
 	}
+		
+	
 	
 	//인원 선택
 	public void pSelect() {
