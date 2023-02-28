@@ -57,6 +57,7 @@ public class Mdao extends Dao{
 	
 	
 	// --------------------- 이경석-------------------
+	//예약내역 출력 
 	public ArrayList<Reservation> Myreser(int loginsession) {
 		//비행표 리스트
 		ArrayList<Reservation> rlist = new ArrayList<>();
@@ -87,7 +88,19 @@ public class Mdao extends Dao{
 		return null;
 	}
 	
-	
+	//예약 취소
+	public boolean MYcancle(int loginsession) {
+		String sql = "delete from reservation where mno = ";
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, loginsession);
+			ps.executeUpdate();
+			
+			return true;
+		} catch (SQLException e) {System.out.println(e);}
+			return false;
+	}
 	
 	
 }
