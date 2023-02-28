@@ -2,21 +2,23 @@ package Flight_reservation.model;
 
 public class LP {
 	private int lpno;
-	private int lno;
+	private String lname;
 	private int ano;
+	private String lpname;
 	
 	public LP() {}
 
-	public LP(int lpno, int lno, int ano) {
+	public LP(int lpno, String lname, int ano, String lpname) {
 		super();
 		this.lpno = lpno;
-		this.lno = lno;
+		this.lname = lname;
 		this.ano = ano;
+		this.lpname = lpname;
 	}
 
 	@Override
 	public String toString() {
-		return "LP [lpno=" + lpno + ", lno=" + lno + ", ano=" + ano + "]";
+		return "LP [lpno=" + lpno + ", lname=" + lname + ", ano=" + ano + ", lpname=" + lpname + "]";
 	}
 
 	public int getLpno() {
@@ -27,12 +29,12 @@ public class LP {
 		this.lpno = lpno;
 	}
 
-	public int getLno() {
-		return lno;
+	public String getLname() {
+		return lname;
 	}
 
-	public void setLno(int lno) {
-		this.lno = lno;
+	public void setLname(String lname) {
+		this.lname = lname;
 	}
 
 	public int getAno() {
@@ -42,6 +44,13 @@ public class LP {
 	public void setAno(int ano) {
 		this.ano = ano;
 	}
-	
+
+	public String getLpname() {
+		return lpname;
+	}
+
+	public void setLpname(String lpname) {
+		this.lpname = lpname;
+	}
 	
 }

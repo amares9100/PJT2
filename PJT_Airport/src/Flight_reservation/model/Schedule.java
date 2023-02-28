@@ -4,28 +4,23 @@ import java.util.Date;
 
 public class Schedule {
 	private int sno;//스케줄번호
-	private int lpno;//비행편
-	private int dpno;//출발지
-	private int apno;//도착지
-    private Date dtime;//출발시간
-    private Date atime;//도착시간
+	private String lpname;//비행편
+	private String dpname;//출발지
+	private String apname;//도착지
+    private String dtime;//출발시간
+    private String atime;//도착시간
     private int price;
     private int rseats;
     
-    private String Kdpno;
-    private String Kapno;
-    
     public Schedule() {}
 
-    
-    
-    
-	public Schedule(int sno, int lpno, int dpno, int apno, Date dtime, Date atime, int price, int rseats) {
+	public Schedule(int sno, String lpname, String dpname, String apname, String dtime, String atime, int price,
+			int rseats) {
 		super();
 		this.sno = sno;
-		this.lpno = lpno;
-		this.dpno = dpno;
-		this.apno = apno;
+		this.lpname = lpname;
+		this.dpname = dpname;
+		this.apname = apname;
 		this.dtime = dtime;
 		this.atime = atime;
 		this.price = price;
@@ -34,8 +29,8 @@ public class Schedule {
 
 	@Override
 	public String toString() {
-		return "Schedule [sno=" + sno + ", lpno=" + lpno + ", dpno=" + dpno + ", apno=" + apno + ", dtime=" + dtime
-				+ ", atime=" + atime + ", price=" + price + ", rseats=" + rseats + "]";
+		return "Schedule [sno=" + sno + ", lpname=" + lpname + ", dpname=" + dpname + ", apname=" + apname + ", dtime="
+				+ dtime + ", atime=" + atime + ", price=" + price + ", rseats=" + rseats + "]";
 	}
 
 	public int getSno() {
@@ -46,43 +41,43 @@ public class Schedule {
 		this.sno = sno;
 	}
 
-	public int getLpno() {
-		return lpno;
+	public String getLpname() {
+		return lpname;
 	}
 
-	public void setLpno(int lpno) {
-		this.lpno = lpno;
+	public void setLpname(String lpname) {
+		this.lpname = lpname;
 	}
 
-	public int getDpno() {
-		return dpno;
+	public String getDpname() {
+		return dpname;
 	}
 
-	public void setDpno(int dpno) {
-		this.dpno = dpno;
+	public void setDpname(String dpname) {
+		this.dpname = dpname;
 	}
 
-	public int getApno() {
-		return apno;
+	public String getApname() {
+		return apname;
 	}
 
-	public void setApno(int apno) {
-		this.apno = apno;
+	public void setApname(String apname) {
+		this.apname = apname;
 	}
 
-	public Date getDtime() {
+	public String getDtime() {
 		return dtime;
 	}
 
-	public void setDtime(Date dtime) {
+	public void setDtime(String dtime) {
 		this.dtime = dtime;
 	}
 
-	public Date getAtime() {
+	public String getAtime() {
 		return atime;
 	}
 
-	public void setAtime(Date atime) {
+	public void setAtime(String atime) {
 		this.atime = atime;
 	}
 
@@ -102,10 +97,7 @@ public class Schedule {
 		this.rseats = rseats;
 	}
 
-	
-	public void Arrival() {
-		
-	}
+    
     
     
 }
