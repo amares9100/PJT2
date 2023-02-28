@@ -92,33 +92,38 @@ public class Front {
 		else if(ch==7) {return;}
 	}
 	
-	public void Departure() {
-		System.out.println("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-		System.out.println("1. 출발지를 선택해주세요"); 
-		System.out.println("1.김포공항 2.인청공항 3.제주공항 "
-						 + "4.하네다공항 5.푸동공항 6.창이공항 "
-						 + "7.샤롤드 골공항 8.히드로공항 9.덜레스공항");
-		int dpno = scanner.nextInt(); 
-		ArrayList<Schedule> sList = Rcontroller.getInstance().Departure(dpno);
+	public int Departure() {
+		System.out.println("국가선택");
+		String pnationlist = Rcontroller.getInstance().pnation();
+		System.out.println(pnationlist);
+		System.out.println("국가명을 입력해 주세요.");
+		String pnation = scanner.next();
 		
-		System.out.println("----------------------------------------------------------");
-		System.out.println("번호 \t 공항명 \t 국가명");
-		System.out.println("----------------------------------------------------------");
-		for(Schedule sch : sList) {
-		System.out.println(sch.getLpno()+" \t "+sch);
-	
-			
+		System.out.println("공항번호\t공항이름\t나라");
+		ArrayList<Airport> airportList = Rcontroller.getInstance().Departure(pnation);
+		for(Airport a : airportList) {
+			System.out.println(a.getPno() +"\t"+ a.getPname() + "\t" +a.getPnation());
 		}
-		
+		System.out.println("공항 번호를 입력하세요.");
+		int dpno = scanner.nextInt();
+		return dpno;
 	}
 	
-	
-	public void Arrival() { 
-		System.out.println("도착지를 선택해주세요"); 
-		System.out.println("1.김포공항 2.인청공항 3.제주공항 "
-						 + "4.하네다공항 5.푸동공항 6.창이공항 "
-						 + "7.샤롤드 골공항 8.히드로공항 9.덜레스공항");
-		int apno = scanner.nextInt();
+	public int Arrival(int dpno) {
+		System.out.println("국가선택");
+		String pnationlist = Rcontroller.getInstance().pnation();
+		System.out.println(pnationlist);
+		System.out.println("국가명을 입력해 주세요.");
+		String pnation = scanner.next();
+		
+		System.out.println("공항번호\t공항이름\t나라");
+		ArrayList<Airport> airportList = Rcontroller.getInstance().Arrival(pnation,dpno);
+		for(Airport a : airportList) {
+			System.out.println(a.getPno() +"\t"+ a.getPname() + "\t" +a.getPnation());
+		}
+		System.out.println("공항 번호를 입력하세요.");
+		int apno =scanner.nextInt();
+		return apno;
 	}
 	
 	
