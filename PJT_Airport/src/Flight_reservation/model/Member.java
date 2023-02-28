@@ -10,7 +10,16 @@ public class Member {
 	private int Mileage;
 	
 	public Member() {}
-
+	
+	public Member( String mid, String mpw, String mname, String mphone) {
+		super();
+		this.mid = mid;
+		this.mpw = mpw;
+		this.mname = mname;
+		this.mphone = mphone;
+		}
+	
+	
 	public Member(int mno, String mid, String mpw, String mname, String mphone, String tier, int mileage) {
 		super();
 		this.mno = mno;

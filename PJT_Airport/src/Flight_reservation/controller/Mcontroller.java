@@ -6,7 +6,7 @@ public class Mcontroller {
 	public static Mcontroller getInstance() {return mcontroller;}
 	
 	//로그인
-	public void login() {
+	public void login( String mid , String mpw  ) {
 		/* -> 로그인 성공 시 사용자 메인이동 // 관리자 아이디 로그인시 관리자 페이지 이동*/
 	}
 	
