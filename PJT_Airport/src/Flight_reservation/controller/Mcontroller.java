@@ -18,7 +18,7 @@ public class Mcontroller {
 		
 		
 		
-		return 0;
+		return 0; 
 	}
 	
 	//회원가입
