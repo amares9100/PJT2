@@ -10,19 +10,22 @@ public class Mdao extends Dao{
 	
 	Member memberDto = new Member();
 	
+	
+	// 아이디 체크
 	public boolean idCheck( String mid ) {
 		String sql = "select * from member where mid = ?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString( 1 , mid );
 			rs = ps.executeQuery();
-			if( rs.next() ) { return true; } 
-			else { return false; }
+			if( rs.next() ) { return true; } // 중복이면 true
+			else { return false; }			// 중복없으면 false
 		}
 		catch (Exception e) {System.out.println(e);}
 		return true; 
 	}
 	
+	// 로그인
 	public int login( String mid , String mpw  ) {
 		String sql = "select * from member where mid = ? and mpw = ?";
 		try {
@@ -31,16 +34,21 @@ public class Mdao extends Dao{
 			ps.setString( 2 , mpw );
 			rs = ps.executeQuery();
 			if( rs.next() ) {
-				return rs.getInt( 1 );
-			}else { 
-				return 0; 
+				if(rs.getInt(1)== 1) {
+					return 1; // 관리자 mno
+				}
+				else if(rs.getInt(1)>1) {
+					return rs.getInt( 1 ); // 검색한 회원이 있으면 mno반환
+				}
 			}
+			else { return 0;}// 검색한 회원이 없으면 0 반환
 		}catch (Exception e) {System.out.println(e);}
 		
-		return 0;
+		return -1; // 오류 반환
 	}
 	
-	public int signup( Member memberDto ) {
+	//회원가입
+	public boolean signup( Member memberDto ) {
 		String sql ="insert into member( mid , mpw , mname , mphone )"
 				+ " values(  ? , ? , ? , ? )";
 		try {
@@ -50,11 +58,78 @@ public class Mdao extends Dao{
 			ps.setString( 3 , memberDto.getMname() );	
 			ps.setString( 4 , memberDto.getMphone() );	
 			ps.executeUpdate();
-			return 1;  
+			return true;  
 		}catch (Exception e) {System.out.println(e);}
-		return 3; 
+		return false; 
 	}
 	
+	//아이디 찾기
+		public String findid(String mname , String mphone) {
+			String sql = "select * from member where mname=? and mphone=?";
+			
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, mname);
+				ps.setString(2, mphone);
+				rs = ps.executeQuery();
+				String mid = null;
+				while(rs.next()) {
+					 mid = rs.getString(2);
+					
+				}
+				return mid;
+				
+			}catch (Exception e) {System.out.println(e);}
+		return null;
+		}
+		
+		
+		// 비밀번호 찾기
+		public String findpw(String mid , String mname , String mphone) {
+			String sql = "select * from member where mid=? and mname=? and mphone=?";
+			
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, mid);
+				ps.setString(2, mname);
+				ps.setString(3, mphone);
+				rs = ps.executeQuery();
+				String mpw = null;
+				while(rs.next()) {
+					mpw = rs.getString(3);
+					
+				}
+				return mpw;
+			}catch (Exception e) {System.out.println(e);}
+		return null;
+		}
+		
+		//회원탈퇴
+		public boolean deleteId(Member memberDto) {
+			
+			// 입력한 정보로 회원찾기
+			String sql ="select * from member where mid=? and mpw=? and mname=? and mphone=?";
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString( 1 , memberDto.getMid() );		
+				ps.setString( 2 , memberDto.getMpw() );		
+				ps.setString( 3 , memberDto.getMname() );	
+				ps.setString( 4 , memberDto.getMphone() );
+				rs = ps.executeQuery();
+				
+				int mno = 0;
+				while(rs.next()) {
+					mno = rs.getInt(1); // 회원번호
+				}
+				// 해당 회원번호 레코드 삭제
+				String sql2 = "delete from member where mno=?";
+				ps = conn.prepareStatement(sql2);
+				ps.setInt(1, mno);
+				ps.executeUpdate();		
+				return true; 
+			}catch (Exception e) {System.out.println(e);}
+			return false;
+		}
 	
 	// --------------------- 이경석-------------------
 	//예약내역 출력 
@@ -101,6 +176,33 @@ public class Mdao extends Dao{
 		} catch (SQLException e) {System.out.println(e);}
 			return false;
 	}
-	
-	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
