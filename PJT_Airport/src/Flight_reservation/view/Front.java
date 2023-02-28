@@ -76,31 +76,35 @@ public class Front {
 	public void reservation() {
 		int dpno = 0;
 		int apno = 0;
-		Date dtime = null;
+		String dtime = null;
 		int men = 0;
 		Schedule schedule = null;
 		while (true) {
 			System.out.println("1. 츨발지 선택"+(dpno!=0 ?" : "+Rcontroller.getInstance().airportName(dpno) : ""));
 			System.out.println("2. 도착지 선택"+(apno!=0 ? " : "+Rcontroller.getInstance().airportName(apno) : ""));
-			System.out.println("3. 출발날짜 선택"+(dtime!=null ? dtime : ""));
-			System.out.println("4. 인원 선택"+ (men!=0 ? men : ""));
-			System.out.println("5. 비행편 검색"+(schedule!=null ? dtime : ""));
+			System.out.println("3. 출발날짜 선택"+(dtime!=null ? " : "+dtime : ""));
+			System.out.println("4. 인원 선택"+ (men!=0 ? " : "+men : ""));
+			System.out.println("5. 비행편 검색"+(schedule!=null ? " : "+schedule : ""));
 			System.out.println("6. 예약하기");
 			System.out.println("7. 뒤로가기");
 			
-			int ch = scanner.nextInt();
-			if(ch==1) {dpno = Departure();}
-			else if(ch==2) {apno = Arrival(dpno);}
-			else if(ch==3) {dateSelect();}
-			else if(ch==4) {pSelect();}
-			else if(ch==5) {flightSelect(dpno,apno,dtime,men);}
-			else if(ch==6) {selectCompelete();}
-			else if(ch==7) {return;}
+			try {
+				int ch = scanner.nextInt();
+				if(ch==1) {dpno = Departure();}
+				else if(ch==2) {apno = Arrival(dpno);}
+				else if(ch==3) {dtime = dateSelect();}
+				else if(ch==4) {men=pSelect();}
+				else if(ch==5) {flightSelect(dpno,apno,dtime,men);}
+				else if(ch==6) {selectCompelete();}
+				else if(ch==7) {return;}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 		}
 	}
 	
 	
-	public int Departure() {
+	public int Departure() throws Exception{
 		System.out.println("국가선택");
 		String pnationlist = Rcontroller.getInstance().pnation();
 		System.out.println(pnationlist);
@@ -117,7 +121,7 @@ public class Front {
 		return dpno;
 	}
 	
-	public int Arrival(int dpno) {
+	public int Arrival(int dpno) throws Exception{
 		System.out.println("국가선택");
 		String pnationlist = Rcontroller.getInstance().pnation();
 		System.out.println(pnationlist);
@@ -133,16 +137,21 @@ public class Front {
 		int apno =scanner.nextInt();
 		return apno;
 	}
-	public void dateSelect() {
-		
+	public String dateSelect() throws Exception{
+		Rcontroller.getInstance().dateSelect();
+		System.out.println("출발 날짜를 입력해 주세요[입력예시 : 2023-03-07] =>");
+		String dtime = scanner.next();
+		return dtime;
 	}
 	
-	public void pSelect() {
-		
+	public int pSelect() throws Exception{
+		System.out.println("탑승 인원을 입력해 주십시오.");
+		int men = scanner.nextInt();
+		return men;
 	}
 	
-	public void flightSelect(int dpno,int apno,Date dtime,int men) {
-		
+	public void flightSelect(int dpno,int apno,String dtime,int men) {
+		System.out.println(dpno+"/"+apno+"/"+dtime+"/"+men);
 	}
 	
 	public void selectCompelete() {
