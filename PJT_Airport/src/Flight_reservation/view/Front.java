@@ -32,7 +32,6 @@ public class Front {
 	flightSelect    -> 검색된 비행편 출력
 	compelete   -> 선택한 내역 출력 
 	payment      -> 결제 방법 출력?
-
 	관리자---------------------------------------------------
 	manager      -> 
 	scheduleRegister   -> 스케쥴 등록
@@ -50,8 +49,7 @@ public class Front {
 	}
 	
 	public void login() {
-		
-		
+		user_main();
 		/* -> 로그인 성공 시 사용자 메인이동 // 관리자 아이디 로그인시 관리자 페이지 이동*/
 	}
 	
@@ -101,6 +99,7 @@ public class Front {
 		}
 	}
 	
+	
 	public int Departure() {
 		System.out.println("국가선택");
 		String pnationlist = Rcontroller.getInstance().pnation();
@@ -134,9 +133,6 @@ public class Front {
 		int apno =scanner.nextInt();
 		return apno;
 	}
-	
-	
-	
 	public void dateSelect() {
 		
 	}
