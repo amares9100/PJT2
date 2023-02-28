@@ -52,6 +52,8 @@ create table LP(
     foreign key(ano) references airplane(ano)
 );
 
+
+
 drop table if exists schedule;
 create table schedule(
 	sno int auto_increment primary key,
@@ -78,7 +80,13 @@ create table reservation(
     foreign key(mno) references member(mno)
 );
 
--- 항공사 입력
+
+select LP.lpno, LP.lpname, AL.lname, AP.aname, AP.amax 
+from  LP ,airline AL,airplane AP
+where LP.lno = AL.lno and LP.ano = AP.ano 
+order by lpno asc;
+
+-- 항공사 입력 
 insert into airline (lname) values ('magpieAIR');
 insert into airline (lname) values ('sparrowAIR');
 insert into airline (lname) values ('hawkAIR');
@@ -199,6 +207,9 @@ insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (5 ,9,2,'2
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (9 ,9,2,'2023-03-09 06:35:00','2023-03-09 20:25:00',1100000,31);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (15,9,2,'2023-03-09 10:35:00','2023-03-10 00:25:00',1100000,2);
 
+
+
+
 -- Tear_table 입력
 insert into tier_table (tier,Mileage,discount,arate) values ( 'BRONZE'	,0		,0.1,0.1);
 insert into tier_table (tier,Mileage,discount,arate) values ( 'SILVER'	,2000	,0.2,0.2);
@@ -213,10 +224,36 @@ insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('zxczxc','8901',
 insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('cxzcxz','7410','서장훈','010-4444-4444','BRONZE'	,200);
 insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('dsadsa','8520','민경훈','010-5555-5555','DIAMOND',12000);
 
-select s.dtime,atime,price,rseats, l.lpname, a.pname, a2.pname 
+-- 출력
+select s.sno,dtime,atime,price,rseats, l.lpname, a.pname, a2.pname 
 from schedule s,LP l, airport a, airport a2 
 where s.lpno=l.lpno and s.dpno=a.pno and s.apno=a2.pno;
+-- 등록
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (15,9,2,'2023-03-09 10:35:00','2023-03-10 00:25:00',1100000,2);
+select s.sno,s.dtime,s.atime,s.price,s.rseats,l.lpname,a.pname,a2.pname from schedule s, LP l, airport a, airport a2 
+where s.lpno = l.lpno and s.dpno = a.pno and s.apno = a2.pno 
+order by a.pname asc limit 10;
 
+select s.sno,s.dtime,s.atime,s.price,s.rseats,l.lpname,a.pname,a2.pname from schedule s, LP l, airport a, airport a2 
+where s.lpno = l.lpno and s.dpno = a.pno and s.apno = a2.pno and a.pname = '김포공항';
+
+select s.sno,s.dtime,s.atime,s.price,s.rseats,l.lpname,a.pname,a2.pname from schedule s, LP l, airport a, airport a2 
+where s.lpno = l.lpno and s.dpno = a.pno and s.apno = a2.pno and DATE(s.dtime) = '2023-03-07';
+
+
+insert into schedule (lpno,dpno,apno) 
+    select lp.lpno, AP.pno dpno, AP.pno apno from lp, airport AP
+    where lpname = 'MA123456' and pname = '김포공항' and pname = '인천공항' ;
+    
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values
+	(select lpno from lp      where lpname = 'MA123456') ,
+    (select dpno from airport where pname = '김포공항'),
+    (select apno from airport where pname = '김포공항'),
+    '2023-03-09 10:35:00',
+    '2023-03-10 00:25:00',
+    1100000,
+    2
+);
 
 select * from airline;
 select * from airplane;

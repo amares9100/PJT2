@@ -3,22 +3,25 @@ package Flight_reservation.model;
 public class LP {
 	private int lpno;
 	private String lname;
-	private int ano;
+	private String aname;
+	private int amax;
 	private String lpname;
 	
 	public LP() {}
 
-	public LP(int lpno, String lname, int ano, String lpname) {
+	public LP(int lpno, String lname, String aname, int amax, String lpname) {
 		super();
 		this.lpno = lpno;
 		this.lname = lname;
-		this.ano = ano;
+		this.aname = aname;
+		this.amax = amax;
 		this.lpname = lpname;
 	}
 
 	@Override
 	public String toString() {
-		return "LP [lpno=" + lpno + ", lname=" + lname + ", ano=" + ano + ", lpname=" + lpname + "]";
+		return "LP [lpno=" + lpno + ", lname=" + lname + ", aname=" + aname + ", amax=" + amax + ", lpname=" + lpname
+				+ "]";
 	}
 
 	public int getLpno() {
@@ -37,12 +40,20 @@ public class LP {
 		this.lname = lname;
 	}
 
-	public int getAno() {
-		return ano;
+	public String getAname() {
+		return aname;
 	}
 
-	public void setAno(int ano) {
-		this.ano = ano;
+	public void setAname(String aname) {
+		this.aname = aname;
+	}
+
+	public int getAmax() {
+		return amax;
+	}
+
+	public void setAmax(int amax) {
+		this.amax = amax;
 	}
 
 	public String getLpname() {
@@ -52,5 +63,7 @@ public class LP {
 	public void setLpname(String lpname) {
 		this.lpname = lpname;
 	}
+
+	
 	
 }
