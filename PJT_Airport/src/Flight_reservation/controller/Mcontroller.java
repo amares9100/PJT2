@@ -1,6 +1,9 @@
 package Flight_reservation.controller;
 
+import java.util.ArrayList;
+
 import Flight_reservation.model.Mdao;
+import Flight_reservation.model.Reservation;
 
 public class Mcontroller {
 	private static Mcontroller mcontroller = new Mcontroller();
@@ -37,11 +40,14 @@ public class Mcontroller {
 	}
 	
 	//예약 내역 확인
-	public void Myreser() {
+	public ArrayList<Reservation> Myreser() {
+		//등록된 회원의 예약내역을 출력해야 함으로.
+		return Mdao.getInstance().Myreser(loginsession);
 	}
 	
 	//예약 취소
 	public void MYcancle() {
+		Mdao.getInstance().Myreser(loginsession);
 		
 	}
 }
