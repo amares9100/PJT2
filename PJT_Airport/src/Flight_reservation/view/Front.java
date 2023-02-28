@@ -59,31 +59,35 @@ public class Front {
 	public void reservation() {
 		int dpno = 0;
 		int apno = 0;
-		Date dtime = null;
+		String dtime = null;
 		int men = 0;
 		Schedule schedule = null;
 		while (true) {
 			System.out.println("1. 츨발지 선택"+(dpno!=0 ?" : "+Rcontroller.getInstance().airportName(dpno) : ""));
 			System.out.println("2. 도착지 선택"+(apno!=0 ? " : "+Rcontroller.getInstance().airportName(apno) : ""));
-			System.out.println("3. 출발날짜 선택"+(dtime!=null ? dtime : ""));
-			System.out.println("4. 인원 선택"+ (men!=0 ? men : ""));
-			System.out.println("5. 비행편 검색"+(schedule!=null ? dtime : ""));
+			System.out.println("3. 출발날짜 선택"+(dtime!=null ? " : "+dtime : ""));
+			System.out.println("4. 인원 선택"+ (men!=0 ? " : "+men : ""));
+			System.out.println("5. 비행편 검색"+(schedule!=null ? " : "+schedule : ""));
 			System.out.println("6. 예약하기");
 			System.out.println("7. 뒤로가기");
 			
-			int ch = scanner.nextInt();
-			if(ch==1) {dpno = Departure();}
-			else if(ch==2) {apno = Arrival(dpno);}
-			else if(ch==3) {dateSelect();}
-			else if(ch==4) {pSelect();}
-			else if(ch==5) {flightSelect(dpno,apno,dtime,men);}
-			else if(ch==6) {selectCompelete();}
-			else if(ch==7) {return;}
+			try {
+				int ch = scanner.nextInt();
+				if(ch==1) {dpno = Departure(apno);}
+				else if(ch==2) {apno = Arrival(dpno);}
+				else if(ch==3) {dtime = dateSelect();}
+				else if(ch==4) {men=pSelect();}
+				else if(ch==5) {flightSelect(dpno,apno,dtime,men);}
+				else if(ch==6) {selectCompelete();}
+				else if(ch==7) {return;}
+			} catch (Exception e) {
+				scanner = new Scanner(System.in);
+			}
 		}
 	}
 	
 	
-		//출발지 입력
+	//출발지 입력
 	public int Departure(int apno) throws Exception{
 		System.out.println("국가선택");
 		String pnationlist = Rcontroller.getInstance().pnation();
