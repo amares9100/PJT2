@@ -563,7 +563,7 @@ public class Front {
 			else {System.out.println("[알림] 일정 삭제 실패 ");}
 		}else if (ch==2) {System.out.println("[알림] 삭제 취소되었습니다. "); }
 	}
-// 결산 내역 메인페이지
+// 결산 내역 메인페이지 
 	public void RANK() {
 		while(true) {
 			System.out.println("------------------------------------------------------------------------------------------------");
