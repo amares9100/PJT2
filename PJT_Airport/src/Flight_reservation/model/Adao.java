@@ -24,13 +24,14 @@ public class Adao extends Dao{
 		
 		return slist;
 	}
-	// 특정 출발지 스케줄 목록		
-	public ArrayList<Schedule> schedulePrint_DP(String pname) {		
+	// 검색된 스케줄 목록		
+	public ArrayList<Schedule> schedulePrint_DP(String pname,String ddate) {		
 		ArrayList<Schedule> splist = new ArrayList<>();
-		String sql = "select s.sno,s.dtime,s.atime,s.price,s.rseats,l.lpname,a.pname,a2.pname from schedule s, LP l, airport a, airport a2 where s.lpno = l.lpno and s.dpno = a.pno and s.apno = a2.pno and a.pname = ?;";
+		String sql = "select s.sno,s.dtime,s.atime,s.price,s.rseats,l.lpname,a.pname,a2.pname from schedule s, LP l, airport a, airport a2 where s.lpno = l.lpno and s.dpno = a.pno and s.apno = a2.pno and a.pname = ? and DATE(s.dtime) = ?;";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, pname);
+			ps.setString(2, ddate);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Schedule sdto = new Schedule(rs.getInt(1), rs.getString(6), rs.getString(7), rs.getString(8), 
@@ -41,22 +42,7 @@ public class Adao extends Dao{
 		
 		return splist;
 	}
-	// 특정 출발일 스케줄 목록	
-	public ArrayList<Schedule> schedulePrint_DD(String ddate) {		
-		ArrayList<Schedule> sdlist = new ArrayList<>();
-		String sql = "select s.sno,s.dtime,s.atime,s.price,s.rseats,l.lpname,a.pname,a2.pname from schedule s, LP l, airport a, airport a2 where s.lpno = l.lpno and s.dpno = a.pno and s.apno = a2.pno and DATE(s.dtime) = ?";
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, ddate);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				Schedule sdto = new Schedule(rs.getInt(1), rs.getString(6), rs.getString(7), rs.getString(8), 
-						rs.getString(2),rs.getString(3), rs.getInt(4),rs.getInt(5)) ;
-				sdlist.add(sdto);
-			}
-		}catch (Exception e) {System.out.println(e);}		
-		return sdlist;
-	}
+
 	// 전채 공항 목록
 	public ArrayList<Airport> Airport() {
 		ArrayList<Airport> ListAP = new ArrayList<>();
@@ -164,7 +150,7 @@ public class Adao extends Dao{
 		}catch (Exception e) {System.out.println(e);}
 		return false;
 	}
-	// 특정 스케쥴 삭제
+	// 선택 스케쥴 삭제
 	public boolean scheduleDelete(int sno) {
 		String sql = "delete * from schedule where sno = ?";
 		try {
@@ -183,12 +169,12 @@ public class Adao extends Dao{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();			
 			while(rs.next()) {
-				rankDto rankDto = new rankDto(rs.getString(1), rs.getInt(2));
+				rankDto rankDto = new rankDto(rs.getString(1), rs.getLong(2));
 				alrlist.add(rankDto);				
-			}// while e			
+			}// while e	
 			return alrlist;
-		}catch(Exception e) { }		
-		return alrlist;
+		}catch (Exception e) {System.out.println(e);}	
+		return null;
 	}
 	// 공항별 이용객수 결산
 	public void APRANK() {

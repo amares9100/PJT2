@@ -1,6 +1,8 @@
-package Flight_reservation.controller;
+ package Flight_reservation.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import Flight_reservation.model.Adao;
 import Flight_reservation.model.Airport;
@@ -17,27 +19,19 @@ public class Acontroller {
 		ArrayList<Schedule> slist  =  Adao.getInstance().schedulePrint();
 		
 		for(int i=0; i< 11 ; i++) {
-			System.out.printf("%2d %-10s %-8s %-20s %-8s %-20s %-8d %3d \n",
+			System.out.printf("%2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
 					slist.get(i).getSno(),slist.get(i).getLpname(),slist.get(i).getDpname(),slist.get(i).getDtime(),
 					slist.get(i).getApname(),slist.get(i).getAtime(),slist.get(i).getPrice(),slist.get(i).getRseats());
 		}
 
 	}
-	// 특정 출발지 스케줄 목록 -> 페이징처리 추가 필요 -> 5~10 개로 출력되도록
-	public void schedulePrint_DP(String pname) {
-		ArrayList<Schedule> splist  =  Adao.getInstance().schedulePrint_DP(pname);
+	// 검색된 스케줄 목록	
+	public void schedulePrint_DP(String pname,String ddate) {
+		ArrayList<Schedule> splist  =  Adao.getInstance().schedulePrint_DP(pname,ddate);
 		for(Schedule dto:splist) {
-			System.out.printf("%2d %-10s %-8s %-20s %-8s %-20s %-8d %3d \n",
+			System.out.printf("%2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
 					dto.getSno(),dto.getLpname(),dto.getDpname(),dto.getDtime(),dto.getApname(),dto.getAtime(),dto.getPrice(),dto.getRseats());
 		}	
-	}
-	// 특정 출발일 스케줄 목록 -> 페이징처리 추가 필요 -> 5~10 개로 출력되도록
-	public void schedulePrint_DD(String ddate) {
-		ArrayList<Schedule> sdlist  =  Adao.getInstance().schedulePrint_DD(ddate);
-		for(Schedule dto:sdlist) {
-			System.out.printf("%2d %-10s %-8s %-20s %-8s %-20s %-8d %3d \n",
-					dto.getSno(),dto.getLpname(),dto.getDpname(),dto.getDtime(),dto.getApname(),dto.getAtime(),dto.getPrice(),dto.getRseats());
-		}
 	}
 	// 전채 공항 목록
 	public ArrayList<Airport> Airport() {
@@ -56,15 +50,34 @@ public class Acontroller {
 					lp.getLpno(),lp.getLpname(),lp.getLname(),lp.getAname(),lp.getAmax());
 		}
 	}
-	// 출발지 도착지 동일 여부 검사
-	public boolean APcheck(String dpname,String apname) {
-		if(dpname.equals(apname)) {return false;}
-		return true;
+	// 경로 설정 유효성 검사
+	public int APcheck(String dpname,String apname) {
+		// 공항 목록에 있는 공항인지 확인
+		int check = 0;
+		ArrayList<Airport> aplist = Adao.getInstance().Airport();
+		for(Airport ap : aplist) {
+			if(ap.getPname().equals(dpname)) { check++; }
+			if(ap.getPname().equals(apname)) { check++; }
+		}
+		if(check != 2) {return 2;}
+		// 출발지 도착지 동일 여부 검사 
+		if(dpname.equals(apname)) {return 3;}
+		return 1;
 	}
 	// 출발일 도착일 순서 확인 검사 ( 출발일이 도착일보다 빠른 날짜가 맞는지 )
-	public boolean dateCheck(String ddate,String adate) {	
-		if(ddate.equals(adate)) {return false;}
-		return true;
+	public boolean dateCheck(String ddate,String dtime,String adate,String atime){	
+		// 날짜와 시간 합쳐서 등록
+		ddate = ddate+" "+dtime;
+		adate = adate+" "+atime;
+		// 출발일이 도착일보다 빠른 날짜가 맞는지 확인 + 입력양식 유효성 검사
+		try {
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	        Date date1 = formatter.parse(ddate);       
+	        Date date2 = formatter.parse(adate);     
+	        if(date2.after(date1)) {return true;}	        
+		}catch (Exception e) {System.out.println(e);}
+
+		return false;
 	}
 	// 스케줄 등록
 	public boolean scheduleRegister(String dpname,String apname,String ddate,String dtime,String adate,String atime,String lpname,int price) {
@@ -84,10 +97,10 @@ public class Acontroller {
 		for(Schedule dto:slist) {
 			if(dto.getSno()==sno) {
 				System.out.println("------------------------------------------------------------------------------------------------");
-				System.out.printf("%-2s %-8s %-8s %-16s %-8s %-16s %-8s %-3s \n",
+				System.out.printf("%-2s %-8s %-8s %-19s %-8s %-19s %-8s %-3s \n",
 						"번호","비행편명","출발지","출발일정","도착지","도착일정","가격","잔여좌석");		
 				System.out.println("------------------------------------------------------------------------------------------------");
-				System.out.printf("%2d %-10s %-8s %-20s %-8s %-20s %-8d %3d \n",
+				System.out.printf("%2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
 						dto.getSno(),dto.getLpname(),dto.getDpname(),dto.getDtime(),dto.getApname(),dto.getAtime(),dto.getPrice(),dto.getRseats());
 				System.out.println("------------------------------------------------------------------------------------------------");
 			}
@@ -118,9 +131,7 @@ public class Acontroller {
 	public void alRank() {
 		ArrayList<rankDto> alrlist = Adao.getInstance().alRank();
 		for(int i=0 ; i < alrlist.size(); i++) {
-			System.out.println(i);
-			System.out.println(alrlist.get(i).getName());
-			System.out.printf("%-2d %-15s %-20d \n",
+			System.out.printf("%3d %-15s %-20d \n",
 					(i+1),alrlist.get(i).getName(),alrlist.get(i).getCount());		
 		}
 	}	

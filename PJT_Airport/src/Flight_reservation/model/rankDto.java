@@ -2,14 +2,14 @@ package Flight_reservation.model;
 
 public class rankDto {
 
-	private String name ;
-	private int    count;
+	private String  name ;
+	private long    count;
 	
 	public rankDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public rankDto(String name, int count) {
+	public rankDto(String name, long count) {
 		super();
 		this.name = name;
 		this.count = count;
@@ -28,17 +28,13 @@ public class rankDto {
 		this.name = name;
 	}
 
-	public int getCount() {
+	public long getCount() {
 		return count;
 	}
 
-	public void setCount(int count) {
+	public void setCount(long count) {
 		this.count = count;
 	}
-	
-	
-	
-	
-	
+
 	
 }
