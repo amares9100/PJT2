@@ -8,15 +8,37 @@ public class Reservation{
 	private int tprice;//총 가격
 	
 	private String lname; // 항공사 이름
+	private String aname; // 비행기 이름
 	private String departure; // 출발지
 	private String arrival; // 출발지
 	private String date; // 비행일
+	private String adate; // 도착일
 	
 	private String tier; // 티어
 	private float discount; // 할인가
 	private float arate; // 적립
 	
 	public Reservation() {}
+
+	
+	
+	//flightSelect
+	public Reservation( int sno , String lname , String aname ,String departure,  String arrival  , String date , String adate, int tprice ,int men) {
+		super();
+		this.sno = sno;
+		this.lname = lname;
+		this.aname = aname;
+		
+		this.departure = departure;
+		this.arrival = arrival;
+		this.date = date;
+		
+		this.adate = adate;
+		this.tprice = tprice;
+		this.men = men;
+	}
+
+
 
 
 	public Reservation(int rno, int sno, int mno, int men, int tprice, String lname, String departure, String arrival,
@@ -47,6 +69,31 @@ public class Reservation{
 	
 	
 	
+	
+	public String getAname() {
+		return aname;
+	}
+
+
+
+	public void setAname(String aname) {
+		this.aname = aname;
+	}
+
+
+
+	public String getAdate() {
+		return adate;
+	}
+
+
+
+	public void setAdate(String adate) {
+		this.adate = adate;
+	}
+
+
+
 	public String getTier() {
 		return tier;
 	}

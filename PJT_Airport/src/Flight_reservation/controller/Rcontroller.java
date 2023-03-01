@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import Flight_reservation.model.Airport;
 import Flight_reservation.model.Rdao;
+import Flight_reservation.model.Reservation;
 
 public class Rcontroller {
 	private static Rcontroller acontroller = new Rcontroller();
@@ -93,8 +94,8 @@ public class Rcontroller {
 	}
 	
 	//비행편 선택
-	public void flightSelect() {
-		
+	public ArrayList<Reservation> flightSelect(int dpno,int apno,String dtime,int men) {
+		return Rdao.getInstance().flightSelect(dpno, apno, dtime, men);
 	}
 	
 	//결제

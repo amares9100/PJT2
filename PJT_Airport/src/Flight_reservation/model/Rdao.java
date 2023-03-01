@@ -1,5 +1,6 @@
 package Flight_reservation.model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Rdao extends Dao{
@@ -100,6 +101,36 @@ public class Rdao extends Dao{
 		} catch (Exception e) {
 			System.out.println("DB오류"+e);
 		}return false;
+	}
+	
+	// -------------------- 이경석 -----------------
+	//
+	public ArrayList<Reservation> flightSelect(int dpno,int apno,String dtime,int men) {
+		ArrayList<Reservation> rlist = new ArrayList<>();
+		
+		String sql = "select s.sno '비행번호' ,al.lname '항공사명' , ap.aname '비행기명' , ap1.pname'출발지' , ap2.pname '도착지'  , s.dtime '비행일' , s.atime '도착일' , s.price  "
+				+ "from schedule s, airport ap1 , airport ap2 ,LP lp , airline al , airplane ap "
+				+ "where  ap1.pno = s.dpno and ap2.pno = s.apno  and lp.lno = al.lno and s.lpno = lp.lpno and lp.ano = ap.ano   "
+				+ "and dpno = ? and apno = ?  and  rseats>="+men+" and dtime like '"+dtime+"%'";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, dpno);
+			ps.setInt(2, apno);
+	
+		
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Reservation reservation = new Reservation(
+				rs.getInt(1) , rs.getString(2) , rs.getString(3) , 
+				rs.getString(4), rs.getString(5) , rs.getString(6) ,
+				rs.getString(7) , rs.getInt(8) ,men );
+				rlist.add(reservation);
+				}
+			return rlist;
+		} catch (SQLException e) {System.out.println("DB오류"+e);}
+		return null;
 	}
 	
 }

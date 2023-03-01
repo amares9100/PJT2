@@ -359,12 +359,32 @@ public class Front {
 		}
 		return men;
 	}
-	
-	public void flightSelect(int dpno,int apno,String dtime,int men) {
-		System.out.println(dpno+"/"+apno+"/"+dtime+"/"+men);
+	//비행편 검색 화면			    출발지 , 도착지 , 날짜 , 인원  /예시 : 김포 -> 인천 2023-03-07
+	public void flightSelect(int dpno,int apno,String dtime,int men) { //이경석
+		System.out.println("======== 비행편 검색 화면 =========");
+		
+		ArrayList<Reservation> rlist = Rcontroller.getInstance().flightSelect(dpno, apno, dtime, men);
+		
+		
+		//검색화면은 하나만 필요함, 이미 중복되므로 하나만 뽑아서 출력
+		System.out.printf("현재 선택 \n항공편:%s -> %s \n비행일:%s \n인원:%d명 \n\n",
+						   rlist.get(0).getDeparture() , rlist.get(0).getArrival() ,rlist.get(0).getDate() , men);
+		
+														//번호 = 스케쥴번호
+		System.out.printf("%10s   %15s %15s %15s %15s %20s %20s %15s \n",
+						  "번호","항공사명","비행기명","출발지","도착지",  "비행일","도착일","가격");
+		for(Reservation re : rlist ) {
+			System.out.printf("%10d \t %15s %15s %15s  %15s \t %20s \t %20s %15d\n",
+					re.getSno() , re.getLname(), re.getAname() ,
+					re.getDeparture() , re.getArrival() ,re.getDate() ,
+					re.getAdate(),re.getTprice(),re.getMen() );
+		}//for e
+		
+		System.out.println("----------------------------------------------------------------------\n");
+		
 	}
 	
-	public void selectCompelete() {
+	public void selectCompelete() { // 이경석
 		System.out.println("1. 결제방법 선택 2. 뒤로가기");
 		int ch = scanner.nextInt();
 		if(ch==1) {payment();} 
@@ -379,7 +399,7 @@ public class Front {
 		ArrayList<Reservation> rlist = Mcontroller.getInstance().Myreser();
 		
 		System.out.println("============ 예약내역 출력 ===========");
-		for(Reservation re : rlist) {
+		for(Reservation re : rlist) { // 비행표는 예약번호
 			System.out.printf("비행표: %d \n항공사 : %s \n항공편 : %s -> %s \n"
 							+ "비행일 : %s \n인원 : %d 명 \n"
 							+ "결제 가격 : %d -> 등급 할인 가격 %d\n"
@@ -402,7 +422,7 @@ public class Front {
 		else if(ch==2) {return;}
 	}
 	
-	public void MYcancle() {
+	public void MYcancle() { // 이경석
 		System.out.println("------------ 예약취소 ------------");
 		System.out.println("몇번째 비행표를 취소하시겠습니까?");
 		int ch2 = scanner.nextInt();
