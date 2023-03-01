@@ -98,6 +98,14 @@ public class Rcontroller {
 		return Rdao.getInstance().flightSelect(dpno, apno, dtime, men);
 	}
 	
+	public Reservation ticketReservation1(int sno) {
+		return Rdao.getInstance().ticketReservation1(sno);
+	}
+	
+	public boolean ticketReservation2(int men , Reservation ticket) {
+		return Rdao.getInstance().ticketReservation2(men, Mcontroller.getInstance().getLoginsession(), ticket);
+	}
+	
 	//결제
 	public void payment() {
 		

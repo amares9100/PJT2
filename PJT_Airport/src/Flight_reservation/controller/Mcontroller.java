@@ -12,6 +12,15 @@ public class Mcontroller {
 	
 	
 	private static int loginsession = 0;
+	
+	public static int getLoginsession() {
+		return loginsession;
+	}
+	public static void setLoginsession(int loginsession) {
+		Mcontroller.loginsession = loginsession;
+	}
+	
+	
 	//로그인
 	public int login( String mid , String mpw  ) {
 		/* -> 로그인 성공 시 사용자 메인이동 // 관리자 아이디 로그인시 관리자 페이지 이동*/

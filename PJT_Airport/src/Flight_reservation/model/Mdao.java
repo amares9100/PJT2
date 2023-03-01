@@ -137,8 +137,8 @@ public class Mdao extends Dao{
 		//비행표 리스트
 		ArrayList<Reservation> rlist = new ArrayList<>();
 		
-		String sql = "select r.rno'예약번호', r.sno '스케쥴번호' ,r.mno'회원번호' ,r.men '인원수', r.tprice '총가격' ,al.lname '항공사' , ap.pname '출발지', ap2.pname '도착지', s.dtime '비행일' ,  m.tier '등급' , t_t.discount '할인가' , t_t.arate '마일리지적립'"
-				+ "from reservation r , schedule s  , airline al , Lp lp , airport ap , airport ap2 , member m , tier_table t_t"
+		String sql = "select r.rno'예약번호', r.sno '스케쥴번호' ,r.mno'회원번호' ,r.men '인원수', r.tprice '총가격' ,al.lname '항공사' , ap.pname '출발지', ap2.pname '도착지', s.dtime '비행일' ,  m.tier '등급' , t_t.discount '할인가' , t_t.arate '마일리지적립' "
+				+ "from reservation r , schedule s  , airline al , Lp lp , airport ap , airport ap2 , member m , tier_table t_t "
 				+ "where r.sno = s.sno and al.lno = lp.lno and s.dpno = ap.pno and s.apno = ap2.pno and s.lpno = lp.lpno and r.mno = m.mno and m.tier = t_t.tier and r.mno = ? ";
 		
 		
@@ -176,6 +176,8 @@ public class Mdao extends Dao{
 			return false;
 	}
 
+	
+	
 }
 
 

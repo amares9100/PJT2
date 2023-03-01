@@ -370,11 +370,11 @@ public class Front {
 		System.out.printf("현재 선택 \n항공편:%s -> %s \n비행일:%s \n인원:%d명 \n\n",
 						   rlist.get(0).getDeparture() , rlist.get(0).getArrival() ,rlist.get(0).getDate() , men);
 		
-														//번호 = 스케쥴번호
-		System.out.printf("%10s   %15s %15s %15s %15s %20s %20s %15s \n",
-						  "번호","항공사명","비행기명","출발지","도착지",  "비행일","도착일","가격");
+														
+		System.out.printf("%10s   %15s %15s %15s %15s %20s \t\t %20s %15s \n",
+						  "스케쥴 번호","항공사명","비행기명","출발지","도착지",  "비행일","도착일","가격");
 		for(Reservation re : rlist ) {
-			System.out.printf("%10d \t %15s %15s %15s  %15s \t %20s \t %20s %15d\n",
+			System.out.printf("%10d \t %15s %15s %15s  %15s \t\t %20s \t\t %20s %15d\n",
 					re.getSno() , re.getLname(), re.getAname() ,
 					re.getDeparture() , re.getArrival() ,re.getDate() ,
 					re.getAdate(),re.getTprice(),re.getMen() );
@@ -385,10 +385,38 @@ public class Front {
 	}
 	
 	public void selectCompelete() { // 이경석
-		System.out.println("1. 결제방법 선택 2. 뒤로가기");
+		System.out.println("1.비행표 선택하기  2. 결제방법 선택 3. 뒤로가기");
 		int ch = scanner.nextInt();
-		if(ch==1) {payment();} 
-		else if(ch==2) {return;}
+		if(ch==1) {ticketReservation1();}
+		else if(ch==2) {payment();} 
+		else if(ch==3) {return;}
+	}
+	
+	//새함수 추가 (비행확인후 -> 티켓예매)
+	public void ticketReservation1() {
+		System.out.println("몇번째 스케쥴 번호를 선택하시겠습니까?"); int sno = scanner.nextInt();
+		Reservation ticket = Rcontroller.getInstance().ticketReservation1(sno);
+		
+		
+		System.out.printf("%10s %15s %15s %15s %15s %20s \t\t %20s \n ",
+						  "스케쥴 번호","항공사명","비행기명","출발지","도착지","비행일","도착일" );
+		System.out.printf("%10d \t %15s %15s %15s %15s \t\t %20s \t\t %20s \n ",
+							ticket.getSno() , ticket.getLname() , ticket.getAname(),
+							ticket.getDeparture() , ticket.getArrival() , ticket.getDate(),
+							ticket.getAdate());
+		
+		System.out.println("이 비행표를 선택하시겠습니까? 1.Yes 2.no");
+		int ch00 = scanner.nextInt();
+		if(ch00==1) { ticketReservation2(ticket); }
+		else if(ch00==2) {}
+	}
+	
+	//
+	public void ticketReservation2(Reservation ticket) {
+		System.out.print("탑승할 인원을 입력해주세요 : "); int men = scanner.nextInt();
+		boolean result = Rcontroller.getInstance().ticketReservation2(men, ticket);
+		if(result) {System.out.println("예약되었습니다.");}
+		else {System.out.println("예약을 실패하셨습니다.");}
 	}
 	
 	public void payment() {

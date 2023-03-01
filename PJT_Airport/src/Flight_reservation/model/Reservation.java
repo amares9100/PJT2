@@ -21,7 +21,22 @@ public class Reservation{
 	public Reservation() {}
 
 	
-	
+	//ticketReservation
+	public Reservation(int sno, String lname, String aname, String departure, String arrival, String date,
+			String adate , int tprice) {
+		super();
+		this.sno = sno;
+		this.lname = lname;
+		this.aname = aname;
+		this.departure = departure;
+		this.arrival = arrival;
+		this.date = date;
+		this.adate = adate;
+		this.tprice = tprice;
+	}
+
+
+
 	//flightSelect
 	public Reservation( int sno , String lname , String aname ,String departure,  String arrival  , String date , String adate, int tprice ,int men) {
 		super();
@@ -39,8 +54,7 @@ public class Reservation{
 	}
 
 
-
-
+	//Myreser
 	public Reservation(int rno, int sno, int mno, int men, int tprice, String lname, String departure, String arrival,
 			String date , String tier , float discount , float arate) {
 		super();
