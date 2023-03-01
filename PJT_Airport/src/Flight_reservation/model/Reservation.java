@@ -12,11 +12,15 @@ public class Reservation{
 	private String arrival; // 출발지
 	private String date; // 비행일
 	
+	private String tier; // 티어
+	private float discount; // 할인가
+	private float arate; // 적립
+	
 	public Reservation() {}
 
 
 	public Reservation(int rno, int sno, int mno, int men, int tprice, String lname, String departure, String arrival,
-			String date) {
+			String date , String tier , float discount , float arate) {
 		super();
 		this.rno = rno;
 		this.sno = sno;
@@ -27,6 +31,9 @@ public class Reservation{
 		this.departure = departure;
 		this.arrival = arrival;
 		this.date = date;
+		this.tier = tier;
+		this.discount = discount;
+		this.arate = arate;
 	}
 
 
@@ -36,6 +43,39 @@ public class Reservation{
 		return "Reservation [rno=" + rno + ", sno=" + sno + ", mno=" + mno + ", men=" + men + ", tprice=" + tprice
 				+ "]";
 	}
+
+	
+	
+	
+	public String getTier() {
+		return tier;
+	}
+
+
+	public void setTier(String tier) {
+		this.tier = tier;
+	}
+
+
+	public float getDiscount() {
+		return discount;
+	}
+
+
+	public void setDiscount(float discount) {
+		this.discount = discount;
+	}
+
+
+	public float getArate() {
+		return arate;
+	}
+
+
+	public void setArate(float arate) {
+		this.arate = arate;
+	}
+
 
 	public int getRno() {
 		return rno;

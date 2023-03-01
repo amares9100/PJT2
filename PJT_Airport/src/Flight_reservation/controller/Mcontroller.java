@@ -11,11 +11,11 @@ public class Mcontroller {
 	public static Mcontroller getInstance() {return mcontroller;}
 	
 	
-	int loginsession = 0;
+	private static int loginsession = 0;
 	//로그인
 	public int login( String mid , String mpw  ) {
 		/* -> 로그인 성공 시 사용자 메인이동 // 관리자 아이디 로그인시 관리자 페이지 이동*/
-		int loginsession = Mdao.getInstance().login(mid, mpw);
+		loginsession = Mdao.getInstance().login(mid, mpw);
 		if(loginsession == 1) { 
 			return 1; // 관리자 반환
 		}
@@ -70,8 +70,7 @@ public class Mcontroller {
 	}
 	
 	//예약 취소
-	public void MYcancle() {
-		Mdao.getInstance().Myreser(loginsession);
-		
+	public boolean MYcancle(int rno) {
+		return Mdao.getInstance().MYcancle(loginsession, rno);	
 	}
 }

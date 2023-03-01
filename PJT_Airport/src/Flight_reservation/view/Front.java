@@ -145,6 +145,7 @@ public class Front {
 		if(ch==1) {reservation();}
 		else if(ch==2) {Myreser();}
 		else if(ch==3) {return;}
+		//Myreser() 에 return이 있어, while문을 쓰는게 좋아보임
 	}
 	
 	public void reservation() {
@@ -379,12 +380,20 @@ public class Front {
 		
 		System.out.println("============ 예약내역 출력 ===========");
 		for(Reservation re : rlist) {
-			System.out.printf("항공사 : %s \n 항공편 : %s -> %s \n "
-							+ "비행일 : %s \n 인원 : %d 명 \n "
-							+ "결제 가격 : %d -> 등급 할인 가격 (미정)\n "
-							+ "예상적립 마일리지 : (미정)",
-							re.getLname() , re.getDeparture(), re.getArrival()
-							,re.getMen(), re.getTprice() );
+			System.out.printf("비행표: %d \n항공사 : %s \n항공편 : %s -> %s \n"
+							+ "비행일 : %s \n인원 : %d 명 \n"
+							+ "결제 가격 : %d -> 등급 할인 가격 %d\n"
+							+ "예상적립 마일리지 : %d\n",
+							re.getRno(), re.getLname() , re.getDeparture(), re.getArrival()
+							,re.getDate() ,re.getMen(), re.getTprice(), 
+							//할인 가격 = 표 가격 - (표가격 * 할인가)
+							re.getTprice() -  (int)(Math.floor(re.getDiscount()*re.getTprice()))   , 
+							//마일리지 적립 = 표가격 * 마일리지비율
+							(int)(Math.floor(re.getTprice() * re.getArate()))
+							);
+			
+			//비행표가 2표면 보기쉽게 분리
+			System.out.println("-----------------------------");
 		}
 		
 		System.out.println("1. 예약취소 2. 뒤로가기");
@@ -394,6 +403,13 @@ public class Front {
 	}
 	
 	public void MYcancle() {
+		System.out.println("------------ 예약취소 ------------");
+		System.out.println("몇번째 비행표를 취소하시겠습니까?");
+		int ch2 = scanner.nextInt();
+		
+		boolean result = Mcontroller.getInstance().MYcancle(ch2);
+		if(result) {System.out.println("[알림] 예약을 취소했습니다.");}
+		else {System.out.println("[알림] 예약을 취소하지 못했습니다!.");}
 		
 	}
 	
