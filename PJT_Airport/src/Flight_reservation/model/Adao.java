@@ -152,7 +152,7 @@ public class Adao extends Dao{
 	}
 	// 선택 스케쥴 삭제
 	public boolean scheduleDelete(int sno) {
-		String sql = "delete * from schedule where sno = ?";
+		String sql = "delete from schedule where sno = ?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, sno);
