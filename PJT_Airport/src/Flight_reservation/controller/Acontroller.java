@@ -18,7 +18,7 @@ public class Acontroller {
 	public void schedulePrint() {	
 		ArrayList<Schedule> slist  =  Adao.getInstance().schedulePrint();
 		
-		for(int i=0; i< 11 ; i++) {
+		for(int i=0; i< 10 ; i++) {
 			System.out.printf("%2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
 					slist.get(i).getSno(),slist.get(i).getLpname(),slist.get(i).getDpname(),slist.get(i).getDtime(),
 					slist.get(i).getApname(),slist.get(i).getAtime(),slist.get(i).getPrice(),slist.get(i).getRseats());

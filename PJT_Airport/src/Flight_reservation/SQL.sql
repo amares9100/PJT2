@@ -126,14 +126,14 @@ insert into airport (pnation, pname) values ('미국','덜레스공항');
 
 -- schedule 입력
 -- 김포 -> 제주
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,1,2,'2023-03-07 06:15:00','2023-03-07 07:25:00',100000,10);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,1,2,'2023-03-07 08:20:00','2023-03-07 09:30:00',100000,5);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,1,2,'2023-03-07 13:05:00','2023-03-07 14:15:00',100000,2);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,1,2,'2023-03-07 22:45:00','2023-03-07 23:55:00',100000,1);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,1,3,'2023-03-07 06:15:00','2023-03-07 07:25:00',100000,10);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,1,3,'2023-03-07 08:20:00','2023-03-07 09:30:00',100000,5);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,1,3,'2023-03-07 13:05:00','2023-03-07 14:15:00',100000,2);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,1,3,'2023-03-07 22:45:00','2023-03-07 23:55:00',100000,1);
 -- 제주 -> 김포
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,2,1,'2023-03-07 08:10:00','2023-03-07 09:20:00',100000,20);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,2,1,'2023-03-07 10:40:00','2023-03-07 11:50:00',100000,10);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,2,1,'2023-03-07 15:10:00','2023-03-07 16:20:00',100000,1);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,3,1,'2023-03-07 08:10:00','2023-03-07 09:20:00',100000,20);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,3,1,'2023-03-07 10:40:00','2023-03-07 11:50:00',100000,10);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,3,1,'2023-03-07 15:10:00','2023-03-07 16:20:00',100000,1);
 -- 인천 -> 도쿄
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7 ,2,4,'2023-03-07 07:15:00','2023-03-07 09:30:00',250000,20);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,2,4,'2023-03-07 10:15:00','2023-03-07 12:30:00',250000,10);
@@ -220,6 +220,13 @@ insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('asdasd','4567',
 insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('zxczxc','8901','이수근','010-3333-3333','GOLD'	,8000);
 insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('cxzcxz','7410','서장훈','010-4444-4444','BRONZE'	,200);
 insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('dsadsa','8520','민경훈','010-5555-5555','DIAMOND',12000);
+-- reservation 입력
+insert into reservation (sno,mno,men,tprice) values (1,1,2,200000);
+insert into reservation (sno,mno,men,tprice) values (1,2,1,100000);
+insert into reservation (sno,mno,men,tprice) values (1,3,3,300000);
+insert into reservation (sno,mno,men,tprice) values (2,4,1,100000);
+insert into reservation (sno,mno,men,tprice) values (2,5,3,300000);
+insert into reservation (sno,mno,men,tprice) values (8,1,1,250000);
 
 select * from airline;
 select * from airplane;
