@@ -85,13 +85,6 @@ public class Rcontroller {
 		}else {return false;}
 		return false;
 	}
-		
-	
-	
-	//인원 선택
-	public void pSelect() {
-		
-	}
 	
 	//비행편 선택
 	public ArrayList<Reservation> flightSelect(int dpno,int apno,String dtime,int men) {
