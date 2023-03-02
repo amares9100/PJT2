@@ -9,10 +9,38 @@ public class Schedule {
 	private String apname;//도착지
     private String dtime;//출발시간
     private String atime;//도착시간
-    private int price;
-    private int rseats;
+    private int price;	//가격
+    
+    
+    private int rseats; // 좌석
+    private String lname; // 항공사명
+    private String aname; // 비행기명
+    
+    
     
     public Schedule() {}
+
+    //비행편 검색 화면
+	public Schedule(int sno, String lname, String aname, String dpname, String apname, String dtime, String atime,
+		int price , int rseats ) {
+		super();
+		this.sno = sno;
+		this.dpname = dpname;
+		this.apname = apname;
+		this.dtime = dtime;
+		this.atime = atime;
+		this.price = price;
+		this.rseats = rseats;
+		this.lname = lname;
+		this.aname = aname;
+	}
+
+
+
+
+
+
+
 
 	public Schedule(int sno, String lpname, String dpname, String apname, String dtime, String atime, int price,
 			int rseats) {
@@ -31,6 +59,25 @@ public class Schedule {
 	public String toString() {
 		return "Schedule [sno=" + sno + ", lpname=" + lpname + ", dpname=" + dpname + ", apname=" + apname + ", dtime="
 				+ dtime + ", atime=" + atime + ", price=" + price + ", rseats=" + rseats + "]";
+	}
+
+	
+	
+	
+	public String getLname() {
+		return lname;
+	}
+
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+
+	public String getAname() {
+		return aname;
+	}
+
+	public void setAname(String aname) {
+		this.aname = aname;
 	}
 
 	public int getSno() {

@@ -7,6 +7,7 @@ import java.util.Scanner;
 import Flight_reservation.model.Airport;
 import Flight_reservation.model.Rdao;
 import Flight_reservation.model.Reservation;
+import Flight_reservation.model.Schedule;
 
 public class Rcontroller {
 	private static Rcontroller acontroller = new Rcontroller();
@@ -87,14 +88,16 @@ public class Rcontroller {
 	}
 	
 	//비행편 선택
-	public ArrayList<Reservation> flightSelect(int dpno,int apno,String dtime,int men) {
+	public  ArrayList<Schedule> flightSelect(int dpno,int apno,String dtime,int men) {
 		return Rdao.getInstance().flightSelect(dpno, apno, dtime, men);
 	}
 	
+	//선택한 스케줄 번호의 스케줄[1개]
 	public Reservation ticketReservation1(int sno) {
 		return Rdao.getInstance().ticketReservation1(sno);
 	}
 	
+	// 예약 완료[insert]
 	public boolean ticketReservation2(int men , Reservation ticket) {
 		return Rdao.getInstance().ticketReservation2(men, Mcontroller.getInstance().getLoginsession(), ticket);
 	}
