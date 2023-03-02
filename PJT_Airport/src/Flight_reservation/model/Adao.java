@@ -162,7 +162,7 @@ public class Adao extends Dao{
 		return false;
 	}
 	// 항공사별 매출 결산
-	public ArrayList<rankDto> alRank() {
+	public ArrayList<rankDto> ALRank() {
 		ArrayList<rankDto> alrlist = new ArrayList<>();
 		String sql = "select al.lname, sum(((ap.amax-s.rseats) *s.price)) as total from airplane ap, schedule s, airline al, LP where lp.ano = ap.ano and al.lno = lp.lno group by al.lname order by total desc ;";
 		try {
@@ -177,8 +177,19 @@ public class Adao extends Dao{
 		return null;
 	}
 	// 공항별 이용객수 결산
-	public void APRANK() {
-			
+	public ArrayList<rankDto> APRANK() {
+		ArrayList<rankDto> aprlist = new ArrayList<>();
+		String sql = "select p.pname, sum(ap.amax-s.rseats) as total from schedule s,LP , airport p, airplane ap where s.dpno = p.pno and s.lpno = LP.lpno and lp.ano = ap.ano group by p.pname order by total desc;";
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();			
+			while(rs.next()) {
+				rankDto rankDto = new rankDto(rs.getString(1), rs.getLong(2));
+				aprlist.add(rankDto);				
+			}// while e	
+			return aprlist;
+		}catch (Exception e) {System.out.println(e);}	
+		return null;
 	}
 	
 }

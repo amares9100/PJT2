@@ -129,7 +129,7 @@ public class Acontroller {
 	}
 	// 항공사별 매출 결산
 	public void alRank() {
-		ArrayList<rankDto> alrlist = Adao.getInstance().alRank();
+		ArrayList<rankDto> alrlist = Adao.getInstance().ALRank();
 		for(int i=0 ; i < alrlist.size(); i++) {
 			System.out.printf("%3d %-15s %-20d \n",
 					(i+1),alrlist.get(i).getName(),alrlist.get(i).getCount());		
@@ -137,6 +137,10 @@ public class Acontroller {
 	}	
 	// 공항별 이용객수 결산
 	public void apRank() {
-			
+		ArrayList<rankDto> aprlist = Adao.getInstance().APRANK();
+		for(int i=0 ; i < aprlist.size(); i++) {
+			System.out.printf("%3d %-12s %-8d \n",
+					(i+1),aprlist.get(i).getName(),aprlist.get(i).getCount());		
+		}	
 	}
 }

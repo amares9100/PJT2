@@ -84,8 +84,10 @@ public class Afront {
 
 				
 				System.out.println("[일정 설정]");
-				System.out.print("출발일 입력 : [예시:2023-03-07 06:15:00] "); String ddate = scanner.next(); String dtime = scanner.next();
-				System.out.print("도착일 입력 : [예시:2023-03-07 09:15:00] "); String adate = scanner.next(); String atime = scanner.next();
+				System.out.print("출발일	입력 : [예시:2023-03-07] "); 	String ddate = scanner.next(); 
+				System.out.print("출발시간	입력 : [예시:06:15:00] ");		String dtime = scanner.next();
+				System.out.print("도착일 	입력 : [예시:2023-03-07] "); 	String adate = scanner.next(); 
+				System.out.print("도착시간	입력 : [예시:09:15:00] ");		String atime = scanner.next();
 				if(Acontroller.getInstance().dateCheck(ddate, dtime, adate, atime)) {}
 				else {System.out.println("[알림] 등록 불가능한 일정입니다.");break; }
 				
@@ -139,8 +141,10 @@ public class Afront {
 		public void scheduleUpdate_DD(int sno) throws Exception{
 			System.out.println("------------------------------------------------------------------------------------------------");
 			System.out.println("[일정 재설정]");
-			System.out.print("출발일 입력 : [예시:2023-03-07 06:15:00] "); String ddate = scanner.next(); String dtime = scanner.next();
-			System.out.print("도착일 입력 : [예시:2023-03-07 09:15:00] "); String adate = scanner.next(); String atime = scanner.next();
+			System.out.print("출발일	입력 : [예시:2023-03-07] "); 	String ddate = scanner.next(); 
+			System.out.print("출발시간	입력 : [예시:06:15:00] ");		String dtime = scanner.next();
+			System.out.print("도착일 	입력 : [예시:2023-03-07] "); 	String adate = scanner.next(); 
+			System.out.print("도착시간	입력 : [예시:09:15:00] ");		String atime = scanner.next();
 			System.out.println("------------------------------------------------------------------------------------------------");
 			boolean result = Acontroller.getInstance().scheduleUpdate_DD(sno, ddate,dtime, adate,atime);			
 			if(result) {System.out.println("[알림] 일정 재설정 완료 "); }
@@ -196,12 +200,15 @@ public class Afront {
 	// 항공사별 매출 결산
 		public void ALRANK() {
 			System.out.printf("%-3s %-14s %-20s\n",
-					"순위","공항명","매출 총액");
+					"순위","항공사명","매출 총액");
 			System.out.println("------------------------------------------------------------------------------------------------");
 			Acontroller.getInstance().alRank();		
 			}
 	// 공항별 이용객수 결산
-			public void APRANK() {
-				
-			}
+		public void APRANK() {
+			System.out.printf("%-3s %-12s %-8s\n",
+					"순위","공항명","이용객수");
+			System.out.println("------------------------------------------------------------------------------------------------");
+			Acontroller.getInstance().apRank();			
+		}
 }
