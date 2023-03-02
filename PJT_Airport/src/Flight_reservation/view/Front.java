@@ -167,7 +167,7 @@ public class Front {
 		
 		System.out.println("============ 예약내역 출력 ===========");
 		for(Reservation re : rlist) { // 비행표는 예약번호
-			System.out.printf("비행표: %d \n항공사 : %s \n항공편 : %s -> %s \n"
+			System.out.printf("예약번호: %d \n항공사 : %s \n항공편 : %s -> %s \n"
 							+ "비행일 : %s \n인원 : %d 명 \n"
 							+ "결제 가격 : %d -> 등급 할인 가격 %d\n"
 							+ "예상적립 마일리지 : %d\n",
