@@ -175,6 +175,23 @@ public class Mdao extends Dao{
 		} catch (SQLException e) {System.out.println(e);}
 			return false;
 	}
+	
+	public Member memberTier(int mno) {
+		Member member = null;
+		String sql = "select mname,tier,Mileage from member where mno=?;";
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			rs=ps.executeQuery();
+			while (rs.next()) {
+				member = new Member(rs.getString(1),rs.getString(2),rs.getInt(3));
+			}
+			return member;
+		} catch (Exception e) {
+			System.out.println(e);
+		}return null;
+		
+	}
 
 	
 	

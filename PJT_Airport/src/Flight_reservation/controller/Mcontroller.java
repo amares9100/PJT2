@@ -82,4 +82,9 @@ public class Mcontroller {
 	public boolean MYcancle(int rno) {
 		return Mdao.getInstance().MYcancle(loginsession, rno);	
 	}
+	
+	//회원 등급안내
+	public Member memberTier() {
+		return Mdao.getInstance().memberTier(loginsession);
+	}
 }
