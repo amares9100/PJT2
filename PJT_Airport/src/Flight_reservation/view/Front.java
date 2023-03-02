@@ -13,6 +13,7 @@ import Flight_reservation.model.Airport;
 import Flight_reservation.model.Reservation;
 import Flight_reservation.model.Schedule;
 import Flight_reservation.model.LP;
+import Flight_reservation.model.Member;
 
 public class Front {
 	
@@ -148,6 +149,8 @@ public class Front {
 	
 	public void user_main() {
 		while (true) {
+			Member m = Mcontroller.getInstance().memberTier();
+			System.out.println("안녕하세요 "+m.getMname()+"님 회원님의 등급은 "+m.getTier()+"["+m.getMileage()+"점]"+"입니다. ");
 			System.out.println(" 1. 비행편 출력   2. 예약 확인 3. 로그아웃");
 			try {
 				int ch = scanner.nextInt();

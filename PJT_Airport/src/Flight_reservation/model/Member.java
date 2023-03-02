@@ -20,6 +20,13 @@ public class Member {
 		}
 	
 	
+	public Member(String mname, String tier, int mileage) {
+		super();
+		this.mname = mname;
+		this.tier = tier;
+		Mileage = mileage;
+	}
+
 	public Member(int mno, String mid, String mpw, String mname, String mphone, String tier, int mileage) {
 		super();
 		this.mno = mno;
