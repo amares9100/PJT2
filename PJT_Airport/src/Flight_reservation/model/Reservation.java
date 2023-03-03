@@ -13,17 +13,21 @@ public class Reservation{
 	private String arrival; // 출발지
 	private String date; // 비행일
 	private String adate; // 도착일
+	private String tier;
 	
-	private String tier; // 티어
 	private float discount; // 할인가
 	private float arate; // 적립
+	private int rseats ; // 좌석
+	private int mileage; // 좌석
+	
+
 	
 	public Reservation() {}
 
 	
 	//ticketReservation
-	public Reservation(int sno, String lname, String aname, String departure, String arrival, String date,
-			String adate , int tprice) {
+	public Reservation(int sno, String lname, String aname, String departure, String arrival, String date, 
+			String adate , int tprice, int rseats, int mno , float discount ,float arate , int mileage ) {
 		super();
 		this.sno = sno;
 		this.lname = lname;
@@ -33,6 +37,12 @@ public class Reservation{
 		this.date = date;
 		this.adate = adate;
 		this.tprice = tprice;
+		this.rseats = rseats;
+		this.mno = mno;
+		this.discount = discount;
+		this.arate = arate;
+		this.mileage = mileage;
+		
 	}
 
 
@@ -216,6 +226,26 @@ public class Reservation{
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+
+	public int getRseats() {
+		return rseats;
+	}
+
+
+	public void setRseats(int rseats) {
+		this.rseats = rseats;
+	}
+
+
+	public int getMileage() {
+		return mileage;
+	}
+
+
+	public void setMileage(int mileage) {
+		this.mileage = mileage;
 	}
 	
 	
