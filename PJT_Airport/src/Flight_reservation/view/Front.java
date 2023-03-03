@@ -25,9 +25,12 @@ public class Front {
 
 	public void index() {
 		while(true) {
-			System.out.println("======================메인화면=====================");
-			System.out.println("메뉴> 1. 로그인 2. 회원가입 3. 아이디찾기 4. 비번 찾기 5. 회원탈퇴");
+			System.out.println("\t\t\t\t\t==============================================메인화면==============================================");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t 메뉴>> 1. 로그인 2. 회원가입 3. 아이디찾기 4. 비번 찾기 5. 회원탈퇴"); 
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			try {
+				System.out.print("\t\t\t\t\t ");
 				int ch = scanner.nextInt();
 				if(ch==1) {login();}
 				else if(ch==2) {signup();}
@@ -47,25 +50,24 @@ public class Front {
 	// 로그인
 	public void login() throws Exception{
 		/* -> 로그인 성공 시 사용자 메인이동 // 관리자 아이디 로그인시 관리자 페이지 이동*/
-		System.out.println("======================로그인======================");
-		System.out.println("로그인 아이디 : ");
+		System.out.println("\t\t\t\t\t===============================================로그인===============================================");
+		System.out.print("\t\t\t\t\t 로그인 아이디 : ");
 		String mid = scanner.next();
-		System.out.println("비밀번호 : ");
+		System.out.print("\t\t\t\t\t 비밀번호 : ");
 		String mpw = scanner.next();
 		
 		int result = Mcontroller.getInstance().login(mid, mpw);
 		if(result == 1) { // 관리자 로그인 id :adimn / pw : 1234 
-			System.out.println("관리자 로그인"); // 확인용
+			System.out.println("\t\t\t\t\t [관리자 로그인]"); // 확인용
 			Afront.getInstance().admin_main();
 		}
 		else if(result == 2) { // 일반로그인
-			System.out.println("로그인되었습니다.");
 			user_main(); // 사용자 메인페이지로 이동
 		}
 		else if(result == 0){ // 없는 아이디
-			System.out.println("존재하지 않는 아이디 입니다.");
+			System.out.println("\t\t\t\t\t [알림] 존재하지 않는 아이디 입니다.");
 		}
-		else {System.out.println("DB오류");} // 확인용
+		else {System.out.println("\t\t\t\t\t [알림] DB오류");} // 확인용
 	}
 	
 	// 회원가입
@@ -149,10 +151,21 @@ public class Front {
 	
 	public void user_main() {
 		while (true) {
+			System.out.println("\t\t\t\t\t==============================================유저메인==============================================");
 			Member m = Mcontroller.getInstance().memberTier();
-			System.out.println("안녕하세요 "+m.getMname()+"님 회원님의 등급은 "+m.getTier()+"["+m.getMileage()+"점]"+"입니다. ");
-			System.out.println(" 1. 비행편 출력   2. 예약 확인 3. 로그아웃");
+			
+			System.out.println("\t\t\t\t\t 안녕하세요 "+m.getMname()+"님 회원님의 등급은 "+m.getTier()+"["+m.getMileage()+"점]"+"입니다. ");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			ArrayList<Airport> list = Mcontroller.getInstance().recommended();
+			System.out.println("\t\t\t\t\t 이번달 가장 많이 떠난 여행지 TOP3");
+			for(int i = 0 ; i<list.size();i++) {
+				System.out.println("\t\t\t\t\t "+(i+1)+". "+list.get(i).getPnation()+"["+list.get(i).getPname()+"] : "+list.get(i).getPno()+"명 이용");
+			}
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t 1. 비행편 출력 2. 예약 확인 3. 로그아웃");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			try {
+				System.out.print("\t\t\t\t\t ");
 				int ch = scanner.nextInt();
 				if(ch==1) {Rfront.getInstance().reservation();}
 				else if(ch==2) {Myreser();}
