@@ -166,10 +166,23 @@ public class Mdao extends Dao{
 	
 	//예약 취소
 	public boolean MYcancle(int loginsession, int rno) {
-		String sql = "delete from reservation where mno = ? and rno =?";
-		
+			//예약 번호를 찾아 인원+스케쥴번호+스케쥴남은좌석 검색
+			String sql ="select r.men , r.sno , s.rseats from reservation r,schedule s where r.rno="+rno+" and r.sno = s.sno";
 		try {
 			ps=conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			//스케쥴 찾아가 남은좌석 + 예약취소된 좌석
+			while(rs.next()) {									// 이상하게 문자형끼리 붙어짐
+				int a = rs.getInt(3) + rs.getInt(1);
+				String sql2 = "update schedule set rseats ="+ a  +" where sno ="+rs.getInt(2);
+				ps=conn.prepareStatement(sql2);
+				ps.executeUpdate();
+			}
+			
+			//예약취소하기
+			String sql3 = "delete from reservation where mno = ? and rno =?";
+			ps=conn.prepareStatement(sql3);
 			ps.setInt(1, loginsession);
 			ps.setInt(2,rno);
 			ps.executeUpdate();

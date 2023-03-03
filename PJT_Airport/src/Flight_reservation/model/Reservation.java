@@ -18,7 +18,7 @@ public class Reservation{
 	private float discount; // 할인가
 	private float arate; // 적립
 	private int rseats ; // 좌석
-	private int mileage; // 좌석
+	
 	
 
 	
@@ -27,22 +27,23 @@ public class Reservation{
 	
 	//ticketReservation
 	public Reservation(int sno, String lname, String aname, String departure, String arrival, String date, 
-			String adate , int tprice, int rseats, int mno , float discount ,float arate , int mileage ) {
+			String adate , int tprice, int rseats, int mno , float discount ,float arate  ) {
 		super();
 		this.sno = sno;
 		this.lname = lname;
 		this.aname = aname;
+		
 		this.departure = departure;
 		this.arrival = arrival;
 		this.date = date;
+		
 		this.adate = adate;
 		this.tprice = tprice;
 		this.rseats = rseats;
+		
 		this.mno = mno;
 		this.discount = discount;
 		this.arate = arate;
-		this.mileage = mileage;
-		
 	}
 
 
@@ -239,15 +240,5 @@ public class Reservation{
 	}
 
 
-	public int getMileage() {
-		return mileage;
-	}
-
-
-	public void setMileage(int mileage) {
-		this.mileage = mileage;
-	}
-	
-	
 	
 }

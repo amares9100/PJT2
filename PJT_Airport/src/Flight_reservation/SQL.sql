@@ -242,5 +242,3 @@ select * from member;
 select * from LP;
 select * from schedule;
 select * from reservation;
-
-
