@@ -94,7 +94,7 @@ public class Rcontroller {
 	
 	//선택한 스케줄 번호의 스케줄[1개]
 	public Reservation ticketReservation1(int sno) {
-		return Rdao.getInstance().ticketReservation1(sno);
+		return Rdao.getInstance().ticketReservation1(sno,Mcontroller.getLoginsession());
 	}
 	
 	// 예약 완료[insert]

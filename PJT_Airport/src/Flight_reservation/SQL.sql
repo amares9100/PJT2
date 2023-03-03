@@ -233,6 +233,15 @@ select * from airplane;
 select * from airport;
 select * from tier_table;
 select * from member;
+
+
 select * from LP;
 select * from schedule;
 select * from reservation;
+
+update  member  set  Mileage  =2700 where mno=2;
+
+select s.sno '스케쥴 번호' ,  al.lname '항공사명' , ap.aname '비행기명' ,  ap1.pname'출발지' , ap2.pname '도착지' , s.dtime '비행일' , s.atime '도착일' , s.price '가격' , s.rseats '남은좌석'  
+				from schedule s , LP lp ,   airline al , airplane ap , airport ap1 , airport ap2 
+				where s.sno = 1
+				and s.lpno = lp.lpno and lp.lno = al.lno  and lp.ano = ap.ano and ap1.pno = s.dpno and ap2.pno = s.apno;
