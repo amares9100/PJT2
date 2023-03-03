@@ -1,6 +1,11 @@
 package Flight_reservation.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import Flight_reservation.model.Airport;
+import Flight_reservation.model.Dao;
 import Flight_reservation.model.Mdao;
 import Flight_reservation.model.Reservation;
 import Flight_reservation.model.Member;
@@ -86,5 +91,18 @@ public class Mcontroller {
 	//회원 등급안내
 	public Member memberTier() {
 		return Mdao.getInstance().memberTier(loginsession);
+	}
+	
+	//회원 등급 변경
+	
+	public boolean tierUpdate() {
+		return Mdao.getInstance().tierUpdate(loginsession);
+	}
+	
+	//당월 추천여행지
+	public ArrayList<Airport> recommended() {
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+		return Mdao.getInstance().recommended(dateFormat.format(date));
 	}
 }

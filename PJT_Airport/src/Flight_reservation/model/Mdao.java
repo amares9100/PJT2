@@ -176,6 +176,11 @@ public class Mdao extends Dao{
 			return false;
 	}
 	
+	
+	
+	
+	
+	// 멤버 등급 출력
 	public Member memberTier(int mno) {
 		Member member = null;
 		String sql = "select mname,tier,Mileage from member where mno=?;";
@@ -193,8 +198,46 @@ public class Mdao extends Dao{
 		
 	}
 
+	// 멤버 등급 변경
+	public boolean tierUpdate(int mno) {
+		String sql = "update member set tier = \r\n"
+				+ "	case 	when Mileage>=16000 then 'DIAMOND' \r\n"
+				+ "			when Mileage>=10000 then 'PLATINUM'	\r\n"
+				+ "			when Mileage>=5000 then 'GOLD'\r\n"
+				+ "			when Mileage>=2000 then 'SILVER' \r\n"
+				+ "            else 'BRONZE' end\r\n"
+				+ "    where mno=?;";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			ps.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}return false;
+	}
 	
-	
+	// 당월 여행지 추천
+	public ArrayList<Airport> recommended(String date) {
+		ArrayList<Airport> list = new ArrayList<>();
+		String sql = "select p.pnation, p.pname, sum(ap.amax-s.rseats) as total "
+				+ "from schedule s ,LP , airport p , airplane ap "
+				+ "where s.apno = p.pno and s.lpno = LP.lpno and lp.ano = ap.ano and "
+				+ "dtime like '"+date+"%' and pname!='인천공항' group by p.pnation, p.pname order by total desc limit 3;";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Airport airport = new Airport(rs.getInt(3), rs.getString(2), rs.getString(1));
+				list.add(airport);
+			}
+			return list;
+		} catch (Exception e) {
+			System.out.println(e);
+		}return null;
+	}
 }
 
 
