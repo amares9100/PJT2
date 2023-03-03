@@ -174,7 +174,8 @@ public class Mdao extends Dao{
 			
 			//스케쥴 찾아가 남은좌석 + 예약취소된 좌석
 			while(rs.next()) {									// 이상하게 문자형끼리 붙어짐
-				String sql2 = "update schedule set rseats ="+ (int)rs.getInt(3)+(int)(rs.getInt(1))   +" where sno ="+rs.getInt(2);
+				int a = rs.getInt(3) + rs.getInt(1);
+				String sql2 = "update schedule set rseats ="+ a  +" where sno ="+rs.getInt(2);
 				ps=conn.prepareStatement(sql2);
 				ps.executeUpdate();
 			}
