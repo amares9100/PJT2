@@ -1,4 +1,3 @@
-
 drop database if exists Flight_reservation;
 create database Flight_reservation;
 use Flight_reservation;
@@ -54,8 +53,6 @@ create table LP(
     foreign key(lno) references airline(lno),
     foreign key(ano) references airplane(ano)
 );
-
-
 
 drop table if exists schedule;
 create table schedule(
@@ -220,12 +217,13 @@ insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('
 insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('dsadsa','8520','민경훈','010-5555-5555','DIAMOND',12000 , '900421-1298543' , '남자');
 
 -- reservation 입력
-insert into reservation (sno,mno,men,tprice) values (1,1,2,200000);
-insert into reservation (sno,mno,men,tprice) values (1,2,1,100000);
+insert into reservation (sno,mno,men,tprice) values (1,4,2,200000);
+insert into reservation (sno,mno,men,tprice) values (1,6,1,100000);
 insert into reservation (sno,mno,men,tprice) values (1,3,3,300000);
 insert into reservation (sno,mno,men,tprice) values (2,4,1,100000);
 insert into reservation (sno,mno,men,tprice) values (2,5,3,300000);
-insert into reservation (sno,mno,men,tprice) values (8,1,1,250000);
+insert into reservation (sno,mno,men,tprice) values (8,2,1,250000);
+
 
 -- select * from airline;
 -- select * from airplane;
@@ -235,4 +233,14 @@ insert into reservation (sno,mno,men,tprice) values (8,1,1,250000);
 -- select * from LP;
 -- select * from schedule;
 -- select * from reservation;
+
+select * from airline;
+select * from airplane;
+select * from airport;
+select * from tier_table;
+select * from member;
+select * from LP;
+select * from schedule;
+select * from reservation;
+
 
