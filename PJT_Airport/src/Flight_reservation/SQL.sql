@@ -39,7 +39,9 @@ create table member (
     mphone varchar(20) not null,
     tier varchar(10) default 'bronze',
     Mileage int default 0,
-    foreign key(tier) references tier_table(tier)
+    foreign key(tier) references tier_table(tier) ,
+    rrn varchar(14) not null, -- 주민등록번호
+    gender varchar(10) not null -- 성별
 );
 
 drop table if exists LP;
@@ -214,12 +216,12 @@ insert into tier_table (tier,Mileage,discount,arate) values ( 'GOLD'	,5000	,0.3,
 insert into tier_table (tier,Mileage,discount,arate) values ( 'PLATINUM',10000	,0.4,0.4);
 insert into tier_table (tier,Mileage,discount,arate) values ( 'DIAMOND'	,16000	,0.5,0.5);
 -- member 입력
-insert into member ( mid,mpw,mname,mphone) values ('admin','1234','관리자','010-1234-5678');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('qweqwe','1234','유재석','010-1111-1111','SILVER'	,2500);
-insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('asdasd','4567','강호동','010-2222-2222','BRONZE'	,1200);
-insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('zxczxc','8901','이수근','010-3333-3333','GOLD'	,8000);
-insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('cxzcxz','7410','서장훈','010-4444-4444','BRONZE'	,200);
-insert into member ( mid,mpw,mname,mphone,tier,Mileage) values ('dsadsa','8520','민경훈','010-5555-5555','DIAMOND',12000);
+insert into member ( mid,mpw,mname,mphone, rrn , gender) values ('admin','1234','관리자','010-1234-5678' , 'null' , 'null');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('qweqwe','1234','유재석','010-1111-1111','SILVER'	,2500 , '991025-1234567' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('asdasd','4567','강호동','010-2222-2222','BRONZE'	,1200 , '980623-1222267' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('zxczxc','8901','이수근','010-3333-3333','GOLD'	,8000 , '950116-1444567' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('cxzcxz','7410','서장훈','010-4444-4444','BRONZE'	,200 , '101001-1234599' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('dsadsa','8520','민경훈','010-5555-5555','DIAMOND',12000 , '900421-1298543' , '남자');
 -- reservation 입력
 insert into reservation (sno,mno,men,tprice) values (1,1,2,200000);
 insert into reservation (sno,mno,men,tprice) values (1,2,1,100000);

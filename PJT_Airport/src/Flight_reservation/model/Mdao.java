@@ -48,19 +48,21 @@ public class Mdao extends Dao{
 	}
 	
 	//회원가입
-	public boolean signup( Member memberDto ) {
-		String sql ="insert into member( mid , mpw , mname , mphone )"
-				+ " values(  ? , ? , ? , ? )";
+	public int signup( Member memberDto ) {
+		String sql ="insert into member( mid , mpw , mname , mphone , rrn , gender)"
+				+ " values(  ? , ? , ? , ? , ? , ?)";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString( 1 , memberDto.getMid() );		
 			ps.setString( 2 , memberDto.getMpw() );		
 			ps.setString( 3 , memberDto.getMname() );	
-			ps.setString( 4 , memberDto.getMphone() );	
+			ps.setString( 4 , memberDto.getMphone() );
+			ps.setString( 5,  memberDto.getRrn());
+			ps.setString( 6,  memberDto.getGender());
 			ps.executeUpdate();
-			return true;  
+			return 0;  
 		}catch (Exception e) {System.out.println(e);}
-		return false; 
+		return 3; 
 	}
 	
 	//아이디 찾기
