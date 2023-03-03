@@ -17,7 +17,7 @@ public class Afront {
 			while(true) {
 				try {
 					System.out.println("------------------------------------------------------------------------------------------------");
-					System.out.print("1.스케줄 확인  2. 스케줄 등록 3. 스케줄 수정 4. 스케줄 삭제  5. 결산내역  6.뒤로가기"); int ch = scanner.nextInt();
+					System.out.print("1.스케줄 확인  2. 스케줄 등록 3. 스케줄 수정 4. 스케줄 삭제  5. 결산내역  6. 예약확인  7.뒤로가기"); int ch = scanner.nextInt();
 					System.out.println("------------------------------------------------------------------------------------------------");
 
 					if(ch==1) {schedulePrint();}
@@ -25,6 +25,7 @@ public class Afront {
 					else if(ch==3) {scheduleUpdate();}
 					else if(ch==4) {scheduleDelete();}
 					else if(ch==5) {RANK();}
+					else if(ch==6) {Aresevation();}
 					else if(ch==6) {break;}
 				} catch (Exception e) {
 					System.out.println(e);
@@ -211,4 +212,25 @@ public class Afront {
 			System.out.println("------------------------------------------------------------------------------------------------");
 			Acontroller.getInstance().apRank();			
 		}
+		
+	// 예약 확인
+		public void Aresevation() {			
+			System.out.println("------------------------------------------------------------------------------------------------");
+			System.out.printf("%-5s %-5s %-5s %-5s %-10s \n",
+					"예약번호","스케줄번호","회원번호","인원수","가격");		
+			System.out.println("------------------------------------------------------------------------------------------------");
+			Acontroller.getInstance().Aresevation();
+			System.out.println("------------------------------------------------------------------------------------------------");	
+			while(true) {
+				System.out.print("1.예약 상세내역 확인  2. 뒤로가기   ");
+				int ch = scanner.nextInt();
+				if(ch==1) {}
+				else if(ch==2) {break;}
+			}
+		}
+	// 예약 취소 (환불여부?)
+		public void AresevCancle() {
+			
+		}
+		
 }

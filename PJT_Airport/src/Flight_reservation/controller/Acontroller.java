@@ -7,6 +7,7 @@ import java.util.Date;
 import Flight_reservation.model.Adao;
 import Flight_reservation.model.Airport;
 import Flight_reservation.model.LP;
+import Flight_reservation.model.Reservation;
 import Flight_reservation.model.Schedule;
 import Flight_reservation.model.rankDto;
 
@@ -142,5 +143,24 @@ public class Acontroller {
 			System.out.printf("%3d %-12s %-8d \n",
 					(i+1),aprlist.get(i).getName(),aprlist.get(i).getCount());		
 		}	
+	}
+	// 예약 확인
+	public void Aresevation() {
+		ArrayList<Reservation> rlist = Adao.getInstance().Aresevation();
+		for(Reservation re:rlist) {
+			System.out.printf("%-8d %-8d %-8d %-5d %-10d  \n",
+					re.getRno(),re.getSno(),re.getMno(),re.getMen(),re.getTprice());
+		}
+	}
+	public void AresevView() {
+		ArrayList<Reservation> rlist = Adao.getInstance().Aresevation();
+		for(Reservation re:rlist) {
+			System.out.printf("%-8d %-8d %-8d %-5d %-10d  \n",
+					re.getRno(),re.getSno(),re.getMno(),re.getMen(),re.getTprice());
+		}
+	}
+	// 예약 취소 (환불여부?)
+	public boolean AresevCancle(int rno) {
+		return Adao.getInstance().AresevCancle(rno);
 	}
 }

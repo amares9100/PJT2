@@ -191,5 +191,49 @@ public class Adao extends Dao{
 		}catch (Exception e) {System.out.println(e);}	
 		return null;
 	}
+	// 예약 확인
+	public ArrayList<Reservation> Aresevation() {
+		ArrayList<Reservation> rlist = new ArrayList<>();
+		String sql = "select * from reservation";
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();			
+			while(rs.next()) {
+				Reservation reservation = new Reservation(rs.getInt(1),rs.getInt(2) ,rs.getInt(3),rs.getInt(4), rs.getInt(5),
+						null,null,null,null,null,0, 0);
+				rlist.add(reservation);				
+			}// while e	
+			return rlist;
+		}catch (Exception e) {System.out.println(e);}	
+		return null;
+	}
+	// 예약 상세보기
+	public Reservation AresevView(int rno) {
+		Reservation reservation = new Reservation();
+		String sql = "select r.rno , r.sno, r.tprice,r.men, m.mid, al.lname, lp.lpname, ap.pname, ap1.pname, s.dtime, s.atime from reservation r, schedule s , LP lp ,  airline al , airport ap , airport ap1 , member m"
+				+ "where r.sno = s.sno and r.mno = m.mno and s.lpno = lp.lpno and lp.lno = al.lno and ap.pno = s.dpno and ap1.pno = s.apno and rno= ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rno);
+			rs = ps.executeQuery();			
+			while(rs.next()) {
+		
+			}// while e	
+			return reservation;
+		}catch (Exception e) {System.out.println(e);}	
+		return null;
+	}
+	// 예약 취소 (환불여부?)
+	public boolean AresevCancle(int rno) {
+		String sql = "delete from reservation where rno = ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rno);
+			ps.executeUpdate();
+			return true;		
+		}catch (Exception e) {System.out.println(e);}	
+		return false;
+	}
+	
 	
 }
