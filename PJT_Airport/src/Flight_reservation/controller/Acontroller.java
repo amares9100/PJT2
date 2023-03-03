@@ -144,7 +144,7 @@ public class Acontroller {
 					(i+1),aprlist.get(i).getName(),aprlist.get(i).getCount());		
 		}	
 	}
-	// 예약 확인
+	// 예약 목록 확인
 	public void Aresevation() {
 		ArrayList<Reservation> rlist = Adao.getInstance().Aresevation();
 		for(Reservation re:rlist) {
@@ -152,12 +152,24 @@ public class Acontroller {
 					re.getRno(),re.getSno(),re.getMno(),re.getMen(),re.getTprice());
 		}
 	}
-	public void AresevView() {
-		ArrayList<Reservation> rlist = Adao.getInstance().Aresevation();
-		for(Reservation re:rlist) {
-			System.out.printf("%-8d %-8d %-8d %-5d %-10d  \n",
-					re.getRno(),re.getSno(),re.getMno(),re.getMen(),re.getTprice());
-		}
+	// 에약 상세보기
+	public void AresevView(int rno) {
+		Reservation re = Adao.getInstance().AresevView(rno);
+		
+		System.out.printf(
+				  "예약 번호	: %d \n"
+				+ "스케줄번호	: %d \n"
+				+ "예약회원	: %s \n"
+				+ "인원	: %d 명 \n"
+				+ "결제 가격 	: %d \n "
+				+ "항공사 	: %s \n"
+				+ "비행편 	: %s \n"
+				+ "항공편 	: %s -> %s \n"
+				+ "비행일 	: %s -> %s \n",
+				re.getRno(),re.getSno(),re.getTier(),re.getMen(),re.getTprice(),
+				re.getLname(),re.getAname(),re.getDeparture(),re.getArrival(),re.getDate(),re.getAdate()
+		);
+
 	}
 	// 예약 취소 (환불여부?)
 	public boolean AresevCancle(int rno) {

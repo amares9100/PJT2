@@ -209,17 +209,26 @@ public class Adao extends Dao{
 	}
 	// 예약 상세보기
 	public Reservation AresevView(int rno) {
-		Reservation reservation = new Reservation();
-		String sql = "select r.rno , r.sno, r.tprice,r.men, m.mid, al.lname, lp.lpname, ap.pname, ap1.pname, s.dtime, s.atime from reservation r, schedule s , LP lp ,  airline al , airport ap , airport ap1 , member m"
-				+ "where r.sno = s.sno and r.mno = m.mno and s.lpno = lp.lpno and lp.lno = al.lno and ap.pno = s.dpno and ap1.pno = s.apno and rno= ?";
+		Reservation re = new Reservation();
+		String sql = "select r.rno , r.sno, r.tprice,r.men, m.mid, al.lname, lp.lpname, ap.pname, ap1.pname, s.dtime, s.atime from reservation r, schedule s , LP lp ,  airline al , airport ap , airport ap1 , member m where r.sno = s.sno and r.mno = m.mno and s.lpno = lp.lpno and lp.lno = al.lno and ap.pno = s.dpno and ap1.pno = s.apno and rno= ?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, rno);
 			rs = ps.executeQuery();			
 			while(rs.next()) {
-		
+				re.setRno(rs.getInt(1));
+				re.setSno(rs.getInt(2));
+				re.setTprice(rs.getInt(3));
+				re.setMen(rs.getInt(4));
+				re.setLname(rs.getString(6));
+				re.setAname(rs.getString(7));
+				re.setDeparture(rs.getString(8));
+				re.setDate(rs.getString(10));
+				re.setArrival(rs.getString(9));
+				re.setAdate(rs.getString(11));
+				re.setTier(rs.getString(5));
 			}// while e	
-			return reservation;
+			return re;
 		}catch (Exception e) {System.out.println(e);}	
 		return null;
 	}

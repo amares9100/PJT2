@@ -199,14 +199,14 @@ public class Afront {
 			}// while e
 		}
 	// 항공사별 매출 결산
-		public void ALRANK() {
+		public void ALRANK() throws Exception {
 			System.out.printf("%-3s %-14s %-20s\n",
 					"순위","항공사명","매출 총액");
 			System.out.println("------------------------------------------------------------------------------------------------");
 			Acontroller.getInstance().alRank();		
 			}
 	// 공항별 이용객수 결산
-		public void APRANK() {
+		public void APRANK() throws Exception {
 			System.out.printf("%-3s %-12s %-8s\n",
 					"순위","공항명","이용객수");
 			System.out.println("------------------------------------------------------------------------------------------------");
@@ -214,7 +214,7 @@ public class Afront {
 		}
 		
 	// 예약 확인
-		public void Aresevation() {			
+		public void Aresevation() throws Exception {			
 			System.out.println("------------------------------------------------------------------------------------------------");
 			System.out.printf("%-5s %-5s %-5s %-5s %-10s \n",
 					"예약번호","스케줄번호","회원번호","인원수","가격");		
@@ -224,13 +224,25 @@ public class Afront {
 			while(true) {
 				System.out.print("1.예약 상세내역 확인  2. 뒤로가기   ");
 				int ch = scanner.nextInt();
-				if(ch==1) {}
+				if(ch==1) {
+					System.out.print("예약 번호 : "); int rno = scanner.nextInt();
+					AreservView(rno);}
 				else if(ch==2) {break;}
 			}
 		}
-	// 예약 취소 (환불여부?)
-		public void AresevCancle() {
-			
+	// 예약 상세 / 삭제
+		public void AreservView(int rno) throws Exception  {
+			System.out.println("------------------------------------------------------------------------------------------------");
+
+			Acontroller.getInstance().AresevView(rno);
+			System.out.println("------------------------------------------------------------------------------------------------");	
+			System.out.print("해당 예약을 삭제하시겠습니까? 1. 삭제  2. 취소		"); int ch = scanner.nextInt();
+			System.out.println("------------------------------------------------------------------------------------------------");
+			if(ch==1) {
+				boolean result = Acontroller.getInstance().AresevCancle(rno);		
+				if(result) {System.out.println("[알림] 일정 삭제 완료 "); }
+				else {System.out.println("[알림] 일정 삭제 실패 ");}
+			}else if (ch==2) {System.out.println("[알림] 삭제 취소되었습니다. "); }
 		}
 		
 }
