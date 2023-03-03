@@ -38,6 +38,7 @@ public class Afront {
 		}
 	// 스케줄 목록	10개 출력	
 		public void schedulePrint() throws Exception{	
+			System.out.println("\t\t\t\t\t=============================================스케줄 확인=============================================");
 			// 10개만 출력
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.printf("\t\t\t\t\t %-2s %-8s %-8s %-19s %-8s %-19s %-8s %-3s \n",
@@ -54,6 +55,7 @@ public class Afront {
 		}// schedulePrint e
 	// 스케줄 검색
 		public void schedulePrint_DP() throws Exception{
+			System.out.println("\t\t\t\t\t=============================================스케줄 검색=============================================");
 			System.out.print("\t\t\t\t\t 출발지 검색 : [예시:김포공항]		"); 	String pname = scanner.next();
 			System.out.print("\t\t\t\t\t 출발일 검색 : [예시:2023-03-07]	"); 	String ddate = scanner.next();
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
@@ -65,6 +67,7 @@ public class Afront {
 		}// schedulePrint_DP e
 	// 스케줄 등록
 		public void scheduleRegister () throws Exception{
+			System.out.println("\t\t\t\t\t=============================================스케줄 등록=============================================");
 			while(true) {
 				ArrayList<Airport> aplist = Acontroller.getInstance().Airport();
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
@@ -78,8 +81,8 @@ public class Afront {
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 				
 				System.out.println("\t\t\t\t\t [경로 설정]");
-				System.out.print("\t\t\t\t\t 출발지 입력[예시:김포공항] :  "); String dpname = scanner.next();
-				System.out.print("\t\t\t\t\t 도착지 입력[예시:인천공항] :  "); String apname = scanner.next();
+				System.out.print("\t\t\t\t\t 출발지 입력 : [예시:김포공항] "); String dpname = scanner.next();
+				System.out.print("\t\t\t\t\t 도착지 입력 : [예시:인천공항] "); String apname = scanner.next();
 				int check  = Acontroller.getInstance().APcheck(dpname, apname);
 				if(check==1) {}
 				else if(check==2) {System.out.println("\t\t\t\t\t [알림] 존재하지 않는 공항입니다.");break; }
@@ -88,19 +91,19 @@ public class Afront {
 				
 				System.out.println("\t\t\t\t\t [일정 설정]");
 				System.out.print("\t\t\t\t\t 출발일	입력 : [예시:2023-03-07] "); 	String ddate = scanner.next(); 
-				System.out.print("\t\t\t\t\t 출발시간	입력 : [예시:06:15:00] ");		String dtime = scanner.next();
+				System.out.print("\t\t\t\t\t 출발시간	입력 : [예시:06:15:00]   ");	String dtime = scanner.next();
 				System.out.print("\t\t\t\t\t 도착일 	입력 : [예시:2023-03-07] "); 	String adate = scanner.next(); 
-				System.out.print("\t\t\t\t\t 도착시간	입력 : [예시:09:15:00] ");		String atime = scanner.next();
+				System.out.print("\t\t\t\t\t 도착시간	입력 : [예시:09:15:00]   ");	String atime = scanner.next();
 				if(Acontroller.getInstance().dateCheck(ddate, dtime, adate, atime)) {}
 				else {System.out.println("\t\t\t\t\t [알림] 등록 불가능한 일정입니다.");break; }
 				
 				System.out.println("\t\t\t\t\t [비행편 설정]");
 				Acontroller.getInstance().LP();
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-				System.out.print("\t\t\t\t\t 비행편 입력 : [예시:MA123456] ");  String lpname = scanner.next();
+				System.out.print("\t\t\t\t\t 비행편   입력 : [예시:MA123456] ");  String lpname = scanner.next();
 					
 				System.out.println("\t\t\t\t\t [가격 설정]");
-				System.out.print("\t\t\t\t\t 가격 입력  : [예시:110000] "); 		int   price  = scanner.nextInt();
+				System.out.print("\t\t\t\t\t 가격    입력 : [예시:110000] "); 	  int   price  = scanner.nextInt();
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");	
 				
 				boolean result = Acontroller.getInstance().scheduleRegister(dpname,apname,ddate,dtime,adate,atime,lpname,price);			
@@ -110,7 +113,7 @@ public class Afront {
 		}
 	// 수정할 스케줄 번호 선택 / 출력	
 		public void scheduleUpdate() throws Exception{
-
+			System.out.println("\t\t\t\t\t=============================================스케줄 수정=============================================");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.print("\t\t\t\t\t 수정할 스케줄 번호 선택 : ");      int sno = scanner.nextInt();
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
@@ -127,6 +130,7 @@ public class Afront {
 		}// scheduleUpdate e
 	// 경로 재설정
 		public void scheduleUpdate_AP(int sno) throws Exception{
+			System.out.println("\t\t\t\t\t=============================================경로 재설정=============================================");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.println("\t\t\t\t\t [경로 재설정]");
 			System.out.print("\t\t\t\t\t 출발지 입력 : [예시:김포공항] "); String dpname = scanner.next();
@@ -142,6 +146,7 @@ public class Afront {
 			}
 	// 일정 재설정
 		public void scheduleUpdate_DD(int sno) throws Exception{
+			System.out.println("\t\t\t\t\t=============================================일정 재설정=============================================");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.println("\t\t\t\t\t [일정 재설정]");
 			System.out.print("\t\t\t\t\t 출발일	입력 : [예시:2023-03-07] "); 	String ddate = scanner.next(); 
@@ -155,6 +160,7 @@ public class Afront {
 		}
 	// 비행편 재설정
 		public void scheduleUpdate_LP(int sno) throws Exception{
+			System.out.println("\t\t\t\t\t=============================================비행 재설정=============================================");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.println("\t\t\t\t\t [비행편 재설정]");
 			Acontroller.getInstance().LP();
@@ -167,6 +173,7 @@ public class Afront {
 		}
 	// 가격 재설정
 		public void scheduleUpdate_PR(int sno) throws Exception{
+			System.out.println("\t\t\t\t\t=============================================가격 재설정=============================================");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.println("\t\t\t\t\t [가격 재설정]");
 			System.out.print("\t\t\t\t\t 가격 입력  : [예시:110000] "); 		int   price  = scanner.nextInt();	
@@ -177,6 +184,7 @@ public class Afront {
 		}
 	// 삭제할 스케줄 번호 선택 / 출력 / 삭제
 		public void scheduleDelete() throws Exception{
+			System.out.println("\t\t\t\t\t=============================================스케줄 삭제=============================================");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.print("\t\t\t\t\t 삭제할 스케쥴번호 입력 : ");  int sno = scanner.nextInt();
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
@@ -191,6 +199,7 @@ public class Afront {
 		}
 	// 결산 내역 메인페이지 
 		public void RANK() throws Exception{
+			System.out.println("\t\t\t\t\t=============================================결산 내역서=============================================");
 			while(true) {
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 				System.out.print("\t\t\t\t\t 1.항공사별 매출 결산  2. 공항별 이용객수 결산   3. 뒤로가기    ");	int ch = scanner.nextInt();
@@ -201,54 +210,58 @@ public class Afront {
 			}// while e
 		}
 	// 항공사별 매출 결산
-
 		public void ALRANK() throws Exception {
-				System.out.printf("\t\t\t\t\t %-3s %-14s %-20s\n",
-
+			System.out.println("\t\t\t\t\t=============================================항공사별 매출=============================================");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.printf("\t\t\t\t\t %-3s %-14s %-20s\n",
 					"순위","항공사명","매출 총액");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			Acontroller.getInstance().alRank();		
 			}
 	// 공항별 이용객수 결산
 		public void APRANK() throws Exception {
-				System.out.printf("\t\t\t\t\t %-3s %-12s %-8s\n",
-
+			System.out.println("\t\t\t\t\t=============================================공항별 이용객=============================================");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.printf("\t\t\t\t\t %-3s %-12s %-8s\n",
 					"순위","공항명","이용객수");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			Acontroller.getInstance().apRank();			
 		}
 		
 	// 예약 확인
-		public void Aresevation() throws Exception {			
-			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-			System.out.printf("\t\t\t\t\t %-5s %-5s %-5s %-5s %-10s \n",
-
-					"예약번호","스케줄번호","회원번호","인원수","가격");		
-			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-			Acontroller.getInstance().Aresevation();
-			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+		public void Aresevation() throws Exception {
 			while(true) {
-				System.out.print("\t\t\t\t\t 1.예약 상세내역 확인  2. 뒤로가기   ");
+				System.out.println("\t\t\t\t\t=============================================예약  조회=============================================");
+				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+				System.out.printf("\t\t\t\t\t %-5s %-5s %-5s %-5s %-10s \n",
+						"예약번호","스케줄번호","회원번호","인원수","가격");		
+				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+				Acontroller.getInstance().Aresevation();
+				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+				System.out.print("\t\t\t\t\t 1.예약 상세내역 확인  2. 뒤로가기   ");				
 				int ch = scanner.nextInt();
 				if(ch==1) {
-					System.out.print("예약 번호 : "); int rno = scanner.nextInt();
+					System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+					System.out.print("\t\t\t\t\t 예약 번호 : "); int rno = scanner.nextInt();
+					System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 					AreservView(rno);}
 				else if(ch==2) {break;}
 			}
+			
 		}
 	// 예약 상세 / 삭제
 		public void AreservView(int rno) throws Exception  {
-			System.out.println("------------------------------------------------------------------------------------------------");
-
+			System.out.println("\t\t\t\t\t=============================================예약  상세=============================================");
+			System.out.println("\t\t\t\t\t------------------------------------------------------------------------------------------------");
 			Acontroller.getInstance().AresevView(rno);
-			System.out.println("------------------------------------------------------------------------------------------------");	
-			System.out.print("해당 예약을 삭제하시겠습니까? 1. 삭제  2. 취소		"); int ch = scanner.nextInt();
-			System.out.println("------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t------------------------------------------------------------------------------------------------");	
+			System.out.print("\t\t\t\t\t 해당 예약을 삭제하시겠습니까? 1. 삭제  2. 취소		"); int ch = scanner.nextInt();
+			System.out.println("\t\t\t\t\t------------------------------------------------------------------------------------------------");
 			if(ch==1) {
 				boolean result = Acontroller.getInstance().AresevCancle(rno);		
-				if(result) {System.out.println("[알림] 일정 삭제 완료 "); }
-				else {System.out.println("[알림] 일정 삭제 실패 ");}
-			}else if (ch==2) {System.out.println("[알림] 삭제 취소되었습니다. "); }
+				if(result) {System.out.println("\t\t\t\t\t [알림] 일정 삭제 완료 "); }
+				else {System.out.println("\t\t\t\t\t [알림] 일정 삭제 실패 ");}
+			}else if (ch==2) {System.out.println("\t\t\t\t\t [알림] 삭제 취소되었습니다. "); }
 		}
 		
 }

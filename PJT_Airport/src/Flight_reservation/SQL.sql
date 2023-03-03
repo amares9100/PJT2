@@ -41,7 +41,7 @@ create table member (
     Mileage int default 0,
     rrn varchar(14) not null, -- 주민등록번호
     gender varchar(10) not null ,-- 성별 
-    foreign key(tier) references tier_table(tier)
+    foreign key(tier) references tier_table(tier) on delete set null
 );
 
 drop table if exists LP;
@@ -50,8 +50,8 @@ create table LP(
 	lno int not null,
     ano int not null,
 	lpname varchar(10),
-    foreign key(lno) references airline(lno),
-    foreign key(ano) references airplane(ano)
+    foreign key(lno) references airline(lno)  on delete cascade ,
+    foreign key(ano) references airplane(ano) on delete cascade 
 );
 
 drop table if exists schedule;
@@ -64,9 +64,9 @@ create table schedule(
     atime datetime not null,
     price int not null,
     rseats int not null,
-    foreign key(lpno) references LP(lpno),
-    foreign key(dpno) references airport(pno),
-    foreign key(apno) references airport(pno)
+    foreign key(lpno) references LP(lpno)     on delete cascade,
+    foreign key(dpno) references airport(pno) on delete cascade,
+    foreign key(apno) references airport(pno) on delete cascade 
 );
 
 drop table if exists reservation;
@@ -76,8 +76,8 @@ create table reservation(
     mno int not null,
     men int not null,
     tprice int not null,
-    foreign key(sno) references schedule(sno),
-    foreign key(mno) references member(mno)
+    foreign key(sno) references schedule(sno) on delete cascade,
+    foreign key(mno) references member(mno)   on delete cascade 
 );
 
 -- 항공사 입력 
@@ -124,20 +124,42 @@ insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,1,3,'2
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,1,3,'2023-03-07 08:20:00','2023-03-07 09:30:00',100000,5);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,1,3,'2023-03-07 13:05:00','2023-03-07 14:15:00',100000,2);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,1,3,'2023-03-07 22:45:00','2023-03-07 23:55:00',100000,1);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,1,3,'2023-03-08 06:15:00','2023-03-08 07:25:00',100000,10);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,1,3,'2023-03-08 08:20:00','2023-03-08 09:30:00',100000,50);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,1,3,'2023-03-08 13:05:00','2023-03-08 14:15:00',100000,72);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,1,3,'2023-03-08 22:45:00','2023-03-08 23:55:00',100000,10);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,1,3,'2023-03-09 06:15:00','2023-03-09 07:25:00',100000,120);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,1,3,'2023-03-09 08:20:00','2023-03-09 09:30:00',100000,95);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,1,3,'2023-03-09 13:05:00','2023-03-09 14:15:00',100000,72);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,1,3,'2023-03-09 22:45:00','2023-03-09 23:55:00',100000,102);
 -- 제주 -> 김포
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,3,1,'2023-03-07 08:10:00','2023-03-07 09:20:00',100000,20);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,3,1,'2023-03-07 10:40:00','2023-03-07 11:50:00',100000,10);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,3,1,'2023-03-07 15:10:00','2023-03-07 16:20:00',100000,1);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,3,1,'2023-03-08 08:10:00','2023-03-08 09:20:00',100000,20);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,3,1,'2023-03-08 10:40:00','2023-03-08 11:50:00',100000,31);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,3,1,'2023-03-08 15:10:00','2023-03-08 16:20:00',100000,50);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,3,1,'2023-03-09 08:10:00','2023-03-09 09:20:00',100000,40);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,3,1,'2023-03-09 10:40:00','2023-03-09 11:50:00',100000,100);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,3,1,'2023-03-09 15:10:00','2023-03-09 16:20:00',100000,105);
 -- 인천 -> 도쿄
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7 ,2,4,'2023-03-07 07:15:00','2023-03-07 09:30:00',250000,20);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,2,4,'2023-03-07 10:15:00','2023-03-07 12:30:00',250000,10);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7 ,2,4,'2023-03-07 13:10:00','2023-03-07 15:25:00',250000,0);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,2,4,'2023-03-07 16:35:00','2023-03-07 18:50:00',250000,3);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7 ,2,4,'2023-03-08 07:15:00','2023-03-08 09:30:00',250000,20);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,2,4,'2023-03-08 10:15:00','2023-03-08 12:30:00',250000,102);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7 ,2,4,'2023-03-08 13:10:00','2023-03-08 15:25:00',250000,80);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,2,4,'2023-03-08 16:35:00','2023-03-08 18:50:00',250000,73);
 -- 도쿄 -> 인천
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7 ,4,2,'2023-03-07 10:25:00','2023-03-07 12:40:00',250000,20);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,4,2,'2023-03-07 13:25:00','2023-03-07 15:40:00',250000,10);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7 ,4,2,'2023-03-07 16:25:00','2023-03-07 18:40:00',250000,1);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,4,2,'2023-03-07 13:15:00','2023-03-07 15:30:00',250000,10);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7 ,4,2,'2023-03-07 16:00:00','2023-03-07 18:15:00',250000,1);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,4,2,'2023-03-07 19:25:00','2023-03-07 21:40:00',250000,5);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7 ,4,2,'2023-03-08 10:25:00','2023-03-08 12:40:00',250000,20);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,4,2,'2023-03-08 13:15:00','2023-03-07 15:30:00',250000,107);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7 ,4,2,'2023-03-08 16:00:00','2023-03-07 18:15:00',250000,100);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,4,2,'2023-03-08 19:25:00','2023-03-08 21:40:00',250000,75);
 -- 인천 -> 상하이
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (2 ,2,5,'2023-03-07 04:15:00','2023-03-07 06:15:00',320000,4);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (11,2,5,'2023-03-07 07:25:00','2023-03-07 09:25:00',320000,6);
@@ -171,28 +193,28 @@ insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (15,2,7,'2
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (18,2,7,'2023-03-08 20:05:00','2023-03-09 10:25:00',800000,6);
 -- 파리 -> 인천
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (17,7,2,'2023-03-07 07:55:00','2023-03-07 22:15:00',800000,7);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (3,7,2,'2023-03-07 13:15:00','2023-03-08 03:35:00',800000,21);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (5,7,2,'2023-03-07 18:40:00','2023-03-08 09:00:00',800000,20);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6,7,2,'2023-03-08 07:55:00','2023-03-08 22:15:00',800000,50);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (9,7,2,'2023-03-08 13:15:00','2023-03-09 03:35:00',800000,4);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (3 ,7,2,'2023-03-07 13:15:00','2023-03-08 03:35:00',800000,21);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (5 ,7,2,'2023-03-07 18:40:00','2023-03-08 09:00:00',800000,20);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (6 ,7,2,'2023-03-08 07:55:00','2023-03-08 22:15:00',800000,50);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (9 ,7,2,'2023-03-08 13:15:00','2023-03-09 03:35:00',800000,4);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (16,7,2,'2023-03-08 18:40:00','2023-03-09 09:00:00',800000,2);
 -- 인천 -> 런던
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (18,2,8,'2023-03-07 08:15:00','2023-03-07 22:55:00',800000,1);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (5,2,8,'2023-03-07 12:45:00','2023-03-08 03:25:00',800000,5);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1,2,8,'2023-03-07 16:00:00','2023-03-08 06:40:00',800000,4);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (5 ,2,8,'2023-03-07 12:45:00','2023-03-08 03:25:00',800000,5);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (1 ,2,8,'2023-03-07 16:00:00','2023-03-08 06:40:00',800000,4);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (12,2,8,'2023-03-07 20:45:00','2023-03-08 11:25:00',800000,3);
 -- 런던 <- 인천
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (12,8,2,'2023-03-08 04:15:00','2023-03-08 18:55:00',800000,14);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (4,8,2,'2023-03-08 08:15:00','2023-03-08 22:55:00',800000,52);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7,8,2,'2023-03-08 12:30:00','2023-03-09 03:10:00',800000,44);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (4 ,8,2,'2023-03-08 08:15:00','2023-03-08 22:55:00',800000,52);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (7 ,8,2,'2023-03-08 12:30:00','2023-03-09 03:10:00',800000,44);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (18,8,2,'2023-03-08 17:20:00','2023-03-09 08:00:00',800000,3);
 -- 인천  	-> 워싱턴
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (9 ,2,9,'2023-03-07 07:25:00','2023-03-07 21:15:00',1100000,2);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (15,2,9,'2023-03-07 13:25:00','2023-03-08 03:15:00',1100000,4);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (18,2,9,'2023-03-07 17:25:00','2023-03-08 07:15:00',1100000,3);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (15,2,9,'2023-03-07 13:10:00','2023-03-08 03:00:00',1100000,4);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (18,2,9,'2023-03-07 17:45:00','2023-03-08 07:35:00',1100000,3);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (5 ,2,9,'2023-03-08 07:25:00','2023-03-08 21:15:00',1100000,31);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (9 ,2,9,'2023-03-08 13:25:00','2023-03-09 03:15:00',1100000,51);
-insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (15,2,9,'2023-03-08 17:25:00','2023-03-09 07:15:00',1100000,96);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (9 ,2,9,'2023-03-08 13:10:00','2023-03-08 03:00:00',1100000,51);
+insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (15,2,9,'2023-03-08 17:45:00','2023-03-08 07:35:00',1100000,96);
 -- 워싱턴 -> 인천
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (9 ,9,2,'2023-03-07 23:35:00','2023-03-08 12:35:00',1100000,20);
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (15,9,2,'2023-03-08 06:35:00','2023-03-08 20:25:00',1100000,4);
@@ -202,37 +224,32 @@ insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (9 ,9,2,'2
 insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (15,9,2,'2023-03-09 10:35:00','2023-03-10 00:25:00',1100000,2);
 
 -- Tear_table 입력
-insert into tier_table (tier,Mileage,discount,arate) values ( 'BRONZE'	,0		,0.1,0.1);
-insert into tier_table (tier,Mileage,discount,arate) values ( 'SILVER'	,2000	,0.2,0.2);
-insert into tier_table (tier,Mileage,discount,arate) values ( 'GOLD'	,5000	,0.3,0.3);
-insert into tier_table (tier,Mileage,discount,arate) values ( 'PLATINUM',10000	,0.4,0.4);
-insert into tier_table (tier,Mileage,discount,arate) values ( 'DIAMOND'	,16000	,0.5,0.5);
+insert into tier_table (tier,Mileage,discount,arate) values ( 'BRONZE'	,0		,0.01,0.01);
+insert into tier_table (tier,Mileage,discount,arate) values ( 'SILVER'	,2000	,0.02,0.02);
+insert into tier_table (tier,Mileage,discount,arate) values ( 'GOLD'	,5000	,0.03,0.03);
+insert into tier_table (tier,Mileage,discount,arate) values ( 'PLATINUM',10000	,0.04,0.04);
+insert into tier_table (tier,Mileage,discount,arate) values ( 'DIAMOND'	,16000	,0.05,0.05);
 
 -- member 입력
 insert into member ( mid,mpw,mname,mphone, rrn , gender) values ('admin','1234','관리자','010-1234-5678' , 'null' , 'null');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('qweqwe','1234','유재석','010-1111-1111','SILVER'	,2500 , '991025-1234567' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('asdasd','4567','강호동','010-2222-2222','BRONZE'	,1200 , '980623-1222267' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('zxczxc','8901','이수근','010-3333-3333','GOLD'	,8000 , '950116-1444567' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('cxzcxz','7410','서장훈','010-4444-4444','BRONZE'	,200 , '101001-1234599' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('dsadsa','8520','민경훈','010-5555-5555','DIAMOND',12000 , '900421-1298543' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('qweqwe','1234','유재석','010-1111-1111','SILVER'	,2500	, '991025-1234567' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('asdasd','4567','강호동','010-2222-2222','BRONZE'	,1200	, '980623-1222267' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('zxczxc','8901','이수근','010-3333-3333','GOLD'	,8000	, '950116-1444567' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('cxzcxz','7410','서장훈','010-4444-4444','BRONZE'	,200	, '101001-1234599' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('dsadsa','8520','민경훈','010-5555-5555','DIAMOND' ,12000 	, '900421-1298543' , '남자');
 
 -- reservation 입력
-insert into reservation (sno,mno,men,tprice) values (1,4,2,200000);
-insert into reservation (sno,mno,men,tprice) values (1,6,1,100000);
-insert into reservation (sno,mno,men,tprice) values (1,3,3,300000);
-insert into reservation (sno,mno,men,tprice) values (2,4,1,100000);
-insert into reservation (sno,mno,men,tprice) values (2,5,3,300000);
-insert into reservation (sno,mno,men,tprice) values (8,2,1,250000);
-
-
--- select * from airline;
--- select * from airplane;
--- select * from airport;
--- select * from tier_table;
--- select * from member;
--- select * from LP;
--- select * from schedule;
--- select * from reservation;
+insert into reservation (sno,mno,men,tprice) values (1 ,4,2,200000);
+insert into reservation (sno,mno,men,tprice) values (1 ,6,1,100000);
+insert into reservation (sno,mno,men,tprice) values (1 ,3,3,300000);
+insert into reservation (sno,mno,men,tprice) values (2 ,4,1,100000);
+insert into reservation (sno,mno,men,tprice) values (2 ,5,3,300000);
+insert into reservation (sno,mno,men,tprice) values (28,2,4,250000);
+insert into reservation (sno,mno,men,tprice) values (42,5,1,320000);
+insert into reservation (sno,mno,men,tprice) values (77,2,3,2400000);
+insert into reservation (sno,mno,men,tprice) values (50,6,1,280000);
+insert into reservation (sno,mno,men,tprice) values (65,4,2,1600000);
+insert into reservation (sno,mno,men,tprice) values (87,2,1,1100000);
 
 select * from airline;
 select * from airplane;

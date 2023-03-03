@@ -158,15 +158,15 @@ public class Acontroller {
 		Reservation re = Adao.getInstance().AresevView(rno);
 		
 		System.out.printf(
-				  "예약 번호	: %d \n"
-				+ "스케줄번호	: %d \n"
-				+ "예약회원	: %s \n"
-				+ "인원	: %d 명 \n"
-				+ "결제 가격 	: %d \n "
-				+ "항공사 	: %s \n"
-				+ "비행편 	: %s \n"
-				+ "항공편 	: %s -> %s \n"
-				+ "비행일 	: %s -> %s \n",
+				  "\t\t\t\t\t 예약 번호		: %d \n"
+				+ "\t\t\t\t\t 스케줄번호	: %d \n"
+				+ "\t\t\t\t\t 예약회원		: %s \n"
+				+ "\t\t\t\t\t 인원		: %d 명 \n"
+				+ "\t\t\t\t\t 결제 가격 	: %d \n "
+				+ "\t\t\t\t\t 항공사 		: %s \n"
+				+ "\t\t\t\t\t 비행편 		: %s \n"
+				+ "\t\t\t\t\t 항공편 		: %s -> %s \n"
+				+ "\t\t\t\t\t 비행일 		: %s -> %s \n",
 				re.getRno(),re.getSno(),re.getTier(),re.getMen(),re.getTprice(),
 				re.getLname(),re.getAname(),re.getDeparture(),re.getArrival(),re.getDate(),re.getAdate()
 		);

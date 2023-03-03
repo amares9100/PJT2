@@ -50,9 +50,9 @@ public class Front {
 	public void login() throws Exception{
 		/* -> 로그인 성공 시 사용자 메인이동 // 관리자 아이디 로그인시 관리자 페이지 이동*/
 		System.out.println("\t\t\t\t\t===============================================로그인===============================================");
-		System.out.print("\t\t\t\t\t 로그인 아이디 : ");
+		System.out.print("\t\t\t\t\t 아이디	: ");
 		String mid = scanner.next();
-		System.out.print("\t\t\t\t\t 비밀번호 : ");
+		System.out.print("\t\t\t\t\t 비밀번호	: ");
 		String mpw = scanner.next();
 		
 		int result = Mcontroller.getInstance().login(mid, mpw);
