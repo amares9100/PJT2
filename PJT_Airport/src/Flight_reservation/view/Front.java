@@ -36,7 +36,6 @@ public class Front {
 				else if(ch==2) {signup();}
 				else if(ch==3) {findid();}
 				else if(ch==4) {findpw();}
-				else if(ch==5) {Afront.getInstance().admin_main();}
 				else if(ch==5) {deleteId();}
 			} catch (Exception e) {
 				System.out.println(e);
@@ -58,102 +57,143 @@ public class Front {
 		
 		int result = Mcontroller.getInstance().login(mid, mpw);
 		if(result == 1) { // 관리자 로그인 id :adimn / pw : 1234 
-			System.out.println("\t\t\t\t\t [관리자 로그인]"); // 확인용
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 관리자 로그인성공"); // 확인용
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			Afront.getInstance().admin_main();
 		}
 		else if(result == 2) { // 일반로그인
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 로그인성공");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			user_main(); // 사용자 메인페이지로 이동
 		}
 		else if(result == 0){ // 없는 아이디
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.println("\t\t\t\t\t [알림] 존재하지 않는 아이디 입니다.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		}
-		else {System.out.println("\t\t\t\t\t [알림] DB오류");} // 확인용
+		else {
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] DB오류");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+		} // 확인용
 	}
 	
 	// 회원가입  0:회원가입 1:아이디중복 2:핸드폰입력이 잘못됨 3:DB오류 4:아아디 입력 오류
 	public void signup() throws Exception{
-		System.out.println("======================회원가입======================");
-		System.out.println("회원가입할 아이디 : (영문대소문자만)");
+		System.out.println("\t\t\t\t\t==============================================회원가입==============================================");
+		System.out.print("\t\t\t\t\t 회원가입할 아이디(영문대소문자만) : ");
 		String mid = scanner.next();
-		System.out.println("비밀번호 : ");
+		System.out.print("\t\t\t\t\t 비밀번호 : ");
 		String mpw = scanner.next();
-		System.out.println("이름 : ");
+		System.out.print("\t\t\t\t\t 이름 : ");
 		String mname = scanner.next();
-		System.out.println("휴대폰 번호 : xxx-xxxx-xxxx입력 ");
+		System.out.print("\t\t\t\t\t 휴대폰 번호(xxx-xxxx-xxxx) : ");
 		String mphone = scanner.next();
-		System.out.println("주민등록번호 : xxxxxx-xxxxxxx");
+		System.out.print("\t\t\t\t\t 주민등록번호(xxxxxx-xxxxxxx) : ");
 		String rrn = scanner.next();
-		System.out.println("성별 : 남자/여자");
+		System.out.print("\t\t\t\t\t 성별(남자/여자) : ");
 		String gender = scanner.next();
 		
 		int result = Mcontroller.getInstance().signup(mid , mpw ,  mname , mphone , rrn , gender);
 		
 		if(result == 0) {
-			System.out.println("가입되었습니다.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림]가입되었습니다. 로그인해 주십시오");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		}
-		else if(result == 1){System.out.println("등록된 아이디입니다.");}
-		else if(result == 2) {System.out.println("핸드폰 입력이 잘못되었습니다.");}
-		else if(result == 4) {System.out.println("아이디는 영문대소문자만 입력하세요.");}
-		else {System.out.println("DB오류");}
+		else if(result == 1){
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 등록된 아이디입니다.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+		}
+		else if(result == 2) {
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 핸드폰 입력이 잘못되었습니다.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");}
+		else if(result == 4) {
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 아이디는 영문대소문자만 입력하세요.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");}
+		else {
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] DB오류");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");}
 	}
 	
 	// 아이디찾기
 	public void findid() throws Exception{
 		// 샘플 'qweqwe','1234','유재석','010-1111-1111'
-		System.out.println("======================아이디 찾기======================");
-		System.out.println("이름 : ");
+		System.out.println("\t\t\t\t\t=============================================아이디 찾기=============================================");
+		System.out.print("\t\t\t\t\t 이름 : ");
 		String mname = scanner.next();
-		System.out.println("휴대폰 번호 : ");
+		System.out.print("\t\t\t\t\t 휴대폰 번호 : ");
 		String mphone = scanner.next();
 		
 		String mid = Mcontroller.getInstance().findid(mname , mphone);
 		if(mid != null) {
-			System.out.print("찾으시는 아이디는 : ");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.print("\t\t\t\t\t [알림] 찾으시는 아이디는 : ");
 			System.err.print(mid);
-			System.out.print(" 입니다.");
+			System.out.print(" 입니다.\n");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		}
-		else {System.out.println("가입된 회원이 아닙니다.");}
+		else {
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 가입된 회원이 아닙니다.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");}
 	}
 	
 	// 비밀번호 찾기
 	public void findpw() throws Exception{
 	// 샘플 'qweqwe','1234','유재석','010-1111-1111'
-		System.out.println("======================비밀번호 찾기======================");
-		System.out.println("아이디 : ");
+		System.out.println("\t\t\t\t\t=============================================비밀번호 찾기============================================");
+		System.out.print("\t\t\t\t\t 아이디 : ");
 		String mid = scanner.next();
-		System.out.println("이름 : ");
+		System.out.print("\t\t\t\t\t 이름 : ");
 		String mname = scanner.next();
-		System.out.println("휴대폰 번호 : ");
+		System.out.print("\t\t\t\t\t 휴대폰 번호 : ");
 		String mphone = scanner.next();
 				
 		String mpw = Mcontroller.getInstance().findpw(mid ,mname, mphone);
 		if(mpw != null) {
-			System.out.print("찾으시는 비밀번호는 : ");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.print("\t\t\t\t\t [알림] 찾으시는 비밀번호는 : ");
 			System.err.print(mpw);
-			System.out.print(" 입니다.");
+			System.out.print(" 입니다.\n");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		}
-		else {System.out.println("가입된 회원이 아닙니다.");}
+		else {
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 가입된 회원이 아닙니다.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");}
 	}
 	
 	// 회원탈퇴
 	public void deleteId() throws Exception{
 		// 샘플 'qweqwe','1234','유재석','010-1111-1111'
-		System.out.println("======================회원탈퇴======================");
-		System.out.println("회원탈퇴할 아이디 : ");
+		System.out.println("\t\t\t\t\t==============================================회원탈퇴==============================================");
+		System.out.print("\t\t\t\t\t 회원탈퇴할 아이디 : ");
 		String mid = scanner.next();
-		System.out.println("비밀번호 : ");
+		System.out.print("\t\t\t\t\t 비밀번호 : ");
 		String mpw = scanner.next();
-		System.out.println("이름 : ");
+		System.out.print("\t\t\t\t\t 이름 : ");
 		String mname = scanner.next();
-		System.out.println("휴대폰 번호 : ");
+		System.out.print("\t\t\t\t\t 휴대폰 번호 : ");
 		String mphone = scanner.next();
 		
 		boolean result = Mcontroller.getInstance().deleteId(mid , mpw ,  mname , mphone);
 		
 		if(result) {
-			System.out.println("탈퇴되었습니다.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 탈퇴되었습니다.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		}
-		else {System.out.println("잘못입력하셨습니다.");}
+		else {
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 잘못입력하셨습니다.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");}
 	}
 	
 	public void user_main() {
@@ -169,7 +209,7 @@ public class Front {
 				System.out.println("\t\t\t\t\t "+(i+1)+". "+list.get(i).getPnation()+"["+list.get(i).getPname()+"] : "+list.get(i).getPno()+"명 이용");
 			}
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-			System.out.println("\t\t\t\t\t 1. 비행편 출력 2. 예약 확인 3. 로그아웃");
+			System.out.println("\t\t\t\t\t 메뉴>> 1. 비행편 출력 2. 예약 확인 3. 로그아웃");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			try {
 				System.out.print("\t\t\t\t\t ");
@@ -188,12 +228,13 @@ public class Front {
 	public void Myreser() throws Exception{ // 이경석
 		ArrayList<Reservation> rlist = Mcontroller.getInstance().Myreser();
 		
-		System.out.println("============ 예약내역 출력 ===========");
+		System.out.println("\t\t\t\t\t=============================================예약내역 출력============================================");
 		for(Reservation re : rlist) { // 비행표는 예약번호
-			System.out.printf("예약번호: %d \n항공사 : %s \n항공편 : %s -> %s \n"
-							+ "비행일 : %s \n인원 : %d 명 \n"
-							+ "결제 가격 : %d -> 등급 할인 가격 %d\n"
-							+ "예상적립 마일리지 : %d\n",
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.printf("\t\t\t\t\t 예약번호: %d \n\t\t\t\t\t 항공사 : %s \n\t\t\t\t\t 항공편 : %s -> %s \n"
+							+ "\t\t\t\t\t 비행일 : %s \n\t\t\t\t\t 인원 : %d 명 \n"
+							+ "\t\t\t\t\t 결제 가격 : %d -> 등급 할인 가격 %d\n"
+							+ "\t\t\t\t\t 예상적립 마일리지 : %d\n",
 							re.getRno(), re.getLname() , re.getDeparture(), re.getArrival()
 							,re.getDate() ,re.getMen(), re.getTprice(), 
 							//할인 가격 = 표 가격 - (표가격 * 할인가)
@@ -202,24 +243,30 @@ public class Front {
 							(int)(Math.floor(re.getTprice() * re.getArate()))
 							);
 			
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			//비행표가 2표면 보기쉽게 분리
-			System.out.println("-----------------------------");
 		}
-		
-		System.out.println("1. 예약취소 2. 뒤로가기");
-		int ch = scanner.nextInt();
+		System.out.println("\t\t\t\t\t 메뉴>> 1. 예약취소 2. 뒤로가기");
+		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+		System.out.print("\t\t\t\t\t");	int ch = scanner.nextInt();
 		if(ch==1) {MYcancle();} 
 		else if(ch==2) {return;}
 	}
 	
 	public void MYcancle() throws Exception{ // 이경석
-		System.out.println("------------ 예약취소 ------------");
-		System.out.println("몇번째 비행표를 취소하시겠습니까?");
+		System.out.println("\t\t\t\t\t==============================================예약취소==============================================");
+		System.out.print("\t\t\t\t\t 취소할 예약의 번호 : ");
 		int ch2 = scanner.nextInt();
 		
 		boolean result = Mcontroller.getInstance().MYcancle(ch2);
-		if(result) {System.out.println("[알림] 예약을 취소했습니다.");}
-		else {System.out.println("[알림] 예약을 취소하지 못했습니다!.");}
+		if(result) {
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 예약을 취소했습니다.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");}
+		else {
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 예약을 취소하지 못했습니다!.");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");}
 		
 	}
 	

@@ -20,7 +20,7 @@ public class Acontroller {
 		ArrayList<Schedule> slist  =  Adao.getInstance().schedulePrint();
 		
 		for(int i=0; i< 10 ; i++) {
-			System.out.printf("%2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
+			System.out.printf("\t\t\t\t\t %2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
 					slist.get(i).getSno(),slist.get(i).getLpname(),slist.get(i).getDpname(),slist.get(i).getDtime(),
 					slist.get(i).getApname(),slist.get(i).getAtime(),slist.get(i).getPrice(),slist.get(i).getRseats());
 		}
@@ -30,7 +30,7 @@ public class Acontroller {
 	public void schedulePrint_DP(String pname,String ddate) {
 		ArrayList<Schedule> splist  =  Adao.getInstance().schedulePrint_DP(pname,ddate);
 		for(Schedule dto:splist) {
-			System.out.printf("%2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
+			System.out.printf("\t\t\t\t\t %2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
 					dto.getSno(),dto.getLpname(),dto.getDpname(),dto.getDtime(),dto.getApname(),dto.getAtime(),dto.getPrice(),dto.getRseats());
 		}	
 	}
@@ -41,13 +41,13 @@ public class Acontroller {
 	// 전채 비행기 목록
 	public void LP() {
 		ArrayList<LP> lplist = Adao.getInstance().LP();
-		System.out.println("------------------------------------------------------------------------------------------------");
-		System.out.printf("%-2s %-8s %-12s %-8s %-8s\n",
+		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+		System.out.printf("\t\t\t\t\t %-2s %-8s %-12s %-8s %-8s\n",
 							"번호","비행편명","소속 항공사","비행기종","최대수용인원");		
-		System.out.println("------------------------------------------------------------------------------------------------");
+		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		
 		for(LP lp: lplist) {
-			System.out.printf("%-2d %-10s %-13s %-10s %-5d\n",
+			System.out.printf("\t\t\t\t\t %-2d %-10s %-13s %-10s %-5d\n",
 					lp.getLpno(),lp.getLpname(),lp.getLname(),lp.getAname(),lp.getAmax());
 		}
 	}
@@ -97,13 +97,13 @@ public class Acontroller {
 		ArrayList<Schedule> slist  =  Adao.getInstance().schedulePrint();
 		for(Schedule dto:slist) {
 			if(dto.getSno()==sno) {
-				System.out.println("------------------------------------------------------------------------------------------------");
-				System.out.printf("%-2s %-8s %-8s %-19s %-8s %-19s %-8s %-3s \n",
+				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+				System.out.printf("\t\t\t\t\t %-2s %-8s %-8s %-19s %-8s %-19s %-8s %-3s \n",
 						"번호","비행편명","출발지","출발일정","도착지","도착일정","가격","잔여좌석");		
-				System.out.println("------------------------------------------------------------------------------------------------");
-				System.out.printf("%2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
+				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+				System.out.printf("\t\t\t\t\t %2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
 						dto.getSno(),dto.getLpname(),dto.getDpname(),dto.getDtime(),dto.getApname(),dto.getAtime(),dto.getPrice(),dto.getRseats());
-				System.out.println("------------------------------------------------------------------------------------------------");
+				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			}
 		}
 	}
@@ -132,7 +132,7 @@ public class Acontroller {
 	public void alRank() {
 		ArrayList<rankDto> alrlist = Adao.getInstance().ALRank();
 		for(int i=0 ; i < alrlist.size(); i++) {
-			System.out.printf("%3d %-15s %-20d \n",
+			System.out.printf("\t\t\t\t\t %3d %-15s %-20d \n",
 					(i+1),alrlist.get(i).getName(),alrlist.get(i).getCount());		
 		}
 	}	
@@ -140,7 +140,7 @@ public class Acontroller {
 	public void apRank() {
 		ArrayList<rankDto> aprlist = Adao.getInstance().APRANK();
 		for(int i=0 ; i < aprlist.size(); i++) {
-			System.out.printf("%3d %-12s %-8d \n",
+			System.out.printf("\t\t\t\t\t %3d %-12s %-8d \n",
 					(i+1),aprlist.get(i).getName(),aprlist.get(i).getCount());		
 		}	
 	}
@@ -148,14 +148,14 @@ public class Acontroller {
 	public void Aresevation() {
 		ArrayList<Reservation> rlist = Adao.getInstance().Aresevation();
 		for(Reservation re:rlist) {
-			System.out.printf("%-8d %-8d %-8d %-5d %-10d  \n",
+			System.out.printf("\t\t\t\t\t %-8d %-8d %-8d %-5d %-10d  \n",
 					re.getRno(),re.getSno(),re.getMno(),re.getMen(),re.getTprice());
 		}
 	}
 	public void AresevView() {
 		ArrayList<Reservation> rlist = Adao.getInstance().Aresevation();
 		for(Reservation re:rlist) {
-			System.out.printf("%-8d %-8d %-8d %-5d %-10d  \n",
+			System.out.printf("\t\t\t\t\t %-8d %-8d %-8d %-5d %-10d  \n",
 					re.getRno(),re.getSno(),re.getMno(),re.getMen(),re.getTprice());
 		}
 	}
