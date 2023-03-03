@@ -71,31 +71,31 @@ public class Front {
 	}
 	
 	// 회원가입  0:회원가입 1:아이디중복 2:핸드폰입력이 잘못됨 3:DB오류 4:아아디 입력 오류
-	public void signup() throws Exception{
-		System.out.println("======================회원가입======================");
-		System.out.println("회원가입할 아이디 : (영문대소문자만)");
-		String mid = scanner.next();
-		System.out.println("비밀번호 : ");
-		String mpw = scanner.next();
-		System.out.println("이름 : ");
-		String mname = scanner.next();
-		System.out.println("휴대폰 번호 : xxx-xxxx-xxxx입력 ");
-		String mphone = scanner.next();
-		System.out.println("주민등록번호 : xxxxxx-xxxxxxx");
-		String rrn = scanner.next();
-		System.out.println("성별 : 남자/여자");
-		String gender = scanner.next();
-		
-		int result = Mcontroller.getInstance().signup(mid , mpw ,  mname , mphone , rrn , gender);
-		
-		if(result == 0) {
-			System.out.println("가입되었습니다.");
+		public void signup() throws Exception{
+			System.out.println("======================회원가입======================");
+			System.out.println("회원가입할 아이디 : (영문대소문자만)");
+			String mid = scanner.next();
+			System.out.println("비밀번호 : ");
+			String mpw = scanner.next();
+			System.out.println("이름 : ");
+			String mname = scanner.next();
+			System.out.println("휴대폰 번호 : xxx-xxxx-xxxx입력 ");
+			String mphone = scanner.next();
+			System.out.println("주민등록번호 : xxxxxx-xxxxxxx");
+			String rrn = scanner.next();
+			
+			
+			int result = Mcontroller.getInstance().signup(mid , mpw ,  mname , mphone , rrn);
+			
+			if(result == 0) {
+				System.out.println("가입되었습니다.");
+			}
+			else if(result == 1){System.out.println("등록된 아이디입니다.");}
+			else if(result == 2) {System.out.println("핸드폰 입력이 잘못되었습니다.");}
+			else if(result == 4) {System.out.println("아이디는 영문대소문자만 입력하세요.");}
+			else if(result == 5) {System.out.println("주민등록번호가 잘못됬습니다.");}
+			else {System.out.println("DB오류");}
 		}
-		else if(result == 1){System.out.println("등록된 아이디입니다.");}
-		else if(result == 2) {System.out.println("핸드폰 입력이 잘못되었습니다.");}
-		else if(result == 4) {System.out.println("아이디는 영문대소문자만 입력하세요.");}
-		else {System.out.println("DB오류");}
-	}
 	
 	// 아이디찾기
 	public void findid() throws Exception{

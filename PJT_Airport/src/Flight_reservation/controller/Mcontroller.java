@@ -45,21 +45,28 @@ public class Mcontroller {
 		
 	}
 	
-	//회원가입 0:회원가입 1:아이디중복 2:핸드폰입력이 잘못됨 3:DB오류
-	public int signup(String mid , String mpw , String mname , String mphone , String rrn , String gender) {
-		
-		boolean result = Mdao.getInstance().idCheck(mid); // 중복 아이디 체크
-		 if(result) { // 아이디가 중복일때
-			 return 1;
-		 }
-		 
-		 else if(!check_id(mid)){return 4;}
-		 else if(!check_phone(mphone)) {
-			 Member memberdto =  new Member(mid , mpw , mname , mphone , rrn , gender); // 입력값 객체화
-			 	return Mdao.getInstance().signup(memberdto); // 리턴값 그대로 리턴}
-		 }
-		 else {return 2;}
-	}
+	//회원가입 0:회원가입 1:아이디중복 2:핸드폰입력이 잘못됨 3:DB오류 4:아이디는 영대소문자만 5:주민등록번호 적합성
+		public int signup(String mid , String mpw , String mname , String mphone , String rrn) {
+			String gender = null;
+			boolean result = Mdao.getInstance().idCheck(mid); // 중복 아이디 체크
+			 if(result) { // 아이디가 중복일때
+				 return 1;
+			 }
+			 
+			 else if(!check_id(mid)){return 4;}		// 아이디 적합성
+			// else if(!check_rrn(rrn)) {return 5;} // 주민등록번호 적합성
+			 // 아스키코드 49 = 1 / 50 = 2 / 51 = 3 / 52 = 4
+			 else if(!check_phone(mphone)) {
+				 if((rrn.charAt(7)-48) % 2 == 0) { // 주민등록번호 뒤의 첫자리[charAt(7)]으로  1~4를 아스키코드로 변환
+						gender = "여자";				// 변환한 값 -48이 짝수이면 여자 아니면 남자
+					}else {
+						gender = "남자";
+					}
+				 Member memberdto =  new Member(mid , mpw , mname , mphone , rrn , gender); // 입력값 객체화
+				 return Mdao.getInstance().signup(memberdto); // 리턴값 그대로 리턴}
+			 }
+			 else {return 2;}
+		}
 	
 	//아이디 찾기
 	public String findid(String mname , String mphone) {
@@ -122,7 +129,9 @@ public class Mcontroller {
 		return Pattern.matches("^[a-zA-Z]*$", id);
 	}
 	
-
+	public boolean check_rrn(String rrn) {
+	    return Pattern.matches("^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))-[1-4][0-9]{6}$", rrn);
+	}
 	
 
 }
