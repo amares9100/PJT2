@@ -282,7 +282,7 @@ public class Rfront {
 				"스케줄 번호: %d \n항공사 : %s \n비행기 : %s \n항공편 : %s -> %s \n" + "비행일 : %s \n인원 : %d 명 \n"
 						+ "결제 가격 : %d -> 등급 할인 가격 %d\n" + "예상적립 마일리지 : %d\n",
 				ticket.getSno(), ticket.getLname(), ticket.getAname(), ticket.getDeparture(), ticket.getArrival(),
-				ticket.getDate(), men, ticket.getTprice(), ticket.getAdate());
+				ticket.getDate(), men, ticket.getTprice(), ticket.getTprice() -(int)(ticket.getArate()*ticket.getDiscount()) , (int)(ticket.getTprice() * ticket.getArate() )   );
 
 		System.out.printf("%10s %15s %15s %15s %15s %20s \t\t %20s \n ", "스케쥴 번호", "항공사명", "비행기명", "출발지", "도착지", "비행일",
 				"도착일");
