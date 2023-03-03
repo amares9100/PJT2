@@ -32,6 +32,7 @@ create table tier_table(
 );
 
 drop table if exists member;
+drop table if exists member;
 create table member (
 	mno int auto_increment primary key,
     mid varchar(20) not null,
@@ -40,7 +41,9 @@ create table member (
     mphone varchar(20) not null,
     tier varchar(10) default 'bronze',
     Mileage int default 0,
-    foreign key(tier) references tier_table(tier)
+    foreign key(tier) references tier_table(tier) ,
+    rrn varchar(14) not null, -- 주민등록번호
+    gender varchar(10) not null -- 성별
 );
 
 drop table if exists LP;
