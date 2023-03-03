@@ -8,18 +8,46 @@ public class Member {
 	private String mphone;
 	private String tier;
 	private int Mileage;
+	private String rrn;
+	private String gender;
 	
 	public Member() {}
 	
-	public Member( String mid, String mpw, String mname, String mphone) {
+	
+	
+
+
+
+
+	public Member(String mid, String mpw, String mname, String mphone) {
 		super();
 		this.mid = mid;
 		this.mpw = mpw;
 		this.mname = mname;
 		this.mphone = mphone;
-		}
+	}
+
+
 	
 	
+	
+	
+	public Member(String mid, String mpw, String mname, String mphone, String rrn, String gender) {
+		super();
+		this.mid = mid;
+		this.mpw = mpw;
+		this.mname = mname;
+		this.mphone = mphone;
+		this.rrn = rrn;
+		this.gender = gender;
+	}
+
+
+
+
+
+
+
 	public Member(String mname, String tier, int mileage) {
 		super();
 		this.mname = mname;
@@ -99,6 +127,26 @@ public class Member {
 	public void setMileage(int mileage) {
 		Mileage = mileage;
 	}
-	
+	public String getRrn() {
+		return rrn;
+	}
+
+
+
+	public void setRrn(String rrn) {
+		this.rrn = rrn;
+	}
+
+
+
+	public String getGender() {
+		return gender;
+	}
+
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	
 }

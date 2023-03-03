@@ -3,9 +3,11 @@ package Flight_reservation.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import Flight_reservation.model.Airport;
 import Flight_reservation.model.Dao;
+import java.util.regex.Pattern;
+
+
 import Flight_reservation.model.Mdao;
 import Flight_reservation.model.Reservation;
 import Flight_reservation.model.Member;
@@ -43,18 +45,20 @@ public class Mcontroller {
 		
 	}
 	
-	//회원가입
-	public boolean signup(String mid , String mpw , String mname , String mphone) {
+	//회원가입 0:회원가입 1:아이디중복 2:핸드폰입력이 잘못됨 3:DB오류
+	public int signup(String mid , String mpw , String mname , String mphone , String rrn , String gender) {
 		
 		boolean result = Mdao.getInstance().idCheck(mid); // 중복 아이디 체크
 		 if(result) { // 아이디가 중복일때
-			 return false;
+			 return 1;
 		 }
-		 else {		// 중복이 아니면 회원가입 실행
-			Member memberdto =  new Member(mid , mpw , mname , mphone); // 입력값 객체화
-			
-			return Mdao.getInstance().signup(memberdto); // 리턴값 그대로 리턴
+		 
+		 else if(!check_id(mid)){return 4;}
+		 else if(!check_phone(mphone)) {
+			 Member memberdto =  new Member(mid , mpw , mname , mphone , rrn , gender); // 입력값 객체화
+			 	return Mdao.getInstance().signup(memberdto); // 리턴값 그대로 리턴}
 		 }
+		 else {return 2;}
 	}
 	
 	//아이디 찾기
@@ -93,6 +97,7 @@ public class Mcontroller {
 		return Mdao.getInstance().memberTier(loginsession);
 	}
 	
+
 	//회원 등급 변경
 	
 	public boolean tierUpdate() {
@@ -105,4 +110,40 @@ public class Mcontroller {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
 		return Mdao.getInstance().recommended(dateFormat.format(date));
 	}
+
+	// -------------------------------------------------------------//
+	// 유효성검사
+	
+	public boolean check_phone(String mphone) {
+	   return Pattern.matches("^01(?:0|1|[6-9]) - (?:\\d{3}|\\d{4}) - \\d{4}$", mphone);
+	}
+	
+	public boolean check_id(String id) {
+		return Pattern.matches("^[a-zA-Z]*$", id);
+	}
+	
+
+	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
