@@ -278,8 +278,6 @@ public class Rfront {
 		int sno = scanner.nextInt();
 		Reservation ticket = Rcontroller.getInstance().ticketReservation1(sno);
 		
-		int Mileage;
-		
 		System.out.printf(
 				"스케줄 번호: %d \n항공사 : %s \n비행기 : %s \n항공편 : %s -> %s \n" + "비행일 : %s \n인원 : %d 명 \n"
 						+ "결제 가격 : %d -> 등급 할인 가격 %d\n" + "예상적립 마일리지 : %d\n",
@@ -311,6 +309,7 @@ public class Rfront {
 
 	public void payment(Reservation ticket, int men) {
 		Rcontroller.getInstance().ticketReservation2(men, ticket);
+		System.out.println("예약이 완료되었습니다.");
 	}
 
 }
