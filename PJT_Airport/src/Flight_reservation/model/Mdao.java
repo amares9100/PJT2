@@ -181,7 +181,7 @@ public class Mdao extends Dao{
 	
 	
 	
-	
+	//--------------------김지호
 	// 멤버 등급 출력
 	public Member memberTier(int mno) {
 		Member member = null;
