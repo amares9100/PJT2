@@ -54,7 +54,7 @@ public class Mcontroller {
 			 }
 			 
 			 else if(!check_id(mid)){return 4;}		// 아이디 적합성
-			// else if(!check_rrn(rrn)) {return 5;} // 주민등록번호 적합성
+			 else if(!check_rrn(rrn)) {return 5;} // 주민등록번호 적합성
 			 // 아스키코드 49 = 1 / 50 = 2 / 51 = 3 / 52 = 4
 			 else if(!check_phone(mphone)) {
 				 if((rrn.charAt(7)-48) % 2 == 0) { // 주민등록번호 뒤의 첫자리[charAt(7)]으로  1~4를 아스키코드로 변환
