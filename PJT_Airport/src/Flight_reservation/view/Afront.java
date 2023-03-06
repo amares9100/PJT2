@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Flight_reservation.controller.Acontroller;
+import Flight_reservation.model.Adao;
 import Flight_reservation.model.Airport;
 import Flight_reservation.model.Reservation;
 
@@ -122,7 +123,10 @@ public class Afront {
 				System.out.print("\t\t\t\t\t 가격    입력 : [예시:110000] "); 	  int   price  = scanner.nextInt();
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 				boolean result = Acontroller.getInstance().scheduleRegister(dpname,apname,ddate,dtime,adate,atime,lpname,price);			
-				if(result) {System.out.println("\t\t\t\t\t [알림] 일정 등록 완료 "); break;}
+				if(result) {
+					Acontroller.getInstance().registercompelete();
+					System.out.println("\t\t\t\t\t [알림] 일정 등록 완료 "); 					
+					break;}
 				else {System.out.println("\t\t\t\t\t [알림] 일정 등록 실패 "); break;}
 			}// while e
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
@@ -136,32 +140,17 @@ public class Afront {
 			while(true) {		
 				boolean result = Acontroller.getInstance().scheduleDelete(sno);
 				if(result) {
-					System.out.print("\t\t\t\t\t 메뉴>> 1.경로 수정 2. 일정 수정  3. 비행편 수정  4. 가격 수정  5.뒤로가기   ");	int ch = scanner.nextInt();
+					System.out.print("\t\t\t\t\t 메뉴>> 1. 일정 수정  2. 비행편 수정  3. 가격 수정  4.뒤로가기   ");	int ch = scanner.nextInt();
 					System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-					if(ch==1) {scheduleUpdate_AP(sno);}
-					else if(ch==2) {scheduleUpdate_DD(sno);}
-					else if(ch==3) {scheduleUpdate_LP(sno);}
-					else if(ch==4) {scheduleUpdate_PR(sno);}
-					else if(ch==5) {break;}
+					if(ch==1) {scheduleUpdate_DD(sno);}
+					else if(ch==2) {scheduleUpdate_LP(sno);}
+					else if(ch==3) {scheduleUpdate_PR(sno);}
+					else if(ch==4) {break;}
 				}
 				else {break;}
 			}// while e
 		}// scheduleUpdate e
-	// 경로 재설정
-		public void scheduleUpdate_AP(int sno) throws Exception{
-			System.out.println("\t\t\t\t\t=============================================경로 재설정=============================================");
-			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-			System.out.print("\t\t\t\t\t 출발지 입력 : [예시:김포공항] "); String dpname = scanner.next();
-			System.out.print("\t\t\t\t\t 도착지 입력 : [예시:인천공항] "); String apname = scanner.next();
-			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-			int check  = Acontroller.getInstance().APcheck(dpname, apname);
-			if(check==1) {
-				Acontroller.getInstance().scheduleUpdate_AP(sno, dpname, apname);
-				System.out.println("\t\t\t\t\t [알림] 경로 재설정이 완료되었습니다.");
-			}
-			else if(check==2) {System.out.println("[알림] 존재하지 않는 공항입니다.");}
-			else if(check==3) {System.out.println("[알림] 동일공항 선택이 불가능합니다.");}
-			}
+
 	// 일정 재설정
 		public void scheduleUpdate_DD(int sno) throws Exception{
 			System.out.println("\t\t\t\t\t=============================================일정 재설정=============================================");
