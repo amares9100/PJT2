@@ -308,8 +308,20 @@ public class Rfront {
 	}
 
 	public void payment(Reservation ticket, int men) {
+		
+		System.out.println("\t\t\t\t\t=============================================결제화면=============================================");
+		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+		System.out.println("\t\t\t\t\t===============================  1.신용카드  2.무통장 입금  3.결제취소 ================================");
+		System.out.print("\t\t\t\t\t ");
+		int ch02 = scanner.nextInt();
+		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+		
+		if(ch02==1 && ch02==2) {
 		Rcontroller.getInstance().ticketReservation2(men, ticket);
-		System.out.println("예약이 완료되었습니다.");
+		System.out.println("\t\t\t\t\t예약이 완료되었습니다.");
+		}
+		else if(ch02==3) {}
+		else {System.out.println("\t\t\t\t\t[알림] 잘못된 입력입니다!");}
 	}
 
 }
