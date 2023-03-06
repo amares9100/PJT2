@@ -58,6 +58,10 @@ public class Rcontroller {
 		int imonth =  Integer.parseInt(date[1]);
 		int iday =  Integer.parseInt(date[2]);
 		
+		if(iyear==0||imonth==0||iday==0) {
+			return false;
+		}
+		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH)+1;

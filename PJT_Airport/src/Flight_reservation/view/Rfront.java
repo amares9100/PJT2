@@ -253,7 +253,7 @@ public class Rfront {
 		
 		if (Rcontroller.getInstance().dateSelect(dtime)) {
 			return dtime;
-		} else {
+		}else{
 			System.out.println(Rcontroller.getInstance().dateSelect(dtime));
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.println("\t\t\t\t\t 잘못 입력하셨습니다.");
