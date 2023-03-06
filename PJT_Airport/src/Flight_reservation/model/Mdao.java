@@ -123,12 +123,17 @@ public class Mdao extends Dao{
 				while(rs.next()) {
 					mno = rs.getInt(1); // 회원번호
 				}
-				// 해당 회원번호 레코드 삭제
-				String sql2 = "delete from member where mno=?";
-				ps = conn.prepareStatement(sql2);
-				ps.setInt(1, mno);
-				ps.executeUpdate();		
-				return true; 
+				if(mno == 0) { // 입력한 값으로 회원을 찾고 만약 해당되는 회원이 없으면
+					return false;
+				}
+				else {// 해당하는 회원이 있으면 회원번호 레코드 삭제
+					String sql2 = "delete from member where mno=?";
+					ps = conn.prepareStatement(sql2);
+					ps.setInt(1, mno);
+					ps.executeUpdate();		
+					return true; 
+					}
+				
 			}catch (Exception e) {System.out.println(e);}
 			return false;
 		}
