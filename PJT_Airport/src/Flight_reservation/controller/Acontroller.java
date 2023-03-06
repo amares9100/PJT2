@@ -15,7 +15,7 @@ public class Acontroller {
 	private static Acontroller controller = new Acontroller();
 	private Acontroller() {};
 	public static Acontroller getInstance() {return controller;}
-	// 스케줄 목록	10개 출력	-> 현재 sno 오름차순 기준 추후 변경 예정 / 날짜 지나면 자동 스케줄 삭제 기능 필요?
+	// 스케줄 목록	10개 출력	-> 현재 sno 오름차순 기준 
 	public void schedulePrint() {	
 		ArrayList<Schedule> slist  =  Adao.getInstance().schedulePrint();
 		
@@ -29,10 +29,19 @@ public class Acontroller {
 	// 검색된 스케줄 목록	
 	public void schedulePrint_DP(String pname,String ddate) {
 		ArrayList<Schedule> splist  =  Adao.getInstance().schedulePrint_DP(pname,ddate);
-		for(Schedule dto:splist) {
-			System.out.printf("\t\t\t\t\t %2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
-					dto.getSno(),dto.getLpname(),dto.getDpname(),dto.getDtime(),dto.getApname(),dto.getAtime(),dto.getPrice(),dto.getRseats());
-		}	
+		if(splist.size()>0) {
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.printf("\t\t\t\t\t %-2s %-8s %-8s %-19s %-8s %-19s %-8s %-3s \n",
+					"번호","비행편명","출발지","출발일정","도착지","도착일정","가격","잔여좌석");
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			for(Schedule dto:splist) {
+				System.out.printf("\t\t\t\t\t %2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
+						dto.getSno(),dto.getLpname(),dto.getDpname(),dto.getDtime(),dto.getApname(),dto.getAtime(),dto.getPrice(),dto.getRseats());
+			}	
+		}
+		else { 
+			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t [알림] 일치하는 스케줄이 없습니다.");}
 	}
 	// 전채 공항 목록
 	public ArrayList<Airport> Airport() {
@@ -80,6 +89,14 @@ public class Acontroller {
 
 		return false;
 	}
+	// 등록된 비행기명이 맞는지 확인
+	public boolean LPCheck(String lpname) {
+		ArrayList<LP> lplist = Adao.getInstance().LP();
+		for(LP lp: lplist) {
+			if(lp.getLpname().equals(lpname)) {return true;}
+		}
+		return false;
+	}
 	// 스케줄 등록
 	public boolean scheduleRegister(String dpname,String apname,String ddate,String dtime,String adate,String atime,String lpname,int price) {
 		// 날짜와 시간 합쳐서 등록
@@ -93,7 +110,7 @@ public class Acontroller {
 		return result;
 	}
 	// 선택한 스케줄 출력
-	public void scheduleUpdate(int sno) {
+	public boolean scheduleUpdate(int sno) {
 		ArrayList<Schedule> slist  =  Adao.getInstance().schedulePrint();
 		for(Schedule dto:slist) {
 			if(dto.getSno()==sno) {
@@ -104,8 +121,12 @@ public class Acontroller {
 				System.out.printf("\t\t\t\t\t %2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
 						dto.getSno(),dto.getLpname(),dto.getDpname(),dto.getDtime(),dto.getApname(),dto.getAtime(),dto.getPrice(),dto.getRseats());
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+				return true;
 			}
 		}
+		System.out.println("\t\t\t\t\t [알림] 존재하지 않는 스케줄 번호입니다.");
+		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+		return false;
 	}
 	// 경로 재설정
 	public boolean scheduleUpdate_AP(int sno,String dpname,String apname) {
@@ -132,16 +153,16 @@ public class Acontroller {
 	public void alRank() {
 		ArrayList<rankDto> alrlist = Adao.getInstance().ALRank();
 		for(int i=0 ; i < alrlist.size(); i++) {
-			System.out.printf("\t\t\t\t\t %3d %-15s %-20d \n",
-					(i+1),alrlist.get(i).getName(),alrlist.get(i).getCount());		
+			System.out.printf("\t\t\t\t\t %3d %-15s %,-13d %-2s \n",
+					(i+1),alrlist.get(i).getName(),alrlist.get(i).getCount()," 원");		
 		}
 	}	
 	// 공항별 이용객수 결산
 	public void apRank() {
 		ArrayList<rankDto> aprlist = Adao.getInstance().APRANK();
 		for(int i=0 ; i < aprlist.size(); i++) {
-			System.out.printf("\t\t\t\t\t %3d %-12s %-8d \n",
-					(i+1),aprlist.get(i).getName(),aprlist.get(i).getCount());		
+			System.out.printf("\t\t\t\t\t %3d %-15s %-5d %-2s \n",
+					(i+1),aprlist.get(i).getName(),aprlist.get(i).getCount()," 명");		
 		}	
 	}
 	// 예약 목록 확인
@@ -154,27 +175,24 @@ public class Acontroller {
 	}
 
 	// 에약 상세보기
-	public void AresevView(int rno) {
-		Reservation re = Adao.getInstance().AresevView(rno);
-		
-		System.out.printf(
-				  "\t\t\t\t\t 예약 번호		: %d \n"
-				+ "\t\t\t\t\t 스케줄번호	: %d \n"
-				+ "\t\t\t\t\t 예약회원		: %s \n"
-				+ "\t\t\t\t\t 인원		: %d 명 \n"
-				+ "\t\t\t\t\t 결제 가격 	: %d \n "
-				+ "\t\t\t\t\t 항공사 		: %s \n"
-				+ "\t\t\t\t\t 비행편 		: %s \n"
-				+ "\t\t\t\t\t 항공편 		: %s -> %s \n"
-				+ "\t\t\t\t\t 비행일 		: %s -> %s \n",
-				re.getRno(),re.getSno(),re.getTier(),re.getMen(),re.getTprice(),
-				re.getLname(),re.getAname(),re.getDeparture(),re.getArrival(),re.getDate(),re.getAdate()
-		);
-
-
+	public Reservation AresevView(int rno) {
+		return Adao.getInstance().AresevView(rno);
 	}
-	// 예약 취소 (환불여부?)
+	// 예약 취소
 	public boolean AresevCancle(int rno) {
+		Reservation re 	=  Adao.getInstance().AresevView(rno);	
+		int 	mno		= re.getMno();
+		int 	tprice  = re.getTprice();
+		double 	rate    = re.getArate();
+		int		sno		= re.getSno();
+		int  	men 	= re.getMen();
+		int		mileage = (int)(tprice / (100-(100*rate)));
+		// 마일리지 회수
+		boolean result1 = Adao.getInstance().mileagPoints(mno, mileage);
+		if(result1) {System.out.println("마일리지 차감 성공");}
+		// 좌석 반환
+		boolean result2 = Adao.getInstance().rseatsUpdate(sno, men);
+		if(result2) {System.out.println("좌석 반환 성공");}
 		return Adao.getInstance().AresevCancle(rno);
 	}
 }
