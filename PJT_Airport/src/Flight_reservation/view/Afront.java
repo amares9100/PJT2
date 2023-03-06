@@ -138,7 +138,7 @@ public class Afront {
 			System.out.print("\t\t\t\t\t 수정할 스케줄 번호 선택 : ");      int sno = scanner.nextInt();
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");			
 			while(true) {		
-				boolean result = Acontroller.getInstance().scheduleDelete(sno);
+				boolean result = Acontroller.getInstance().scheduleUpdate(sno);
 				if(result) {
 					System.out.print("\t\t\t\t\t 메뉴>> 1. 일정 수정  2. 비행편 수정  3. 가격 수정  4.뒤로가기   ");	int ch = scanner.nextInt();
 					System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
@@ -236,22 +236,30 @@ public class Afront {
 		
 	// 예약 확인
 		public void Aresevation() throws Exception {
+			int p = 0;
 			while(true) {
 				System.out.println("\t\t\t\t\t=============================================예약  조회=============================================");
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 				System.out.printf("\t\t\t\t\t %-5s %-5s %-7s %-5s %-10s \n",
 						"예약번호","스케줄번호","회원번호","인원수","가격");		
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-				Acontroller.getInstance().Aresevation();
+				Acontroller.getInstance().Aresevation(p);		
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-				System.out.print("\t\t\t\t\t 메뉴>> 1.예약 상세내역 확인  2. 뒤로가기   ");				
+				System.out.print("\t\t\t\t\t 메뉴>> 1.이전 페이지 2.다음 페이지  3.상세검색  4. 뒤로가기   ");				
 				int ch = scanner.nextInt();
 				if(ch==1) {
+					p -= 10;
+					if(p<0) { p = 0 ;}
+					}
+				else if(ch==2) {
+					p += 10;
+					}
+				else if(ch==3) {
 					System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 					System.out.print("\t\t\t\t\t 예약 번호 : "); int rno = scanner.nextInt();
 					System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 					AreservView(rno);}
-				else if(ch==2) {break;}
+				else if(ch==4) {break;}
 			}
 			
 		}

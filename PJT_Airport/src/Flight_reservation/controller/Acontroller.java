@@ -179,11 +179,11 @@ public class Acontroller {
 		}	
 	}
 	// 예약 목록 확인
-	public void Aresevation() {
+	public void Aresevation(int p) {
 		ArrayList<Reservation> rlist = Adao.getInstance().Aresevation();
-		for(Reservation re:rlist) {
+		for(int i=p ; i<10+p ;i++) {
 			System.out.printf("\t\t\t\t\t %-8d %-8d %-8d %-5d %-10d  \n",
-					re.getRno(),re.getSno(),re.getMno(),re.getMen(),re.getTprice());
+					rlist.get(i).getRno(),rlist.get(i).getSno(),rlist.get(i).getMno(),rlist.get(i).getMen(),rlist.get(i).getTprice());
 		}
 	}
 
@@ -201,11 +201,9 @@ public class Acontroller {
 		int  	men 	= re.getMen();
 		int		mileage = (int)(tprice / (100-(100*rate)));
 		// 마일리지 회수
-		boolean result1 = Adao.getInstance().mileagPoints(mno, mileage);
-		if(result1) {System.out.println("마일리지 차감 성공");}
+		Adao.getInstance().mileagPoints(mno, mileage);
 		// 좌석 반환
-		boolean result2 = Adao.getInstance().rseatsUpdate(sno, men);
-		if(result2) {System.out.println("좌석 반환 성공");}
+		Adao.getInstance().rseatsUpdate(sno, men);
 		return Adao.getInstance().AresevCancle(rno);
 	}
 }
