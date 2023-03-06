@@ -11,7 +11,6 @@ import Flight_reservation.controller.Mcontroller;
 import Flight_reservation.controller.Rcontroller;
 import Flight_reservation.model.Airport;
 import Flight_reservation.model.Reservation;
-import Flight_reservation.model.Schedule;
 import Flight_reservation.model.LP;
 import Flight_reservation.model.Member;
 
@@ -208,10 +207,14 @@ public class Front {
 			System.out.println("\t\t\t\t\t 안녕하세요 "+m.getMname()+"님 회원님의 등급은 "+m.getTier()+"["+m.getMileage()+"점]"+"입니다. ");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			ArrayList<Airport> list = Mcontroller.getInstance().recommended();
-			System.out.println("\t\t\t\t\t 이번달 가장 많이 떠난 여행지 TOP3");
+			System.out.println("\t\t\t\t\t ***********************************************************************************************");
+			System.out.println("\t\t\t\t\t\t\t\t\t [ 이번달 가장 많이 떠난 여행지 TOP3 ]   ");
+			System.out.println();
 			for(int i = 0 ; i<list.size();i++) {
-				System.out.println("\t\t\t\t\t "+(i+1)+". "+list.get(i).getPnation()+"["+list.get(i).getPname()+"] : "+list.get(i).getPno()+"명 이용");
+				System.out.println("\t\t\t\t\t\t\t\t\t "+(i+1)+". "+list.get(i).getPnation()+"["+list.get(i).getPname()+"] : "+list.get(i).getPno()+"명 이용");
 			}
+			System.out.println();
+			System.out.println("\t\t\t\t\t ************************************************************************************************");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.println("\t\t\t\t\t 메뉴>> 1. 비행편 출력 2. 예약 확인 3. 로그아웃");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
@@ -223,6 +226,7 @@ public class Front {
 				else if(ch==3) {return;}
 			} catch (Exception e) {
 				System.out.println(e);
+				scanner = new Scanner(System.in);
 			}
 		}
 	}
