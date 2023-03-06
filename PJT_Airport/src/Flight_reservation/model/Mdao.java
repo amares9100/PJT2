@@ -123,12 +123,17 @@ public class Mdao extends Dao{
 				while(rs.next()) {
 					mno = rs.getInt(1); // 회원번호
 				}
-				// 해당 회원번호 레코드 삭제
-				String sql2 = "delete from member where mno=?";
-				ps = conn.prepareStatement(sql2);
-				ps.setInt(1, mno);
-				ps.executeUpdate();		
-				return true; 
+				if(mno == 0) { // 입력한 값으로 회원을 찾고 만약 해당되는 회원이 없으면
+					return false;
+				}
+				else {// 해당하는 회원이 있으면 회원번호 레코드 삭제
+					String sql2 = "delete from member where mno=?";
+					ps = conn.prepareStatement(sql2);
+					ps.setInt(1, mno);
+					ps.executeUpdate();		
+					return true; 
+					}
+				
 			}catch (Exception e) {System.out.println(e);}
 			return false;
 		}
@@ -271,7 +276,7 @@ public class Mdao extends Dao{
 	// 성별별 여행지 추천
 	public ArrayList<Airport> genderRecommended(String genger) {
 		ArrayList<Airport> list = new ArrayList<>();
-		String sql = "select a.pnation ,a.pname ,count(*)\r\n"
+		String sql = "select a.pnation ,a.pname ,sum(men)\r\n"
 				+ "from member m, reservation r, schedule s, airport a\r\n"
 				+ "where m.mno=r.mno and r.sno=s.sno and s.apno=a.pno and m.gender='"+genger+"' and a.pname!='인천공항' and a.pname!='김포공항'\r\n"
 				+ "group by a.pname,pnation\r\n"

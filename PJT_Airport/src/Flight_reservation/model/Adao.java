@@ -99,20 +99,6 @@ public class Adao extends Dao{
 
 			return false;
 		}
-		// 경로 재설정
-		public boolean scheduleUpdate_AP(int sno,String dpname,String apname) {
-			String sql = "update schedule set dpno = (select pno from airport where pname = ?) , "
-					+ "apno =  (select pno from airport where pname = ?) where sno = ? ;";
-			try {			
-				ps = conn.prepareStatement(sql);
-				ps.setString(1, dpname);
-				ps.setString(2, apname);
-				ps.setInt(3, sno);
-				ps.executeUpdate();
-				return true;
-			}catch (Exception e) {System.out.println(e);}
-			return false;
-		}
 		// 일정 재설정
 		public boolean scheduleUpdate_DD(int sno,String ddate,String dtime,String adate,String atime) {
 			String sql = "update schedule set dtime = ? ,atime = ? where sno = ? ;";

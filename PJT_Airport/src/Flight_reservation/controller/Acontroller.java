@@ -109,6 +109,23 @@ public class Acontroller {
 		
 		return result;
 	}
+	// 등록완료 스케줄 출력
+	public void registercompelete() {
+		ArrayList<Schedule> slist  =  Adao.getInstance().schedulePrint();
+		for(int i=slist.size()-1; i<slist.size() ;i++) {
+			{
+				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+				System.out.printf("\t\t\t\t\t %-2s %-8s %-8s %-19s %-8s %-19s %-8s %-3s \n",
+						"번호","비행편명","출발지","출발일정","도착지","도착일정","가격","잔여좌석");		
+				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+				System.out.printf("\t\t\t\t\t %2d %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
+						slist.get(i).getSno(),slist.get(i).getLpname(),slist.get(i).getDpname(),slist.get(i).getDtime(),
+						slist.get(i).getApname(),slist.get(i).getAtime(),slist.get(i).getPrice(),slist.get(i).getRseats());
+				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			}
+		}
+		
+	}
 	// 선택한 스케줄 출력
 	public boolean scheduleUpdate(int sno) {
 		ArrayList<Schedule> slist  =  Adao.getInstance().schedulePrint();
@@ -127,10 +144,6 @@ public class Acontroller {
 		System.out.println("\t\t\t\t\t [알림] 존재하지 않는 스케줄 번호입니다.");
 		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		return false;
-	}
-	// 경로 재설정
-	public boolean scheduleUpdate_AP(int sno,String dpname,String apname) {
-		return Adao.getInstance().scheduleUpdate_AP(sno, dpname, apname);
 	}
 	// 일정 재설정
 	public boolean scheduleUpdate_DD(int sno,String ddate,String dtime,String adate,String atime) {
