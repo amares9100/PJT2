@@ -317,7 +317,7 @@ public class Rfront {
 		int ch02 = scanner.nextInt();
 		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		
-		if(ch02==1 && ch02==2) {
+		if(ch02==1 || ch02==2) {
 		Rcontroller.getInstance().ticketReservation2(men, ticket);
 		System.out.println("\t\t\t\t\t예약이 완료되었습니다.");
 		}
