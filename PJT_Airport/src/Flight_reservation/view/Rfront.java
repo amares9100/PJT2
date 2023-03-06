@@ -306,7 +306,8 @@ public class Rfront {
 			return;
 		}
 	}
-
+   
+	
 	public void payment(Reservation ticket, int men) {
 		
 		System.out.println("\t\t\t\t\t=============================================결제화면=============================================");
