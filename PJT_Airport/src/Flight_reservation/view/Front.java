@@ -207,11 +207,20 @@ public class Front {
 			System.out.println("\t\t\t\t\t 안녕하세요 "+m.getMname()+"님 회원님의 등급은 "+m.getTier()+"["+m.getMileage()+"점]"+"입니다. ");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			ArrayList<Airport> list = Mcontroller.getInstance().recommended();
-			System.out.println("\t\t\t\t\t ***********************************************************************************************");
+			System.out.println("\t\t\t\t\t ************************************************************************************************");
 			System.out.println("\t\t\t\t\t\t\t\t\t [ 이번달 가장 많이 떠난 여행지 TOP3 ]   ");
 			System.out.println();
 			for(int i = 0 ; i<list.size();i++) {
 				System.out.println("\t\t\t\t\t\t\t\t\t "+(i+1)+". "+list.get(i).getPnation()+"["+list.get(i).getPname()+"] : "+list.get(i).getPno()+"명 이용");
+			}
+			System.out.println();
+			System.out.println("\t\t\t\t\t ************************************************************************************************");
+			ArrayList<Airport> list2 = Mcontroller.getInstance().genderRecommended();
+			System.out.println("\t\t\t\t\t ************************************************************************************************");
+			System.out.println("\t\t\t\t\t\t\t\t  [ 이번달 "+m.getMname()+"님과 같은 성별이 가장 많이 떠난 여행지 TOP3 ]   ");
+			System.out.println();
+			for(int i = 0 ; i<list2.size();i++) {
+				System.out.println("\t\t\t\t\t\t\t\t\t "+(i+1)+". "+list2.get(i).getPnation()+"["+list2.get(i).getPname()+"] : "+list2.get(i).getPno()*10+"명");
 			}
 			System.out.println();
 			System.out.println("\t\t\t\t\t ************************************************************************************************");

@@ -271,7 +271,7 @@ public class Mdao extends Dao{
 	// 성별별 여행지 추천
 	public ArrayList<Airport> genderRecommended(String genger) {
 		ArrayList<Airport> list = new ArrayList<>();
-		String sql = "select a.pnation ,a.pname ,count(*)\r\n"
+		String sql = "select a.pnation ,a.pname ,sum(men)\r\n"
 				+ "from member m, reservation r, schedule s, airport a\r\n"
 				+ "where m.mno=r.mno and r.sno=s.sno and s.apno=a.pno and m.gender='"+genger+"' and a.pname!='인천공항' and a.pname!='김포공항'\r\n"
 				+ "group by a.pname,pnation\r\n"
