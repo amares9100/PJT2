@@ -253,6 +253,42 @@ public class Mdao extends Dao{
 			System.out.println(e);
 		}return null;
 	}
+	
+	//회원의 성별 찾기
+	public String findGender(int mno) {
+		String sql = "select gender from member where mno="+mno+";";
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}return null;
+	}
+	
+	// 성별별 여행지 추천
+	public ArrayList<Airport> genderRecommended(String genger) {
+		ArrayList<Airport> list = new ArrayList<>();
+		String sql = "select a.pnation ,a.pname ,count(*)\r\n"
+				+ "from member m, reservation r, schedule s, airport a\r\n"
+				+ "where m.mno=r.mno and r.sno=s.sno and s.apno=a.pno and m.gender='"+genger+"' and a.pname!='인천공항' and a.pname!='김포공항'\r\n"
+				+ "group by a.pname,pnation\r\n"
+				+ "order by count(a.pname) desc limit 3;";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Airport airport = new Airport(rs.getInt(3), rs.getString(2), rs.getString(1));
+				list.add(airport);
+			}
+			return list;
+		} catch (Exception e) {
+			System.out.println(e);
+		}return null;
+	}
 }
 
 

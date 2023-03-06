@@ -117,6 +117,12 @@ public class Mcontroller {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
 		return Mdao.getInstance().recommended(dateFormat.format(date));
 	}
+	
+	//성별별 추천 여행지
+	public ArrayList<Airport> genderRecommended(){
+		String gender = Mdao.getInstance().findGender(loginsession);
+		return Mdao.getInstance().genderRecommended(gender);
+	}
 
 	// -------------------------------------------------------------//
 	// 유효성검사
