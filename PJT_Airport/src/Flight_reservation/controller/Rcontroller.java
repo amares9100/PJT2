@@ -50,17 +50,18 @@ public class Rcontroller {
 	}
 	
 	
-	//출발 날짜 선택 유효성검사
+	// 출발 날짜 선택 유효성검사
 	public boolean dateSelect(String dtime) {
+		// 길이체크
+		if(dtime.length()<10) {
+			return false;
+		}
 		
+		// 예약 가능한 날짜인지 체크 
 		String date[] = dtime.split("-");
 		int iyear =  Integer.parseInt(date[0]);
 		int imonth =  Integer.parseInt(date[1]);
 		int iday =  Integer.parseInt(date[2]);
-		
-		if(iyear==0||imonth==0||iday==0) {
-			return false;
-		}
 		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
@@ -104,11 +105,6 @@ public class Rcontroller {
 	// 예약 완료[insert]
 	public boolean ticketReservation2(int men , Reservation ticket) {
 		return Rdao.getInstance().ticketReservation2(men, Mcontroller.getInstance().getLoginsession(), ticket);
-	}
-	
-	//결제
-	public void payment() {
-		
 	}
 	
 }

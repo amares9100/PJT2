@@ -221,10 +221,10 @@ public class Mdao extends Dao{
 	// 멤버 등급 변경
 	public boolean tierUpdate(int mno) {
 		String sql = "update member set tier = \r\n"
-				+ "	case 	when Mileage>=16000 then 'DIAMOND' \r\n"
-				+ "			when Mileage>=10000 then 'PLATINUM'	\r\n"
-				+ "			when Mileage>=5000 then 'GOLD'\r\n"
-				+ "			when Mileage>=2000 then 'SILVER' \r\n"
+				+ "	case 	when Mileage>=1600000 then 'DIAMOND' \r\n"
+				+ "			when Mileage>=1000000 then 'PLATINUM'	\r\n"
+				+ "			when Mileage>=500000 then 'GOLD'\r\n"
+				+ "			when Mileage>=200000 then 'SILVER' \r\n"
 				+ "            else 'BRONZE' end\r\n"
 				+ "    where mno=?;";
 		try {

@@ -254,7 +254,6 @@ public class Rfront {
 		if (Rcontroller.getInstance().dateSelect(dtime)) {
 			return dtime;
 		}else{
-			System.out.println(Rcontroller.getInstance().dateSelect(dtime));
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.println("\t\t\t\t\t 잘못 입력하셨습니다.");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
@@ -315,7 +314,7 @@ public class Rfront {
 		ticketReservation(men);
 	}
 
-	// 새함수 추가 (비행확인후 -> 티켓예매)
+	// 비행 스케출 선택
 	public void ticketReservation(int men) {
 		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		System.out.print("\t\t\t\t\t 예약하려는 스케줄 번호 선택 : ");
@@ -338,7 +337,8 @@ public class Rfront {
 		} else if (ch00 == 2) {
 		}
 	}
-
+	
+	// 선택 후 결제
 	public void selectCompelete(Reservation ticket, int men) { // 이경석
 		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		System.out.print("\t\t\t\t\t 1. 결제방법 선택 2. 뒤로가기 ");
@@ -352,6 +352,7 @@ public class Rfront {
 	}
    
 	
+	// 결제
 	public void payment(Reservation ticket, int men) {
 		System.out.println("\t\t\t\t\t==============================================결제화면==============================================");
 		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
