@@ -26,12 +26,13 @@ public class Rfront {
 
 	// 예약하기
 	public void reservation() {
-		System.out.println("\t\t\t\t\t==============================================예약하기==============================================");
+		
 		int dpno = 0;
 		int apno = 0;
 		String dtime = null;
 		int men = 0;
 		while (true) {
+			System.out.println("\t\t\t\t\t==============================================예약하기===============================================");
 			System.out.println("\t\t\t\t\t 1. 츨발지 선택" + (dpno != 0 ? " : " + Rcontroller.getInstance().airportName(dpno) : ""));
 			System.out.println("\t\t\t\t\t 2. 도착지 선택" + (apno != 0 ? " : " + Rcontroller.getInstance().airportName(apno) : ""));
 			System.out.println("\t\t\t\t\t 3. 출발날짜 선택" + (dtime != null ? " : " + dtime : ""));
@@ -292,22 +293,22 @@ public class Rfront {
 
 	// 비행편 검색 화면 출발지 , 도착지 , 날짜 , 인원 /예시 : 김포 -> 인천 2023-03-07
 	public void flightSelect(int dpno, int apno, String dtime, int men) { // 이경석
-		System.out.println("\t\t\t\t\t=============================================비행편 선택=============================================");
+		System.out.println("\t\t\t\t\t=============================================비행편 선택==============================================");
 
 		ArrayList<Schedule> slist = Rcontroller.getInstance().flightSelect(dpno, apno, dtime, men);
 		System.out.printf("\t\t\t\t\t 현재 선택 \n\t\t\t\t\t 항공편:%s -> %s \n\t\t\t\t\t 비행일:%s \n\t\t\t\t\t 인원:%d명 \n\n",
 				 slist.get(0).getDpname() , slist.get(0).getApname() ,slist.get(0).getDtime()
 				 , men);
 		
-		System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+		System.out.println("\t\t\t\t\t--------------------------------------------------------------------------------------------------");
 			System.out.printf("\t\t\t\t\t %-2s %-8s %-8s %-8s %-19s %-8s %-19s %-8s %-3s \n",
 					"번호","항공사","비행기","출발지","출발일정","도착지","도착일정","가격","잔여좌석");		
-			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t--------------------------------------------------------------------------------------------------");
 		
 		for (Schedule dto : slist) {
 			System.out.printf("\t\t\t\t\t %2d %-10s %-10s %-8s %-20s %-8s %-20s %-8d %-3d \n",
 					dto.getSno(),dto.getLname(),dto.getAname(),dto.getDpname(),dto.getDtime(),dto.getApname(),dto.getAtime(),dto.getPrice(),dto.getRseats());
-			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+			System.out.println("\t\t\t\t\t--------------------------------------------------------------------------------------------------");
 		}
 		
 		// 검색화면은 하나만 필요함, 이미 중복되므로 하나만 뽑아서 출력

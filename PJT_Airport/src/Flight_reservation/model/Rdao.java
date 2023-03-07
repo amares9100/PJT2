@@ -108,15 +108,13 @@ public class Rdao extends Dao{
 	public ArrayList<Schedule> flightSelect(int dpno,int apno,String dtime,int men) {
 		ArrayList<Schedule> slist = new ArrayList<>();
 		
-		String sql = "select s.sno '비행번호' ,al.lname '항공사명' , ap.aname '비행기명' , ap1.pname'출발지' , ap2.pname '도착지'  , s.dtime '비행일' , s.atime '도착일' , s.price , s.rseats "
-				+ "from schedule s, airport ap1 , airport ap2 ,LP lp , airline al , airplane ap "
-				+ "where  ap1.pno = s.dpno and ap2.pno = s.apno  and lp.lno = al.lno and s.lpno = lp.lpno and lp.ano = ap.ano   "
-				+ "and dpno = ? and apno = ?  and  rseats>="+men+" and dtime like '"+dtime+"%'";
+		String sql = "select s.sno '비행번호' ,al.lname '항공사명' , ap.aname '비행기명' , ap1.pname'출발지' , ap2.pname '도착지'  , s.dtime '비행일' , s.atime '도착일' , s.price , s.rseats \r\n"
+				+ "				from schedule s, airport ap1 , airport ap2 ,LP lp , airline al , airplane ap \r\n"
+				+ "				where  ap1.pno = s.dpno and ap2.pno = s.apno  and lp.lno = al.lno and s.lpno = lp.lpno and lp.ano = ap.ano\r\n"
+				+ "				and dpno = "+dpno+" and apno = "+apno+"  and  rseats>="+men+" and dtime like '"+dtime+"%';";
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, dpno);
-			ps.setInt(2, apno);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
