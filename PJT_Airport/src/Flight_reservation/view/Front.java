@@ -83,15 +83,15 @@ public class Front {
 
 		public void signup() throws Exception{
 			System.out.println("\t\t\t\t\t==============================================회원가입==============================================");
-			System.out.println("\t\t\t\t\t 회원가입할 아이디(영문대소문자만) : ");
+			System.out.print("\t\t\t\t\t 회원가입할 아이디(영문대소문자만) : ");
 			String mid = scanner.next();
-			System.out.println("\t\t\t\t\t 비밀번호 : ");
+			System.out.print("\t\t\t\t\t 비밀번호 : ");
 			String mpw = scanner.next();
-			System.out.println("\t\t\t\t\t 이름 : ");
+			System.out.print("\t\t\t\t\t 이름 : ");
 			String mname = scanner.next();
-			System.out.println("\t\t\t\t\t 휴대폰 번호(xxx-xxxx-xxxx) : ");
+			System.out.print("\t\t\t\t\t 휴대폰 번호(xxx-xxxx-xxxx) : ");
 			String mphone = scanner.next();
-			System.out.println("\t\t\t\t\t 주민등록번호(xxxxxx-xxxxxxx) : ");
+			System.out.print("\t\t\t\t\t 주민등록번호(xxxxxx-xxxxxxx) : ");
 			String rrn = scanner.next();
 			
 			
@@ -118,6 +118,10 @@ public class Front {
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 				System.out.println("\t\t\t\t\t [알림] 아이디는 영문대소문자만 입력하세요.");
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");}
+			else if(result == 5) {
+				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
+				System.out.println("\t\t\t\t\t [알림] 주민번호 입력이 잘못되었습니다.");
+				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");}
 			else {
 				System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 				System.out.println("\t\t\t\t\t [알림] DB오류");
@@ -137,7 +141,8 @@ public class Front {
 		String mid = Mcontroller.getInstance().findid(mname , mphone);
 		if(mid != null) {
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-			System.out.print("\t\t\t\t\t [알림] 찾으시는 아이디는 : ");
+			System.out.print("\t\t\t\t\t [알림] 찾으시는 아이디는 :");
+			System.out.print(" ");
 			System.err.print(mid);
 			System.out.print(" 입니다.\n");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
@@ -162,7 +167,8 @@ public class Front {
 		String mpw = Mcontroller.getInstance().findpw(mid ,mname, mphone);
 		if(mpw != null) {
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-			System.out.print("\t\t\t\t\t [알림] 찾으시는 비밀번호는 : ");
+			System.out.print("\t\t\t\t\t [알림] 찾으시는 비밀번호는 :");
+			System.out.print(" ");
 			System.err.print(mpw);
 			System.out.print(" 입니다.\n");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
