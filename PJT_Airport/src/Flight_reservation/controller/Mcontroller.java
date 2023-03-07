@@ -56,7 +56,7 @@ public class Mcontroller {
 			 else if(!check_id(mid)){return 4;}		// 아이디 적합성
 			 else if(!check_rrn(rrn)) {return 5;} // 주민등록번호 적합성
 			 // 아스키코드 49 = 1 / 50 = 2 / 51 = 3 / 52 = 4
-			 else if(!check_phone(mphone)) {
+			 else if(check_phone(mphone)) {
 				 if((rrn.charAt(7)-48) % 2 == 0) { // 주민등록번호 뒤의 첫자리[charAt(7)]으로  1~4를 아스키코드로 변환
 						gender = "여자";				// 변환한 값 -48이 짝수이면 여자 아니면 남자
 					}else {
@@ -128,7 +128,7 @@ public class Mcontroller {
 	// 유효성검사
 	
 	public boolean check_phone(String mphone) {
-	   return Pattern.matches("^01(?:0|1|[6-9]) - (?:\\d{3}|\\d{4}) - \\d{4}$", mphone);
+	   return mphone.matches("^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$");
 	}
 	
 	public boolean check_id(String id) {
