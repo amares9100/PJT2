@@ -141,9 +141,8 @@ public class Front {
 		String mid = Mcontroller.getInstance().findid(mname , mphone);
 		if(mid != null) {
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-			System.out.print("\t\t\t\t\t [알림] 찾으시는 아이디는 :");
-			System.out.print(" ");
-			System.err.print(mid);
+			System.out.print("\t\t\t\t\t [알림] 찾으시는 아이디는 : ");
+			System.out.print("["+mid+"]");
 			System.out.print(" 입니다.\n");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		}
@@ -167,9 +166,8 @@ public class Front {
 		String mpw = Mcontroller.getInstance().findpw(mid ,mname, mphone);
 		if(mpw != null) {
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
-			System.out.print("\t\t\t\t\t [알림] 찾으시는 비밀번호는 :");
-			System.out.print(" ");
-			System.err.print(mpw);
+			System.out.print("\t\t\t\t\t [알림] 찾으시는 비밀번호는 : ");
+			System.out.print("["+mpw+"]");
 			System.out.print(" 입니다.\n");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 		}
