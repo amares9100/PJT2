@@ -238,37 +238,37 @@ insert into schedule (lpno,dpno,apno,dtime,atime,price,rseats) values (15,9,2,'2
 
 
 -- Tear_table 입력
-insert into tier_table (tier,Mileage,discount,arate) values ( 'BRONZE'	,0		,0.01,0.01);
-insert into tier_table (tier,Mileage,discount,arate) values ( 'SILVER'	,2000	,0.02,0.02);
-insert into tier_table (tier,Mileage,discount,arate) values ( 'GOLD'	,5000	,0.03,0.03);
-insert into tier_table (tier,Mileage,discount,arate) values ( 'PLATINUM',10000	,0.04,0.04);
-insert into tier_table (tier,Mileage,discount,arate) values ( 'DIAMOND'	,16000	,0.05,0.05);
+insert into tier_table (tier,Mileage,discount,arate) values ( 'BRONZE'	,0			,0.01,0.01);
+insert into tier_table (tier,Mileage,discount,arate) values ( 'SILVER'	,200000		,0.02,0.02);
+insert into tier_table (tier,Mileage,discount,arate) values ( 'GOLD'	,500000		,0.03,0.03);
+insert into tier_table (tier,Mileage,discount,arate) values ( 'PLATINUM',1000000	,0.04,0.04);
+insert into tier_table (tier,Mileage,discount,arate) values ( 'DIAMOND'	,1600000	,0.05,0.05);
 
 -- member 입력
 insert into member ( mid,mpw,mname,mphone, rrn , gender) values ('admin','1234','관리자','010-1234-5678' , 'null' , 'null');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('qweqwe','1234','유재석','010-1111-1111','SILVER'	,2500	, '991025-1234567' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('asdasd','1234','강호동','010-2222-2222','BRONZE'	,1200	, '980623-1222267' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('zxczxc','1234','이수근','010-3333-3333','GOLD'	,8000	, '950116-1444567' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('cxzcxz','1234','서장훈','010-4444-4444','BRONZE'	,200	, '101001-1234599' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('dsadsa','1234','민경훈','010-5555-5555','DIAMOND' ,12000 	, '900421-1298543' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('qweqwe','1234','유재석','010-1111-1111','SILVER'	,250000	, '991025-1234567' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('asdasd','1234','강호동','010-2222-2222','BRONZE'	,120000	, '980623-1222267' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('zxczxc','1234','이수근','010-3333-3333','GOLD'	,800000	, '950116-1444567' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('cxzcxz','1234','서장훈','010-4444-4444','BRONZE'	,20000	, '101001-1234599' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('dsadsa','1234','민경훈','010-5555-5555','DIAMOND' ,1200000, '900421-1298543' , '남자');
 
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('rtyrty','1234','하하','010-1111-1111','SILVER'	,2500	, '991025-1234567' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('uiouio','1234','김종민','010-2222-2222','BRONZE'	,1200	, '980623-1222267' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('fghfgh','1234','넉살','010-3333-3333','GOLD'	,8000	, '950116-1444567' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('jkljkl','1234','김선호','010-4444-4444','BRONZE'	,200	, '101001-1234599' , '남자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('vbnvbn','1234','문세윤','010-5555-5555','DIAMOND' ,12000 	, '900421-1298543' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('rtyrty','1234','하하','010-1111-1111' ,'SILVER'	,250000	, '991025-1234567' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('uiouio','1234','김종민','010-2222-2222','BRONZE'	,120000	, '980623-1222267' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('fghfgh','1234','넉살','010-3333-3333' ,'GOLD'		,800000	, '950116-1444567' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('jkljkl','1234','김선호','010-4444-4444','BRONZE'	,20000	, '101001-1234599' , '남자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('vbnvbn','1234','문세윤','010-5555-5555','DIAMOND' ,1200000, '900421-1298543' , '남자');
 
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('werwer','1234','김숙','010-1111-1111','SILVER'	,2500	, '991025-2234567' , '여자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('sdfsdf','1234','송은이','010-2222-2222','BRONZE'	,1200	, '980623-2222267' , '여자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('xcvxcv','1234','사나','010-3333-3333','GOLD'	,8000	, '950116-2444567' , '여자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('ertert','1234','모모','010-4444-4444','BRONZE'	,200	, '101001-2234599' , '여자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('dfgdfg','1234','미연','010-5555-5555','DIAMOND' ,12000 	, '900421-2298543' , '여자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('werwer','1234','김숙','010-1111-1111','SILVER'	,250000	, '991025-2234567' , '여자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('sdfsdf','1234','송은이','010-2222-2222','BRONZE'	,120000	, '980623-2222267' , '여자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('xcvxcv','1234','사나','010-3333-3333'	,'GOLD'		,800000	, '950116-2444567' , '여자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('ertert','1234','모모','010-4444-4444'	,'BRONZE'	,20000	, '101001-2234599' , '여자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('dfgdfg','1234','미연','010-5555-5555'	,'DIAMOND' 	,1200000, '900421-2298543' , '여자');
 
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('cvbcvb','1234','김태희','010-1111-1111','SILVER'	,2500	, '991025-4234567' , '여자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('tyutyu','1234','한가인','010-2222-2222','BRONZE'	,1200	, '980623-4222267' , '여자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('ghjghj','1234','정연','010-3333-3333','GOLD'	,8000	, '950116-4444567' , '여자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('bnmbnm','1234','예리','010-4444-4444','BRONZE'	,200	, '101001-4234599' , '여자');
-insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('yuiyui','1234','수지','010-5555-5555','DIAMOND' ,12000 	, '900421-4298543' , '여자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('cvbcvb','1234','김태희','010-1111-1111','SILVER'	,250000	, '991025-4234567' , '여자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('tyutyu','1234','한가인','010-2222-2222','BRONZE'	,120000	, '980623-4222267' , '여자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('ghjghj','1234','정연','010-3333-3333','GOLD'		,800000	, '950116-4444567' , '여자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('bnmbnm','1234','예리','010-4444-4444','BRONZE'	,20000	, '101001-4234599' , '여자');
+insert into member ( mid,mpw,mname,mphone,tier,Mileage , rrn , gender) values ('yuiyui','1234','수지','010-5555-5555','DIAMOND' 	,1200000, '900421-4298543' , '여자');
 
 
 -- reservation 입력

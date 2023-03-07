@@ -156,9 +156,9 @@ public class Afront {
 			System.out.println("\t\t\t\t\t=============================================일정 재설정=============================================");
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			System.out.print("\t\t\t\t\t 출발일	입력 : [예시:2023-03-07] "); 	String ddate = scanner.next(); 
-			System.out.print("\t\t\t\t\t 출발시간	입력 : [예시:06:15:00] ");		String dtime = scanner.next();
+			System.out.print("\t\t\t\t\t 출발시간	입력 : [예시:06:15:00]   ");	String dtime = scanner.next();
 			System.out.print("\t\t\t\t\t 도착일 	입력 : [예시:2023-03-07] "); 	String adate = scanner.next(); 
-			System.out.print("\t\t\t\t\t 도착시간	입력 : [예시:09:15:00] ");		String atime = scanner.next();
+			System.out.print("\t\t\t\t\t 도착시간	입력 : [예시:09:15:00]   ");	String atime = scanner.next();
 			System.out.println("\t\t\t\t\t-------------------------------------------------------------------------------------------------");
 			boolean result = Acontroller.getInstance().scheduleUpdate_DD(sno, ddate,dtime, adate,atime);			
 			if(result) {System.out.println("\t\t\t\t\t [알림] 일정 재설정 완료 "); }
