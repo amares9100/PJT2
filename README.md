@@ -82,3 +82,7 @@ https://www.youtube.com/watch?v=x5i4lIobKaI
 
 #### 8. 컨트롤 구조도
 ![image](https://user-images.githubusercontent.com/121651359/221498628-891aab39-7864-4b94-a270-674cc2e9c235.png)
+
+#### 9. 발표ppt
+[항공권 예매_PJT2.pptx](https://github.com/amares9100/PJT2/files/10905945/_PJT2.pptx)
+
