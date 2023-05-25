@@ -68,7 +68,7 @@ https://www.youtube.com/watch?v=x5i4lIobKaI
   
   
 #### 4. 일정
-![image](https://github.com/amares9100/PJT2/assets/120459763/bf58461b-eb60-4db1-96ea-b896e8818082)
+![image](https://github.com/amares9100/PJT2/assets/120459763/69f6e875-e26a-4756-b1a1-25bd56678a05)
 
 
 
