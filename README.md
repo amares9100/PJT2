@@ -1,9 +1,8 @@
 ###PJT2 
 
-#### 9. 발표ppt
+#### ppt
 [항공권 예매_PJT2.pptx](https://github.com/amares9100/PJT2/files/10905945/_PJT2.pptx)
-
-#### 0. 유튜브 링크
+#### 유튜브 링크
 https://www.youtube.com/watch?v=x5i4lIobKaI
 
 #### 1. 주제
